@@ -1,6 +1,8 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 public class connection_table 
 {
@@ -62,4 +64,31 @@ public class connection_table
         }
         return f;
     }
+        
+        
+        
+      public ArrayList get_Answers()
+        {
+            ArrayList arr=new ArrayList();
+            String sql="SELECT (user_id,state) FROM courseware_studentmodule;";
+            try 
+            {
+            get_Connection();
+            Statement statem=conn.createStatement();
+            ResultSet rs=statem.executeQuery(sql);
+            while(rs.next())
+            {
+                ArrayList arr2=new ArrayList();
+                arr2.add(rs.getString("user_id"));
+                arr2.add(rs.getString("state"));
+                arr.add(arr2);
+            }
+            } 
+            catch (Exception e) 
+            {
+            }
+            
+            
+            return arr;
+        }
 }

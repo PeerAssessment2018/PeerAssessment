@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
+import java.util.ArrayList;
 
 /**
  * This class demonstrates how to connect to MySQL and run some basic commands.
@@ -226,6 +227,13 @@ public class DBHandler {
 		}
         }
             
+        public ArrayList get_Answers()
+        {
+            ArrayList arr=null;
+            String sql="SELECT (user_id,state) FROM courseware_studentmodule;";
+            
+            return arr;
+        }
         
 	/**
 	 * Connect to the DB and do some stuff
