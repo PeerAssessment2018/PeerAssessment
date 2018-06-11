@@ -227,13 +227,7 @@ public class DBHandler {
 		}
         }
             
-        public ArrayList get_Answers()
-        {
-            ArrayList arr=null;
-            String sql="SELECT (user_id,state) FROM courseware_studentmodule;";
-            
-            return arr;
-        }
+        
         
 	/**
 	 * Connect to the DB and do some stuff

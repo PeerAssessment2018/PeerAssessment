@@ -55,7 +55,7 @@ public class connection_table
         try{
            // String sql ="INSERT INTO question_details(course_id,question_id,no_assessors,no_assessment,criterion_id,criterion_) VALUES (";");";
             Statement stmt = conn.createStatement();
-        stmt.execute(sql);
+       // stmt.execute(sql);
         f=1;
         }
         catch(Exception ex)
@@ -83,12 +83,12 @@ public class connection_table
                 arr2.add(rs.getString("state"));
                 arr.add(arr2);
             }
+            rs.close();
             } 
             catch (Exception e) 
             {
+                System.out.println(e.getMessage());
             }
-            
-            
             return arr;
         }
 }
