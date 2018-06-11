@@ -36,7 +36,7 @@ import java.util.Properties;
  * 
  * java.net.ConnectException: Connection refused
  */
-public class DBDemo {
+public class DBHandler {
 
 	/** The name of the MySQL account to use (or empty for anonymous) */
 	private final String userName = "root";
@@ -51,10 +51,16 @@ public class DBDemo {
 	private final int portNumber = 3306;
 
 	/** The name of the database we are testing with (this default is installed with MySQL) */
-	private final String dbName = "peer";
+	private final String dbName = "peer_assessment";
 	
 	/** The name of the table we are testing with */
-	private final String tableName = "student_data";
+	private final String student_data = "student_data";
+        private final String question_details = "question_details";   
+        private final String courseware_studentmodule = "courseware_studentmodule";
+        private final String option_details = "option_details";
+        private final String pa_grade = "pa_grade";
+        private final String student_anonymoususerid = "student_anonymoususerid";
+        private final String student_courseenrollment = "student_courseenrollment";
 	
 	/**
 	 * Get a new database connection
@@ -97,9 +103,8 @@ public class DBDemo {
 	/**
 	 * Connect to MySQL and do some stuff.
 	 */
-	public void run() {
+	/*public void run() {
 
-                int id = 1;
 		String username = "junk_username";
 		String firstname = "junk_firstname";
 		String lastname = "junk_lastname";
@@ -135,10 +140,12 @@ public class DBDemo {
 			e.printStackTrace();
 			return;
 		}*/
+                
+                
                 //Insert String
-                try {
-			String insertString = " INSERT INTO " + this.tableName + " ( " +" id, " + " username, " + " first_name, " +
-					" last_name, " + " email, " + " password )" + " VALUES "  + " (" +  id++ +"," + "'" +username + "'" + ","
+                /*try {
+			String insertString = " INSERT INTO " + this.tableName + " ( " + " username, " + " first_name, " +
+					" last_name, " + " email, " + " password )" + " VALUES "  + " (" +"," + "'" +username + "'" + ","
 					+ "'" +firstname + "'" + ","+ "'" +lastname + "'" + ","+ "'" +email + "'" + "," + "'" +password + "'" + ")";
 			this.executeUpdate(conn, insertString);
 			System.out.println("Record Inserted");
@@ -147,7 +154,8 @@ public class DBDemo {
 			e.printStackTrace();
 			return;
 		}
-		
+		*/
+                
 		// Drop the table
 		/*try {
 		    String dropString = "DROP TABLE " + this.tableName;
@@ -158,13 +166,72 @@ public class DBDemo {
 			e.printStackTrace();
 			return;
 		}*/
-	}
+	//}
+        
+        public void insert_student_data()
+        {
+                String username = "junk_username";
+		String firstname = "junk_firstname";
+		String lastname = "junk_lastname";
+		String email = "junkmail@mail.com";
+		String password = "password";
+		
+                // Connect to MySQL
+		Connection conn = null;
+		try {
+			conn = this.getConnection();
+			System.out.println("Connected to database");
+		} catch (SQLException e) {
+			System.out.println("ERROR: Could not connect to the database");
+			e.printStackTrace();
+			return;
+		}
+                
+                try {
+			String insertString = " INSERT INTO " + this.student_data + " ( " + " username, " + " first_name, " +
+					" last_name, " + " email, " + " password )" + " VALUES "  + " (" +"," + "'" +username + "'" + ","
+					+ "'" +firstname + "'" + ","+ "'" +lastname + "'" + ","+ "'" +email + "'" + "," + "'" +password + "'" + ")";
+			this.executeUpdate(conn, insertString);
+			System.out.println("Record Inserted");
+                        } catch (SQLException e) {
+			System.out.println("ERROR: Could not insert record");
+			e.printStackTrace();
+			return;
+		}
+        }
 	
+        public void insert_question_details_1(String course_id, String question_id,int x,int y)
+        {		
+                // Connect to MySQL
+		Connection conn = null;
+		try {
+			conn = this.getConnection();
+			System.out.println("Connected to database");
+		} catch (SQLException e) {
+			System.out.println("ERROR: Could not connect to the database");
+			e.printStackTrace();
+			return;
+		}
+                
+                try {
+			String insertString = " INSERT INTO " + this.question_details + " ( " + " course_id, " + " question_id, " +
+					" no_assessors, " + " no_assessment )" + " VALUES "  + " (" + "'" + course_id + "'" + ","
+                                + "'" + question_id + "'" + "," + x + "," + y + ")";
+			this.executeUpdate(conn, insertString);
+			System.out.println("Record Inserted");
+                } catch (SQLException e) {
+			System.out.println("ERROR: Could not insert record");
+			e.printStackTrace();
+			return;
+		}
+        }
+            
+        
 	/**
 	 * Connect to the DB and do some stuff
 	 */
 	public static void main(String[] args) {
-		DBDemo app = new DBDemo();
-		app.run();
+		DBHandler app = new DBHandler();
+                //app.insert_question_details_1("helslo","junk_thisdng",4,5);
 	}
 }
