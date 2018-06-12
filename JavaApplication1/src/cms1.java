@@ -51,7 +51,9 @@ public class cms1 extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
         prompt.setColumns(20);
+        prompt.setLineWrap(true);
         prompt.setRows(5);
+        prompt.setWrapStyleWord(true);
         jScrollPane1.setViewportView(prompt);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 340, 100));
@@ -116,7 +118,7 @@ public class cms1 extends javax.swing.JFrame {
         p=prompt.getText();
         n1=Integer.parseInt(nos.getText());
         n2=Integer.parseInt(noa.getText());
-        DataBase_Handler app=new DataBase_Handler();               
+        DBHandler app=new DBHandler();               
         app.insert_question_details_1("course1",p,n1,n2);
     }//GEN-LAST:event_jButton2ActionPerformed
 

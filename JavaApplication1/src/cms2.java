@@ -172,7 +172,7 @@ public class cms2 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
@@ -288,7 +288,7 @@ public class cms2 extends javax.swing.JFrame {
         String oname=tf4.getText();
         String od=ta2.getText();
         int oscale=Integer.parseInt(tf5.getText());
-        DataBase_Handler app = new DataBase_Handler();
+        DBHandler app = new DBHandler();
         app.insert_question_details_2(cname,cprompt,con);
         app.insert_options_details_1(q,"course 1",cname,oname,od,oscale);
         if(cb2.getItemCount()==0)
