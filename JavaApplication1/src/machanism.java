@@ -33,24 +33,46 @@ public class machanism
                     DataBase_Handler dh=new DataBase_Handler();
                    ArrayList answers=dh.get_Answers();
                    dh.conn.close();
+                   ArrayList answers2=(ArrayList)answers.clone();
                    int len=answers.size();
-                   int arr[][]=new int[len][number_assessor];
+                   int arr[][]=new int[len*number_assessor][2];
                   
                    int n=number_assessor;
-            for(int i=0;i<len;i++)
+                   
+                   for(int i=0;i<len;i++)
+                   {
+                      while(n--)
+                      {
+                          arr[i+n-1][0]=(int)answers.get(i);
+                          Random random = new Random();
+                          int index = random.nextInt(len);
+                          int x=(int)answers.get(index);
+                          while(x!=arr[i+n-1][0])
+                          {
+                              random = new Random();
+                              index = random.nextInt(len);
+                              x=(int)answers.get(index);
+                          }
+                            arr[i+n-1][1]=x;
+                              
+                      }
+                   }
+            /*for(int i=0;i<len;i++)
             {
-                String s="";
              while(n)
                 {
                   Random random = new Random();
                  int index = random.nextInt(len);
-                 ArrayList arr1=(ArrayList)answers.get(index);
-                 s+=String.valueOf(arr1.get(0))+",";
+                 
+                 //answers.remove(index);
+                 arr[i+(l-n)][0]=(int)
+                 arr[i+(l-n)][1]=(int)((ArrayList)answers.get(index)).get(0);
                  n--;
                  //return as an 2d array where the assignment takes place 
                 }
+               // answers=answers2;
                 n=number_assessor;
-            }
+            }*/
             
         } catch (Exception e) 
         {
