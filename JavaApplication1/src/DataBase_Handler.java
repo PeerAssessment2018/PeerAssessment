@@ -61,18 +61,20 @@ public class DataBase_Handler
             return arr;
     }
     
-    public void insert_question_details_1(String course_id, String question_id,int x,int y)
-    {	                
+    public boolean insert_question_details_1(String course_id, String question_id,int x,int y)
+    {
+        boolean f=false;
         try 
         {
             String sql = "INSERT INTO question_details(course_id,question_id,no_assessors,no_assessment) VALUES ("+"'"+course_id+"'"+ ","+"'"+question_id+"'"+","+x+","+y+ ");";
             Statement stmt = conn.createStatement();
-            stmt.execute(sql);
+            f=stmt.execute(sql);
         } 
         catch (Exception ex)
         {
              System.out.println(ex.getMessage());
 	}
+        return f;
     }
     
     public void insert_student_answer(int user_id,String course_id, String question_id,String prompt)
