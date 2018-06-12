@@ -3,7 +3,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
-import java.util.ArrayList;
 
 /**
  * This class demonstrates how to connect to MySQL and run some basic commands.
@@ -228,12 +227,60 @@ public class DBHandler {
         }
             
         
-        
 	/**
 	 * Connect to the DB and do some stuff
 	 */
+        public void insert_question_details_2(String cri_name, String cri_prompt,int nop)
+        {		
+                // Connect to MySQL
+		Connection conn = null;
+		try {
+			conn = this.getConnection();
+			System.out.println("Connected to database");
+		} catch (SQLException e) {
+			System.out.println("ERROR: Could not connect to the database");
+			e.printStackTrace();
+			return;
+		}
+                
+                try {String question=cms1.prompt.getText();
+			String insertString =" UPDATE "+ this.question_details+ " SET criterion_id = ' "+ cri_name +" ', criterion_prompt = '"+
+                                cri_prompt+" ' , no_of_options = "+nop + " WHERE question_id = '"+question+"'";
+			this.executeUpdate(conn, insertString);
+			System.out.println("Record Updated");
+                } catch (SQLException e) {
+			System.out.println("ERROR: Could not insert record");
+			e.printStackTrace();
+			return;
+		}
+        }
+        public void insert_options_details_1(String ques_id, String course_id,String cri_id,String op_id,String op_desc,int scale)
+        {		
+                // Connect to MySQL
+		Connection conn = null;
+		try {
+			conn = this.getConnection();
+			System.out.println("Connected to database");
+		} catch (SQLException e) {
+			System.out.println("ERROR: Could not connect to the database");
+			e.printStackTrace();
+			return;
+		}
+                
+                try {
+			String insertString=" INSERT INTO " + this.option_details + " ( " + " course_id, " + " question_id, " +
+					" criterion_id, " + " option_id, " + " option_description, " + " option_points " + " ) " + " VALUES "  + " (" + "'" +course_id + "'" + ","
+					+ "'" +ques_id + "'" + ","+ "'" +cri_id + "'" + ", '"+op_id + "' ," + "'" +op_desc + "'," +scale + ")";
+			this.executeUpdate(conn, insertString);
+			System.out.println("Record Updated");
+                } catch (SQLException e) {
+			System.out.println("ERROR: Could not insert record");
+			e.printStackTrace();
+			return;
+		}
+        }
 	public static void main(String[] args) {
 		DBHandler app = new DBHandler();
-                //app.insert_question_details_1("helslo","junk_thisdng",4,5);
+                app.insert_question_details_1("helslo","junk_thisdng",4,5);
 	}
 }

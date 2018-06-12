@@ -1,4 +1,8 @@
-/*
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Properties;/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -10,9 +14,8 @@
  */
 public class cms2 extends javax.swing.JFrame {
 
-    /**
-     * Creates new form cms2
-     */
+	
+	
     public cms2() {
         initComponents();
     }
@@ -169,7 +172,7 @@ public class cms2 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
@@ -242,8 +245,19 @@ public class cms2 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    	
     private void tf3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf3ActionPerformed
         // TODO add your handling code here:
+        int ic=cb2.getItemCount();
+        for(int i=0;i<ic;i++)
+        {
+            cb2.removeItemAt(i);
+        }
+        int noc=Integer.parseInt(tf3.getText());
+        for(int i=0;i<noc;i++)
+        {
+            cb2.addItem("Option "+(i+1));
+        }
     }//GEN-LAST:event_tf3ActionPerformed
 
     private void tf5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf5ActionPerformed
@@ -266,19 +280,95 @@ public class cms2 extends javax.swing.JFrame {
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // TODO add your handling code here:
-        if(cb1.getItemCount()==0)
+        String q=cms1.prompt.getText();
+        int nc=Integer.parseInt(tf1.getText());
+        String cname=tf2.getText();
+        String cprompt=ta1.getText();
+        int con=Integer.parseInt(tf3.getText());
+        String oname=tf4.getText();
+        String od=ta2.getText();
+        int oscale=Integer.parseInt(tf5.getText());
+        DBHandler app = new DBHandler();
+        app.insert_question_details_2(cname,cprompt,con);
+        app.insert_options_details_1(q,"course 1",cname,oname,od,oscale);
+        if(cb2.getItemCount()==0)
+        {
+            cb1.removeItemAt(cb1.getSelectedIndex());
+            tf1.setText("");
+            tf2.setText("");
+            tf3.setText("");
+            tf4.setText("");
+            tf5.setText("");
+            ta1.setText("");
+            ta2.setText("");
+        }
+        else
+        {
+            cb2.removeItemAt(cb2.getSelectedIndex());
+            tf4.setText("");
+            tf5.setText("");
+            ta2.setText("");
+        }
+        /*if(cb1.getItemCount()==0)
         {
             n23.setEnabled(true);
         }
         else
         {
+            int nc=Integer.parseInt(tf1.getText());
+            String cname[]=new String[nc];
+            String cprompt[]=new String[nc];
+            int con[]=new int[nc];
+            String oname[][]=new String[nc][];
+            String odesc[][]=new String[nc][];
+            int oscale[][]=new int[nc][];
+            while(cb1.getItemCount()!=0)
+            {
+                int i=cb2.getSelectedIndex();
+                cname[i]=tf2.getText();
+                cprompt[i]=ta1.getText();
+                con[i]=Integer.parseInt(tf3.getText());
+                oname[i]=new String[con[i]];
+                odesc[i]=new String[con[i]];
+                oscale[i]=new int[con[i]];
+                if(cb2.getItemCount()==0)
+                {
+                    tf2.setText("");
+                    ta1.setText("");
+                    tf3.setText("");
+                    cb1.removeItemAt(i);
+                }
+                else
+                {
+                    while(cb2.getItemCount()!=0)
+                    {
+                        System.out.println(cb2.getItemCount());
+                        int j=cb2.getSelectedIndex();
+                        oname[i][j]=tf4.getText();
+                        odesc[i][j]=ta2.getText();
+                        oscale[i][j]=Integer.parseInt(tf5.getText());
+                        tf4.setText("");
+                        ta2.setText("");
+                        tf5.setText("");
+                        cb2.removeItemAt(j);
+                    }
+                }
+            }
+            String q=cms1.prompt.getText();
             //Fetch criterion name,prompt and number of options
-            String cn=tf2.getText();
-            String cp=tf3.getText();
-            int co=Integer.parseInt(tf4.getText());
+            for(int i=0;i<nc;i++)
+            {
+                DBHandler_cms2 app = new DBHandler_cms2();
+                app.insert_question_details_1(cname[i],cprompt[i],con[i]);
+                for(int j=0;j<con[i];j++)
+                {
+                   // DBHandler_cms2 app1 = new DBHandler_cms2();
+                    //app1.insert_options_details_1(q,"course 1",cname[i],oname[i][j],odesc[i][j],oscale[i][j]);
+                }
+            }
             //Now store the above details into database
             //After storing details clear text fields
-        }
+        }*/
     }//GEN-LAST:event_saveActionPerformed
 
     private void tf1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf1ActionPerformed
@@ -303,6 +393,8 @@ public class cms2 extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+       // DBDemo app = new DBDemo();
+	//	app.run();
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
