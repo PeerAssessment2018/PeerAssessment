@@ -168,7 +168,7 @@ public class table_entry extends javax.swing.JFrame {
     }
     public int enter_into_questiondet(String s1,String s2,String s3)
     {
-        
+     return 1;   
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
