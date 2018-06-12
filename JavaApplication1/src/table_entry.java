@@ -127,9 +127,8 @@ public class table_entry extends javax.swing.JFrame {
        s3=(String)jTextField3.getText();
        s4=(String)jTextField4.getText();
        s5=(String)jTextField5.getText();
-       connection_table c=new connection_table();
-       c.get_Connection();
-       c.student_data_entry(s1, s2, s3, s4, s5);
+       DataBase_Handler c=new DataBase_Handler();
+       c.insert_student_data(s1, s2, s3, s4, s5);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

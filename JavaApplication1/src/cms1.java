@@ -116,11 +116,8 @@ public class cms1 extends javax.swing.JFrame {
         p=prompt.getText();
         n1=Integer.parseInt(nos.getText());
         n2=Integer.parseInt(noa.getText());
-        DBHandler app=new DBHandler();               
+        DataBase_Handler app=new DataBase_Handler();               
         app.insert_question_details_1("course1",p,n1,n2);
-        prompt.setText("");
-        nos.setText("");
-        noa.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
