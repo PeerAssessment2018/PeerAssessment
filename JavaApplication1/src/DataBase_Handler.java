@@ -1,6 +1,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -123,7 +124,19 @@ public class DataBase_Handler
 			return;
 		}
     }
-        
+        public void insert_courseware_studentmodule(int user_id,String ans)
+        {                
+                try {
+			String insertString = " INSERT INTO courseware_studentmodule ( user_id, course_id, question_id, state )" +" VALUES ( ' " 
+                                +user_id+"' , ' course1 ' , ' "+ lms1.ta1.getText()+" ' , ' " +ans+" ' ) ";
+			Statement stmt = conn.createStatement();
+                stmt.execute(insertString);
+               } catch (Exception e) {
+			System.out.println("ERROR: Could not insert record");
+			e.printStackTrace();
+			return;
+		}}
+       
     public void insert_options_details_1(String ques_id, String course_id,String cri_id,String op_id,String op_desc,int scale)
     {		
                 try {

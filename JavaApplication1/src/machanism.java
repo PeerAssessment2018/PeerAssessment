@@ -42,7 +42,7 @@ public class machanism
                    
                    for(int i=0;i<len;i++)
                    {
-                      while(n--)
+                      while(n--!=0)
                       {
                           arr[i+n-1][0]=(int)answers.get(i);
                           Random random = new Random();

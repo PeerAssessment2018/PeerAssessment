@@ -288,7 +288,7 @@ public class cms2 extends javax.swing.JFrame {
         String oname=tf4.getText();
         String od=ta2.getText();
         int oscale=Integer.parseInt(tf5.getText());
-        DBHandler app = new DBHandler();
+        DataBase_Handler app = new DataBase_Handler();
         app.insert_question_details_2(cname,cprompt,con);
         app.insert_options_details_1(q,"course 1",cname,oname,od,oscale);
         if(cb2.getItemCount()==0)

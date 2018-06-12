@@ -165,7 +165,7 @@ public class lms1 extends javax.swing.JFrame {
         String ans = ta2.getText();
         String p = ta1.getText();
         int name =  cb1.getSelectedIndex();
-        DBHandler app = new DBHandler();
+        DataBase_Handler app = new DataBase_Handler();
         app.insert_courseware_studentmodule(name, ans);
     }//GEN-LAST:event_saveActionPerformed
 
