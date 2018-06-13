@@ -236,11 +236,115 @@ public class DataBase_Handler
         return uid;
     }
     
+    public int user_to_anonymous(int uid)
+    {
+        int auid=0;
+        try {
+                //int x = 10;
+                //System.out.println(x);
+                String sql=" SELECT anonymous_user_id FROM student_anonymoususerid WHERE user_id = " + uid ;
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                if(rs.next())
+                    auid = rs.getInt("anonymous_user_id");
+                else
+                    System.out.println("no results");
+                } catch (Exception e) {
+		System.out.println("ERROR: Could not fetch record");
+            }
+        return auid;
+    }
+    
+    public void lms3_f( int user_id, String course_id,String question_id )
+    {
+        int a_user_id = user_to_anonymous(user_id);
+        //System.out.println(a_user_id);
+        
+        ArrayList<Integer> ids_to_assess = new ArrayList<Integer>();
+        
+            try {
+                //int x = 10;
+                //System.out.println(x);
+                String sql=" SELECT user_id FROM pa_grade WHERE anonymous_assesser_id = " + a_user_id ;
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    int temp = rs.getInt("user_id");
+                    if(!ids_to_assess.contains(temp))
+                        ids_to_assess.add(temp);
+                }
+                //System.out.println(ids_to_assess);
+                } catch (Exception e) {
+		System.out.println(e);
+            }
+        
+        ArrayList<String> responses = new ArrayList<String>();
+            
+        for (int i = 0 ; i<ids_to_assess.size() ; i++ )
+        {
+            try {
+                //int x = 10;
+                //System.out.println(x);
+                String sql=" SELECT state FROM courseware_studentmodule WHERE user_id = '" + ids_to_assess.get(i)+ "' AND course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                if(rs.next())
+                {
+                    responses.add(rs.getString("state"));
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+            }    
+        }
+        
+        ArrayList<String> criterias = new ArrayList<String>();
+        
+        try {
+                //int x = 10;
+                //System.out.println(x);
+                String sql=" SELECT criterion_id FROM question_details WHERE course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    criterias.add(rs.getString("criterion_id"));
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+            }   
+        
+        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options_description = new ArrayList<String>();
+        ArrayList<Integer> options_points = new ArrayList<Integer>();
+        
+        String selected_criteria = (String)lms3.cb3.getSelectedItem();
+        //String selected_criteria = "c1";
+        
+        try {
+                //int x = 10;
+                //System.out.println(x);
+                String sql=" SELECT option_id,option_description,option_points FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id + "' AND criterion_id = '" + selected_criteria +"'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    options.add(rs.getString("option_id"));
+                    options_description.add(rs.getString("option_description"));
+                    options_points.add(rs.getInt("option_points"));
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+            }   
+        //System.out.println(options_points);
+    }
+            
     public static void  main(String args[])
     {
         DataBase_Handler db =new DataBase_Handler(); 
         //int arr[] = {2,3};
         //db.insert_pa_grade_postshuffle(1,arr,"ques","course1");
+        //db.lms3_f(3,"course 1","ques");
     }
 }
     

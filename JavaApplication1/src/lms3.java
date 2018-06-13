@@ -321,7 +321,7 @@ public class lms3 extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cb1;
     private javax.swing.JComboBox<String> cb2;
-    private javax.swing.JComboBox<String> cb3;
+    public static javax.swing.JComboBox<String> cb3;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
