@@ -73,6 +73,8 @@ public class lms3 extends javax.swing.JFrame {
 
         jLabel4.setText("Evaluate for Criterion:");
 
+        cb3.setToolTipText("jkfhsdkjfh");
+
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Options"));
 
         buttonGroup1.add(rd1);

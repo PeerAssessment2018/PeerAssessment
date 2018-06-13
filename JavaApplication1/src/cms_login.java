@@ -122,7 +122,7 @@ public class cms_login extends javax.swing.JFrame {
         // TODO add your handling code here:
         cms1 frame=new cms1();
         frame.setVisible(true);
-        this.visible(false);
+        this.setVisible(false);
     }//GEN-LAST:event_no1ActionPerformed
 
     /**
