@@ -204,13 +204,12 @@ public class DataBase_Handler
             for(int j=0;j<criterias.size();j++)
             {
                 try {
-			String sql=" INSERT INTO pa_grade " + " ( " + " user_id, " + " anonymous_assesser_id, " +
-					" course_id, " + " question_id, " + " criteria_id, " + " grade_points " + " ) " + " VALUES "  + " (" + user_id + ","
-					+ arr2[i] + ","+ "'" + course_id + "'" + ", '" + question_id + "' ," + "'" + criterias.get(j) + "'" + ")";
+			String sql=" INSERT INTO pa_grade ( user_id, anonymous_assesser_id, course_id, question_id, criteria_id, grade_points) VALUES "  + " (" + user_id + ","
+					+ arr2[i] + ","+ "'" + course_id + "'" + ", '" + question_id + "' ," + "'" + criterias.get(j) + "'," + 0 +")";
 		Statement stmt = conn.createStatement();
                 stmt.execute(sql);
                 } catch (SQLException e) {
-			System.out.println("ERROR: Could not insert record");
+			System.out.println(e);
 			return;
 		}
             }
@@ -240,8 +239,8 @@ public class DataBase_Handler
     public static void  main(String args[])
     {
         DataBase_Handler db =new DataBase_Handler(); 
-        int arr[] = {2,3};
-        db.insert_pa_grade_postshuffle(1,arr,"ques","course1");
+        //int arr[] = {2,3};
+        //db.insert_pa_grade_postshuffle(1,arr,"ques","course1");
     }
 }
     
