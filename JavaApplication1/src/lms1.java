@@ -148,7 +148,7 @@ public class lms1 extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         DataBase_Handler db = new DataBase_Handler();
-        int rc = db.insert_student_answer();
+        int rc = db.count_no_of_students();
         for (int i = 1; i <= rc; i++) 
         {
             cb1.addItem("User " + i);

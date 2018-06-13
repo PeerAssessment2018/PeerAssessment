@@ -78,7 +78,7 @@ public class DataBase_Handler
         return f;
     }
     
-    public int insert_student_answer()
+    public int count_no_of_students()
     {
         try 
         {
