@@ -151,11 +151,77 @@ public class DataBase_Handler
 		}
     }
     
+     public void insert_pa_grade_postshuffle(int user_id, int arr[] , String question_id, String course_id )
+    {
+        /*Convert arr from user_id list to anonymous_user_id from the student_anonymoususerid table*/
+        
+        int arr2[] = new int[arr.length];
+        ArrayList<String> criterias = new ArrayList<String>();
+        
+        for(int i=0; i<arr.length;i++)
+        {
+            try {
+                //int x = 10;
+                //System.out.println(x);
+                String sql=" SELECT anonymous_user_id FROM student_anonymoususerid WHERE user_id = " + arr[i] ;
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                if(rs.next())
+                    arr2[i] = rs.getInt("anonymous_user_id");
+                else
+                    System.out.println("no results");
+                System.out.println(arr2[i]);
+                } catch (Exception e) {
+		System.out.println("ERROR: Could not fetch record");
+		return;
+            }
+        }
+        
+        /*Fetch the criteris ids from question id and course_id which are common to different criteria ids in question_details table*/
+        
+        try {
+                //int x = 10;
+                //System.out.println(x);
+                String sql=" SELECT criterion_id FROM question_details WHERE course_id= '" + course_id + "' AND question_id = '" + question_id +"'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                    criterias.add(rs.getString("criterian_id"));
+                } catch (Exception e) {
+		System.out.println("ERROR: Could not fetch record");
+		return;
+            }
+        
+        for(int i=0; i<criterias.size();i++)
+            System.out.println(criterias.get(i));
+        /*for each criteria give seperate entry in the pa_grade table*/
+        /*Duplicate the above entries for different ids from ArrayList*/
+    }
+    
+    public int anonymous_to_user(int auid)
+    {
+        int uid=0;
+        try {
+                //int x = 10;
+                //System.out.println(x);
+                String sql=" SELECT user_id FROM student_anonymoususerid WHERE anonymous_user_id = " + auid ;
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                if(rs.next())
+                    uid = rs.getInt("user_id");
+                else
+                    System.out.println("no results");
+                System.out.println(uid);
+                } catch (Exception e) {
+		System.out.println("ERROR: Could not fetch record");
+            }
+        return uid;
+    }
+    
     public static void  main(String args[])
     {
         DataBase_Handler db =new DataBase_Handler();  
-        //db.insert_question_details_1("sdg", "qwe",10, 10);
-        //db.insert_student_data("qwer","qwe","r","qwe@qwef.com","password");
+        
     }
 }
     
