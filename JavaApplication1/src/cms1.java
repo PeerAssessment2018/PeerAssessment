@@ -1,21 +1,24 @@
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Khushboo
  */
 public class cms1 extends javax.swing.JFrame {
-    public static int n1,n2;
+
+    public static int n1, n2;
     public static String p;
+
     /**
      * Creates new form cms1
      */
@@ -108,18 +111,18 @@ public class cms1 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here
-        cms2 frame=new cms2();
+        cms2 frame = new cms2();
         frame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here
-        p=prompt.getText();
-        n1=Integer.parseInt(nos.getText());
-        n2=Integer.parseInt(noa.getText());
-        DataBase_Handler app=new DataBase_Handler();               
-        app.insert_question_details_1("course1",p,n1,n2);
+        p = prompt.getText();
+        n1 = Integer.parseInt(nos.getText());
+        n2 = Integer.parseInt(noa.getText());
+        DataBase_Handler app = new DataBase_Handler();
+        app.insert_question_details_1("course1", p, n1, n2);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
