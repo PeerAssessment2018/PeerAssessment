@@ -186,16 +186,35 @@ public class DataBase_Handler
 		Statement stmt=conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
-                    criterias.add(rs.getString("criterian_id"));
+                    criterias.add(rs.getString("criterion_id"));
                 } catch (Exception e) {
 		System.out.println("ERROR: Could not fetch record");
 		return;
             }
         
-        for(int i=0; i<criterias.size();i++)
-            System.out.println(criterias.get(i));
+        /*for(int i=0; i<criterias.size();i++)
+            System.out.println(criterias.get(i));*/
+        
+        
         /*for each criteria give seperate entry in the pa_grade table*/
         /*Duplicate the above entries for different ids from ArrayList*/
+        
+        for(int i=0;i<arr2.length;i++)
+        {
+            for(int j=0;j<criterias.size();j++)
+            {
+                try {
+			String sql=" INSERT INTO pa_grade " + " ( " + " user_id, " + " anonymous_assesser_id, " +
+					" course_id, " + " question_id, " + " criteria_id, " + " grade_points " + " ) " + " VALUES "  + " (" + user_id + ","
+					+ arr2[i] + ","+ "'" + course_id + "'" + ", '" + question_id + "' ," + "'" + criterias.get(j) + "'" + ")";
+		Statement stmt = conn.createStatement();
+                stmt.execute(sql);
+                } catch (SQLException e) {
+			System.out.println("ERROR: Could not insert record");
+			return;
+		}
+            }
+        }
     }
     
     public int anonymous_to_user(int auid)
@@ -220,8 +239,9 @@ public class DataBase_Handler
     
     public static void  main(String args[])
     {
-        DataBase_Handler db =new DataBase_Handler();  
-        
+        DataBase_Handler db =new DataBase_Handler(); 
+        int arr[] = {2,3};
+        db.insert_pa_grade_postshuffle(1,arr,"ques","course1");
     }
 }
     
