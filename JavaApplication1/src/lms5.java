@@ -52,7 +52,7 @@ public class lms5 extends javax.swing.JFrame {
 
         jLabel3.setText("You assessed these many number of peers:");
 
-        jLabel4.setText("You were assessed these many number of peers:");
+        jLabel4.setText("You were assessed by these many number of peers:");
 
         jLabel5.setText("Peer assessed Score:");
 
@@ -124,7 +124,7 @@ public class lms5 extends javax.swing.JFrame {
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton1)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

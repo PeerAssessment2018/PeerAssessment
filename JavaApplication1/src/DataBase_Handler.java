@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.Collections;
 
 public class DataBase_Handler 
 {
@@ -560,6 +561,58 @@ public class DataBase_Handler
         if(f1.isVisible()==true)
             lms4.ta.setText(responses.get(j));
     }
+    
+     public void results(int user_id, String course_id, String question_id)
+    {
+        int a=0,b=0,sas=0,pas=0;
+        
+        try {
+                String sql=" SELECT no_assessors,no_assessment FROM question_details WHERE course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                if(rs.next())
+                {
+                    a=rs.getInt("no_assessors");
+                    b=rs.getInt("no_assessment");
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+            }   
+        
+        /*System.out.println(a);
+        System.out.println(b);*/
+        
+        try {
+                String sql=" SELECT self_assessed_grade FROM courseware_studentmodule WHERE user_id = " + user_id + " AND course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                if(rs.next())
+                {
+                    sas=rs.getInt("self_assessed_grade");
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+            } 
+        
+        ArrayList<Integer> marks = new ArrayList<>();
+        
+         try {
+                String sql=" SELECT AVG(grade_points) as avg_grade FROM pa_grade WHERE user_id = " + user_id + " AND course_id = '" + course_id + "'AND question_id = '" + question_id + "' GROUP BY anonymous_assesser_id HAVING count(*)>1";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    marks.add(rs.getInt("avg_grade"));
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+            } 
+        
+        Collections.sort(marks);
+        pas = (marks.get(marks.size()/2-1)+marks.get(marks.size()/2))/2;
+        System.out.println(pas);
+    }
+     
     public static void  main(String args[])
     {
         DataBase_Handler db =new DataBase_Handler(); 
@@ -567,6 +620,7 @@ public class DataBase_Handler
        // db.lms3_f1(1,"course 1","sample prompt");
         //db.insert_pa_grade_postshuffle(1,arr,"ques","course1");
         //db.lms3_f(3,"course 1","ques");
+        //db.results(1,"course1","ques");
     }
 }
     
