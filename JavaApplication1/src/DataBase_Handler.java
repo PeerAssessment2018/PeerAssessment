@@ -301,7 +301,12 @@ public class DataBase_Handler
             }   
         for(int i=0;i<criterias.size();i++)
         {
+            lms3 frame=new lms3();
+            lms4 frame1=new lms4();
+            if(frame.isVisible()==true)
             lms3.cb3.addItem(criterias.get(i));
+            if(frame1.isVisible()==true)
+            lms4.cb2.addItem(criterias.get(i));
         }
      
     }
@@ -372,9 +377,9 @@ public class DataBase_Handler
         ArrayList<String> options_description = new ArrayList<String>();
         ArrayList<Integer> options_points = new ArrayList<Integer>();
         
-        //String selected_criteria = (String)lms3.cb3.getSelectedItem();
+        String selected_criteria = (String)lms3.cb3.getSelectedItem();
         
-        String selected_criteria = "cked";
+        //String selected_criteria = "cked";
         
         try {
                 //int x = 10;
@@ -393,6 +398,10 @@ public class DataBase_Handler
             }   
         System.out.println(options.size());
         System.out.println(options);
+        lms3 f=new lms3();
+        lms4 f1=new lms4();
+        if(f.isVisible()==true)
+        {
         if(options.size()==1)
         {
             lms3.rd1.setVisible(true);
@@ -437,6 +446,55 @@ public class DataBase_Handler
             lms3.rd4.setText(options.get(3));
             lms3.rd5.setVisible(true);
             lms3.rd5.setText(options.get(4));
+        }
+        }
+        if(f1.isVisible()==true)
+        {
+            if(options.size()==1)
+        {
+            lms4.rd1.setVisible(true);
+            lms4.rd1.setText(options.get(0));
+        }
+        else if(options.size()==2)
+        {
+            lms4.rd1.setVisible(true);
+            lms4.rd1.setText(options.get(0));
+            lms4.rd2.setVisible(true);
+            lms4.rd2.setText(options.get(1));
+        }
+        else if(options.size()==3)
+        {
+            lms4.rd1.setVisible(true);
+            lms4.rd1.setText(options.get(0));
+            lms4.rd2.setVisible(true);
+            lms4.rd2.setText(options.get(1));
+            lms4.rd3.setVisible(true);
+            lms4.rd3.setText(options.get(2));
+        }
+        else if(options.size()==4)
+        {
+            lms4.rd1.setVisible(true);
+            lms4.rd1.setText(options.get(0));
+            lms4.rd2.setVisible(true);
+            lms4.rd2.setText(options.get(1));
+            lms4.rd3.setVisible(true);
+            lms4.rd3.setText(options.get(2));
+            lms4.rd4.setVisible(true);
+            lms4.rd4.setText(options.get(3));
+        }
+        else if(options.size()==5)
+        {
+            lms4.rd1.setVisible(true);
+            lms4.rd1.setText(options.get(0));
+            lms4.rd2.setVisible(true);
+            lms4.rd2.setText(options.get(1));
+            lms4.rd3.setVisible(true);
+            lms4.rd3.setText(options.get(2));
+            lms4.rd4.setVisible(true);
+            lms4.rd4.setText(options.get(3));
+            lms4.rd5.setVisible(true);
+            lms4.rd5.setText(options.get(4));
+        }
         }
         //System.out.println(options_points);
     }
@@ -486,6 +544,9 @@ public class DataBase_Handler
 		System.out.println(e);
             }    
         }
+        lms3 f=new lms3();
+        lms4 f1=new lms4();
+        
         String s=(String)lms3.cb2.getSelectedItem();
         int j=0;
         int uid=Integer.parseInt(s);
@@ -494,7 +555,10 @@ public class DataBase_Handler
             if(a_user_ids.get(i)==uid)
                 j=i;
         }
-        lms3.ta.setText(responses.get(j));
+        if(f.isVisible()==true)
+            lms3.ta.setText(responses.get(j));
+        if(f1.isVisible()==true)
+            lms4.ta.setText(responses.get(j));
     }
     public static void  main(String args[])
     {
