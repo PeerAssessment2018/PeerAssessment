@@ -91,4 +91,33 @@ public class machanism
         }
         return arr;
     }
+    
+    
+   public boolean store_allocated(int arr[][],int n,String ques_idString,String course_id)
+    {
+        boolean f=false;
+        try {
+            Connection conn=null;
+            conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/peer_assesment","root","");
+            String sql="";
+            for(int i=0;i<0;i++)
+            {
+                sql="INSERT INTO pa_grade (user_id,anonymus_id) VALUES ("+arr[i][0]+","+arr[i][1]+");"
+            }
+            f=true;
+           } catch (Exception e) {
+               System.out.println(e.getMessage());
+        }
+        return f;
+    }
+    
+    public String[] get_questions_to_put (int user_id)
+    {
+        String respoceesString[]=null;
+        
+            
+        //for(int )
+        return respoceesString;
+    }
 }
+
