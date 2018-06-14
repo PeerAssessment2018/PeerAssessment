@@ -102,7 +102,9 @@ public class machanism
             String sql="";
             for(int i=0;i<0;i++)
             {
-                sql="INSERT INTO pa_grade (user_id,anonymus_id) VALUES ("+arr[i][0]+","+arr[i][1]+");"
+                sql="INSERT INTO pa_grade (user_id,anonymus_id) VALUES ("+arr[i][0]+","+arr[i][1]+");";
+                Statement statement=conn.createStatement();
+                statement.executeQuery(sql);
             }
             f=true;
            } catch (Exception e) {
