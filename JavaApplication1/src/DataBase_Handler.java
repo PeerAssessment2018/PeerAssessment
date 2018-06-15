@@ -26,18 +26,41 @@ public class DataBase_Handler
             System.out.println(ex.getMessage());
         }
     }
-        
-    public void insert_student_data(String username,String first_name,String last_name,String email,String password)
+    public boolean insert_student_data_handler(String username,String first_name,String last_name,String email,String password,String course_id)
     {
+        boolean f=false;
+        f=insert_student_data(username, first_name, last_name, email, password);
         try{
-            String sql ="INSERT INTO student_data(username,first_name,last_name,email,password) VALUES ("+"'"+username+"'"+ ","+"'"+first_name+"'"+","+"'"+last_name+"'"+","+"'"+email+"'"+","+"'"+password+"'"+");";
+            String sql ="SELECT id FROM student_data WHERE username="+"'"+username+"';";//+ " AND "+"'"+first_name+"'"+","+"'"+last_name+"'"+","+"'"+email+"'"+","+"'"+password+"'"+");";
             Statement stmt = conn.createStatement();
-            stmt.execute(sql);
+            ResultSet rs=stmt.executeQuery(sql);
+            rs.next();
+            
+            int id=rs.getInt("id");
+            
+            sql ="INSERT INTO student_courseenrollment(user_id,course_id) VALUES ("+id+ ","+"'"+course_id+"');";//+","+"'"+last_name+"'"+","+"'"+email+"'"+","+"'"+password+"'"+");";
+            stmt = conn.createStatement();
+            f=stmt.execute(sql);   
         }
         catch(Exception ex)
         {
             System.out.println(ex.getMessage());
         }
+        return f;
+    }
+    public boolean insert_student_data(String username,String first_name,String last_name,String email,String password)
+    {
+        boolean f=false;
+        try{
+            String sql ="INSERT INTO student_data(username,first_name,last_name,email,password) VALUES ("+"'"+username+"'"+ ","+"'"+first_name+"'"+","+"'"+last_name+"'"+","+"'"+email+"'"+","+"'"+password+"'"+");";
+            Statement stmt = conn.createStatement();
+            f=stmt.execute(sql);   
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+        return f;
     }
     
     public ArrayList get_Answers()

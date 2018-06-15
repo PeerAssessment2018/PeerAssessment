@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 import java.sql.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Indranil
@@ -106,17 +107,37 @@ public class login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         System.out.println("Pressed ! Login !");
+        String t1=jTextField1.getText();
+        String t2=jTextField1.getText();
+        if(check_valid_login(t1, t2))
+        {
+            System.out.println("Login Successfull !");
+            JOptionPane.showConfirmDialog(null,"Login Successfull !");
+        }
+        else
+            System.out.println("UnSuccessfull Login");
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public boolean check_valid_login(String user_id,String password)
+    {
         Connection conn=null;
         try {
             conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/peer_assessment");
             System.out.println("Connection Established !");
-            
-        } catch (Exception e) {
+            String sql="SELECT COUNT(user_id) FROM student_data WHERE user_id='"+user_id+"', AND password='"+password+"';";
+            Statement statement=conn.createStatement();
+            ResultSet rs= statement.executeQuery(sql);
+            rs.next();
+            int f=rs.getInt("COUNT");
+            if(f>0)
+                return true;
+        } catch (Exception e) 
+        {
+            System.out.println("Error Login  !"+e.getMessage());
         }
-        
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+        return false;
+    }
     /**
      * @param args the command line arguments
      */
