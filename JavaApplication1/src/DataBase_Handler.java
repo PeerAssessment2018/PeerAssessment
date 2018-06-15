@@ -613,11 +613,13 @@ public class DataBase_Handler
         System.out.println(pas);
     }
      
-    public void insert_pa_grade(int user_id,int assessor_id,String q_id, String cri_id,int points)
+       public void insert_pa_grade(int user_id,int assessor_id,String q_id, String course, String cri_id,int points)
     {		
                 try {
-			String insertString="INSERT INTO pa_grade (user_id, anonymous_assessor_id, question_id, crieteria_id,"
-                                + " grade_points) VALUES ("+user_id+","+assessor_id+", '"+q_id+"' , '"+cri_id+"' ,"+points+")";
+                    user_id=anonymous_to_user(user_id);
+                    assessor_id=user_to_anonymous(assessor_id);
+			String insertString="INSERT INTO pa_grade (user_id, anonymous_assessor_id, question_id, course, crieteria_id,"
+                                + " grade_points) VALUES ("+user_id+","+assessor_id+", '"+q_id+"' , '"+course+"','"+cri_id+"' ,"+points+")";
 		Statement stmt = conn.createStatement();
                 stmt.execute(insertString);
                 } catch (Exception e) {

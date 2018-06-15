@@ -1,3 +1,6 @@
+
+import java.util.StringTokenizer;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -277,6 +280,33 @@ public class lms3 extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        int assessor_id=Integer.parseInt((String)cb1.getSelectedItem());
+        int user_id=Integer.parseInt((String)cb2.getSelectedItem());
+        String q_id="sample prompt";
+        String cri=(String)cb3.getSelectedItem();
+        StringTokenizer option=new StringTokenizer("");
+        if(rd1.isSelected()==true)
+            option=new StringTokenizer(rd1.getText());
+        else if(rd2.isSelected()==true)
+            option=new StringTokenizer(rd2.getText());
+        else if(rd3.isSelected()==true)
+            option=new StringTokenizer(rd3.getText());
+        else if(rd4.isSelected()==true)
+            option=new StringTokenizer(rd4.getText());
+        else if(rd5.isSelected()==true)
+            option=new StringTokenizer(rd5.getText());
+        String s1=option.nextToken();
+        int points=Integer.parseInt(option.nextToken());
+        DataBase_Handler db=new DataBase_Handler();
+        db.insert_pa_grade(user_id,assessor_id,q_id,"course1",cri,points);
+        cb3.removeItem(cri);
+        if(cb3.getItemCount()==0)
+            cb2.removeItem(user_id);
+        if(cb2.getItemCount()==0)
+        {
+            cb1.removeItem(assessor_id);
+            n34.setEnabled(true);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
