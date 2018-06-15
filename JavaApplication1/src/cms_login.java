@@ -13,6 +13,8 @@ public class cms_login extends javax.swing.JFrame {
     /**
      * Creates new form cms_login
      */
+    //public static int s;
+    
     public cms_login() {
         initComponents();
     }

@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.Collections;
 
 public class DataBase_Handler 
 {
@@ -301,7 +302,12 @@ public class DataBase_Handler
             }   
         for(int i=0;i<criterias.size();i++)
         {
+            lms3 frame=new lms3();
+            lms4 frame1=new lms4();
+            if(frame.isVisible()==true)
             lms3.cb3.addItem(criterias.get(i));
+            if(frame1.isVisible()==true)
+            lms4.cb2.addItem(criterias.get(i));
         }
      
     }
@@ -372,9 +378,9 @@ public class DataBase_Handler
         ArrayList<String> options_description = new ArrayList<String>();
         ArrayList<Integer> options_points = new ArrayList<Integer>();
         
-        //String selected_criteria = (String)lms3.cb3.getSelectedItem();
+        String selected_criteria = (String)lms3.cb3.getSelectedItem();
         
-        String selected_criteria = "cked";
+        //String selected_criteria = "cked";
         
         try {
                 //int x = 10;
@@ -393,6 +399,10 @@ public class DataBase_Handler
             }   
         System.out.println(options.size());
         System.out.println(options);
+        lms3 f=new lms3();
+        lms4 f1=new lms4();
+        if(f.isVisible()==true)
+        {
         if(options.size()==1)
         {
             lms3.rd1.setVisible(true);
@@ -437,6 +447,55 @@ public class DataBase_Handler
             lms3.rd4.setText(options.get(3));
             lms3.rd5.setVisible(true);
             lms3.rd5.setText(options.get(4));
+        }
+        }
+        if(f1.isVisible()==true)
+        {
+            if(options.size()==1)
+        {
+            lms4.rd1.setVisible(true);
+            lms4.rd1.setText(options.get(0));
+        }
+        else if(options.size()==2)
+        {
+            lms4.rd1.setVisible(true);
+            lms4.rd1.setText(options.get(0));
+            lms4.rd2.setVisible(true);
+            lms4.rd2.setText(options.get(1));
+        }
+        else if(options.size()==3)
+        {
+            lms4.rd1.setVisible(true);
+            lms4.rd1.setText(options.get(0));
+            lms4.rd2.setVisible(true);
+            lms4.rd2.setText(options.get(1));
+            lms4.rd3.setVisible(true);
+            lms4.rd3.setText(options.get(2));
+        }
+        else if(options.size()==4)
+        {
+            lms4.rd1.setVisible(true);
+            lms4.rd1.setText(options.get(0));
+            lms4.rd2.setVisible(true);
+            lms4.rd2.setText(options.get(1));
+            lms4.rd3.setVisible(true);
+            lms4.rd3.setText(options.get(2));
+            lms4.rd4.setVisible(true);
+            lms4.rd4.setText(options.get(3));
+        }
+        else if(options.size()==5)
+        {
+            lms4.rd1.setVisible(true);
+            lms4.rd1.setText(options.get(0));
+            lms4.rd2.setVisible(true);
+            lms4.rd2.setText(options.get(1));
+            lms4.rd3.setVisible(true);
+            lms4.rd3.setText(options.get(2));
+            lms4.rd4.setVisible(true);
+            lms4.rd4.setText(options.get(3));
+            lms4.rd5.setVisible(true);
+            lms4.rd5.setText(options.get(4));
+        }
         }
         //System.out.println(options_points);
     }
@@ -486,6 +545,9 @@ public class DataBase_Handler
 		System.out.println(e);
             }    
         }
+        lms3 f=new lms3();
+        lms4 f1=new lms4();
+        
         String s=(String)lms3.cb2.getSelectedItem();
         int j=0;
         int uid=Integer.parseInt(s);
@@ -494,7 +556,73 @@ public class DataBase_Handler
             if(a_user_ids.get(i)==uid)
                 j=i;
         }
-        lms3.ta.setText(responses.get(j));
+        if(f.isVisible()==true)
+            lms3.ta.setText(responses.get(j));
+        if(f1.isVisible()==true)
+            lms4.ta.setText(responses.get(j));
+    }
+    
+     public void results(int user_id, String course_id, String question_id)
+    {
+        int a=0,b=0,sas=0,pas=0;
+        
+        try {
+                String sql=" SELECT no_assessors,no_assessment FROM question_details WHERE course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                if(rs.next())
+                {
+                    a=rs.getInt("no_assessors");
+                    b=rs.getInt("no_assessment");
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+            }   
+        
+        /*System.out.println(a);
+        System.out.println(b);*/
+        
+        try {
+                String sql=" SELECT self_assessed_grade FROM courseware_studentmodule WHERE user_id = " + user_id + " AND course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                if(rs.next())
+                {
+                    sas=rs.getInt("self_assessed_grade");
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+            } 
+        
+        ArrayList<Integer> marks = new ArrayList<>();
+        
+         try {
+                String sql=" SELECT AVG(grade_points) as avg_grade FROM pa_grade WHERE user_id = " + user_id + " AND course_id = '" + course_id + "'AND question_id = '" + question_id + "' GROUP BY anonymous_assesser_id HAVING count(*)>1";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    marks.add(rs.getInt("avg_grade"));
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+            } 
+        
+        Collections.sort(marks);
+        pas = (marks.get(marks.size()/2-1)+marks.get(marks.size()/2))/2;
+        System.out.println(pas);
+    }
+     
+    public void insert_pa_grade(int user_id,int assessor_id,String q_id, String cri_id,int points)
+    {		
+                try {
+			String insertString="";
+		Statement stmt = conn.createStatement();
+                stmt.execute(insertString);
+                } catch (Exception e) {
+			System.out.println("ERROR: Could not insert record");
+			return;
+		}
     }
     public static void  main(String args[])
     {
@@ -503,6 +631,7 @@ public class DataBase_Handler
        // db.lms3_f1(1,"course 1","sample prompt");
         //db.insert_pa_grade_postshuffle(1,arr,"ques","course1");
         //db.lms3_f(3,"course 1","ques");
+        //db.results(1,"course1","ques");
     }
 }
     
