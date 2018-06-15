@@ -613,6 +613,17 @@ public class DataBase_Handler
         System.out.println(pas);
     }
      
+    public void insert_pa_grade(int user_id,int assessor_id,String q_id, String cri_id,int points)
+    {		
+                try {
+			String insertString="";
+		Statement stmt = conn.createStatement();
+                stmt.execute(insertString);
+                } catch (Exception e) {
+			System.out.println("ERROR: Could not insert record");
+			return;
+		}
+    }
     public static void  main(String args[])
     {
         DataBase_Handler db =new DataBase_Handler(); 

@@ -41,7 +41,7 @@ public class lms3 extends javax.swing.JFrame {
         rd3 = new javax.swing.JRadioButton();
         rd4 = new javax.swing.JRadioButton();
         rd5 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        n34 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -118,10 +118,10 @@ public class lms3 extends javax.swing.JFrame {
         });
         jPanel1.add(rd5, new org.netbeans.lib.awtextra.AbsoluteConstraints(204, 49, -1, -1));
 
-        jButton1.setText("Next");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        n34.setText("Next");
+        n34.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                n34ActionPerformed(evt);
             }
         });
 
@@ -155,7 +155,7 @@ public class lms3 extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(n34))
                     .addComponent(jLabel5)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
@@ -206,7 +206,7 @@ public class lms3 extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(n34)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -228,12 +228,12 @@ public class lms3 extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void n34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n34ActionPerformed
         // TODO add your handling code here:
         lms4 frame=new lms4();
         frame.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_n34ActionPerformed
 
     private void cb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb2ActionPerformed
         // TODO add your handling code here:
@@ -251,6 +251,7 @@ public class lms3 extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        n34.setEnabled(false);
         rd1.setVisible(false);
         rd2.setVisible(false);
         rd3.setVisible(false);
@@ -318,7 +319,6 @@ public class lms3 extends javax.swing.JFrame {
     public static javax.swing.JComboBox<String> cb1;
     public static javax.swing.JComboBox<String> cb2;
     public static javax.swing.JComboBox<String> cb3;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -329,6 +329,7 @@ public class lms3 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton n34;
     public static javax.swing.JRadioButton rd1;
     public static javax.swing.JRadioButton rd2;
     public static javax.swing.JRadioButton rd3;
