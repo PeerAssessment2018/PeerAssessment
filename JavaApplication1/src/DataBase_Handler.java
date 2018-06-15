@@ -616,7 +616,8 @@ public class DataBase_Handler
     public void insert_pa_grade(int user_id,int assessor_id,String q_id, String cri_id,int points)
     {		
                 try {
-			String insertString="";
+			String insertString="INSERT INTO pa_grade (user_id, anonymous_assessor_id, question_id, crieteria_id,"
+                                + " grade_points) VALUES ("+user_id+","+assessor_id+", '"+q_id+"' , '"+cri_id+"' ,"+points+")";
 		Statement stmt = conn.createStatement();
                 stmt.execute(insertString);
                 } catch (Exception e) {
