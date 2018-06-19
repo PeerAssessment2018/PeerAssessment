@@ -220,7 +220,8 @@ public class DataBase_Handler
 			return;
 		}
     }
-        public void insert_courseware_studentmodule(int user_id,String ans)
+    
+    public void insert_courseware_studentmodule(int user_id,String ans)
         {                
                 try {
 			String insertString = " INSERT INTO courseware_studentmodule ( user_id, course_id, question_id, state )" +" VALUES ( ' " 
@@ -231,7 +232,8 @@ public class DataBase_Handler
 			System.out.println("ERROR: Could not insert record");
 			e.printStackTrace();
 			return;
-		}}
+		}
+        }
        
     public void insert_options_details_1(String ques_id, String course_id,String cri_id,String op_id,String op_desc,int scale)
     {		
