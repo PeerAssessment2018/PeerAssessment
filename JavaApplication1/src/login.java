@@ -54,6 +54,11 @@ public class login extends javax.swing.JFrame {
         });
 
         jButton2.setText("Register");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,8 +121,17 @@ public class login extends javax.swing.JFrame {
         }
         else
             System.out.println("UnSuccessfull Login");
-        
+        cms1 f=new cms1();
+        f.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        table_entry f=new table_entry();
+        f.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public boolean check_valid_login(String user_id,String password)
     {

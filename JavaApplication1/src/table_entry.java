@@ -145,7 +145,9 @@ public class table_entry extends javax.swing.JFrame {
        DataBase_Handler c=new DataBase_Handler();
        if(c.insert_student_data_handler(s1, s2, s3, s4, s5,course))
            JOptionPane.showConfirmDialog(null,"Successfully Registered !");
-       
+       login f=new login();
+       f.setVisible(true);
+       this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
