@@ -151,7 +151,11 @@ public class lms1 extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         DataBase_Handler db = new DataBase_Handler();
+        
+        System.out.println(login.tf.getText());
         ArrayList<String> courses = db.courses_enrolled(db.username_to_id(login.tf.getText()));
+        System.out.println(courses);
+        
         for (int i = 0; i < courses.size(); i++) 
         {
             cb1.addItem(courses.get(i));

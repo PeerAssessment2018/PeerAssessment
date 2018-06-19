@@ -727,12 +727,30 @@ public class DataBase_Handler
 		}
     }
        
+    public ArrayList<String> courses_available()
+    {
+        ArrayList<String> courses = new ArrayList<String>();
+        
+        try {
+                String sql=" SELECT course_id FROM author_coursecreated" ;
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    courses.add(rs.getString("course_id"));
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+         }   
+        return courses;
+    }
+    
     public ArrayList<String> courses_created(int author_id)
     {
         ArrayList<String> courses = new ArrayList<String>();
         
         try {
-                String sql=" SELECT course_id FROM author_coursecreated WHERE author_id = " + author_id;
+                String sql=" SELECT course_id FROM author_coursecreated WHERE author_id = " + author_id ;
 		Statement stmt=conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
@@ -750,7 +768,7 @@ public class DataBase_Handler
         ArrayList<String> courses = new ArrayList<String>();
         
         try {
-                String sql=" SELECT course_id FROM student_courseenrollment WHERE author_id = " + user_id;
+                String sql=" SELECT course_id FROM student_courseenrollment WHERE user_id = " + user_id;
 		Statement stmt=conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
@@ -768,7 +786,7 @@ public class DataBase_Handler
         int user_id=0;
         
         try {
-                String sql=" SELECT id FROM student_data WHERE username = " + username;
+                String sql=" SELECT id FROM student_data WHERE username = '" + username +"'";
 		Statement stmt=conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 if(rs.next())
@@ -776,7 +794,7 @@ public class DataBase_Handler
                     user_id=rs.getInt("id");
                 }
                 } catch (Exception e) {
-		System.out.println(e);
+		System.out.println("username not found ");
          }
         return user_id;     
     }
