@@ -28,7 +28,7 @@ public class login extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tf = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -76,7 +76,7 @@ public class login extends javax.swing.JFrame {
                                 .addComponent(jPasswordField1))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(tf, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -85,7 +85,7 @@ public class login extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -103,9 +103,11 @@ public class login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         System.out.println("Pressed ! Login !");
-        String t1=jTextField1.getText();
+        String t1=tf.getText();
         String t2=jPasswordField1.getText();
-        if(check_valid_login(t1, t2))
+        
+        DataBase_Handler db = new DataBase_Handler();
+        if(db.check_valid_login_lms(t1, t2))
         {
             System.out.println("Login Successfull !");
             JOptionPane.showConfirmDialog(null,"Login Successfull !");
@@ -125,25 +127,6 @@ public class login extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public boolean check_valid_login(String user_id,String password)
-    {
-        Connection conn=null;
-        try {
-            conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/peer_assessment");
-            System.out.println("Connection Established !");
-            String sql="SELECT COUNT(user_id) FROM student_data WHERE user_id='"+user_id+"', AND password='"+password+"';";
-            Statement statement=conn.createStatement();
-            ResultSet rs= statement.executeQuery(sql);
-            rs.next();
-            int f=rs.getInt("COUNT");
-            if(f>0)
-                return true;
-        } catch (Exception e) 
-        {
-            System.out.println("Error Login  !"+e.getMessage());
-        }
-        return false;
-    }
     /**
      * @param args the command line arguments
      */
@@ -187,6 +170,6 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    public static javax.swing.JTextField tf;
     // End of variables declaration//GEN-END:variables
 }

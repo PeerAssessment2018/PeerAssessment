@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -47,7 +50,7 @@ public class lms1 extends javax.swing.JFrame {
 
         jLabel1.setText("Submit your Response");
 
-        jLabel2.setText("Select User:");
+        jLabel2.setText("Select Course:");
 
         cb1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,10 +151,10 @@ public class lms1 extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         DataBase_Handler db = new DataBase_Handler();
-        int rc = db.count_no_of_students();
-        for (int i = 1; i <= rc; i++) 
+        ArrayList<String> courses = db.courses_enrolled(db.username_to_id(login.tf.getText()));
+        for (int i = 0; i < courses.size(); i++) 
         {
-            cb1.addItem("User " + i);
+            cb1.addItem(courses.get(i));
         }
         ta1.setText("Sample prompt");
     }//GEN-LAST:event_formWindowOpened

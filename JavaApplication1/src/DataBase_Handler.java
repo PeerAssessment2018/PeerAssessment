@@ -745,6 +745,78 @@ public class DataBase_Handler
         return courses;     
     }
     
+    public ArrayList<String> courses_enrolled(int user_id)
+    {
+        ArrayList<String> courses = new ArrayList<String>();
+        
+        try {
+                String sql=" SELECT course_id FROM student_courseenrollment WHERE author_id = " + user_id;
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    courses.add(rs.getString("course_id"));
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+         }
+        return courses;     
+    }
+    
+    public int username_to_id(String username)
+    {
+        int user_id=0;
+        
+        try {
+                String sql=" SELECT id FROM student_data WHERE username = " + username;
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                if(rs.next())
+                {
+                    user_id=rs.getInt("id");
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+         }
+        return user_id;     
+    }
+    
+    public boolean check_valid_login_lms(String username,String password)
+    {
+        try {
+            System.out.println("Connection Established !");
+            String sql="SELECT COUNT(username) as count1 FROM student_data WHERE username='"+username+"' AND password='"+password+"';";
+            Statement statement=conn.createStatement();
+            ResultSet rs= statement.executeQuery(sql);
+            rs.next();
+            int f=rs.getInt("count1");
+            if(f>0)
+                return true;
+        } catch (Exception e) 
+        {
+            System.out.println("Error Login  !"+e.getMessage());
+        }
+        return false;
+    }
+    
+    public boolean check_valid_login_cms(String username,String password)
+    {
+        try {
+            System.out.println("Connection Established !");
+            String sql="SELECT COUNT(username) as count1 FROM author_data WHERE username='"+username+"' AND password='"+password+"';";
+            Statement statement=conn.createStatement();
+            ResultSet rs= statement.executeQuery(sql);
+            rs.next();
+            int f=rs.getInt("count1");
+            if(f>0)
+                return true;
+        } catch (Exception e) 
+        {
+            System.out.println("Error Login  !"+e.getMessage());
+        }
+        return false;
+    }
+    
     public static void  main(String args[])
     {
         DataBase_Handler db =new DataBase_Handler(); 
@@ -756,8 +828,8 @@ public class DataBase_Handler
         //db.insert_student_data_handler("asdfg","asd","fg","qwe@gm.com","12@wd","hell1");
        // db.insert_student_data_handler("asdfg","asd","fg","qwe@gm.com","12@wd","hell2");
         //db.insert_student_data_handler("asdfg","asd","fg","qwe@gm.com","12@wd","hell3");
-        ArrayList<String> courses = db.courses_created(1);
-        System.out.println(courses);
+        //ArrayList<String> courses = db.courses_created(1);
+        //System.out.println(courses);
     }
 }
     
