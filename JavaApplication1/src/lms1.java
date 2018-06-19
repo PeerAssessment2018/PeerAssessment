@@ -152,8 +152,8 @@ public class lms1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         DataBase_Handler db = new DataBase_Handler();
         
-        System.out.println(login.tf.getText());
-        ArrayList<String> courses = db.courses_enrolled(db.username_to_id(login.tf.getText()));
+        System.out.println(lms_login.tf.getText());
+        ArrayList<String> courses = db.courses_enrolled(db.username_to_id(lms_login.tf.getText()));
         System.out.println(courses);
         
         for (int i = 0; i < courses.size(); i++) 

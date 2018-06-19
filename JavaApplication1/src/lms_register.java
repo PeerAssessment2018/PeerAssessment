@@ -4,12 +4,12 @@ import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 
 
-public class table_entry extends javax.swing.JFrame {
+public class lms_register extends javax.swing.JFrame {
 
     /**
      * Creates new form table_entry
      */
-    public table_entry() {
+    public lms_register() {
         initComponents();
     }
 
@@ -74,12 +74,19 @@ public class table_entry extends javax.swing.JFrame {
         ta.setRows(5);
         jScrollPane1.setViewportView(ta);
 
+        cb.setKeySelectionManager(null);
+        cb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -165,7 +172,7 @@ public class table_entry extends javax.swing.JFrame {
        {
            f=c.insert_student_data_handler(s1,s2,s3,s4,s5,s.nextToken());
        }
-       login f1=new login();
+       lms_login f1=new lms_login();
        f1.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -180,7 +187,25 @@ public class table_entry extends javax.swing.JFrame {
         ArrayList<String> courses=db.courses_available();
         for(int i=0;i<courses.size();i++)
             cb.addItem(courses.get(i));
+        cb.setSelectedItem(null);
+        ta.setText("");
     }//GEN-LAST:event_formWindowOpened
+
+    private void cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbActionPerformed
+        // TODO add your handling code here:
+           String s = (String)cb.getSelectedItem();
+           StringTokenizer st=new StringTokenizer(ta.getText(),",");
+           
+           boolean f = false;
+           while(st.hasMoreTokens())
+           {
+           if(st.nextToken().equals(s))
+               f=true;
+           }
+           
+           if(!f&&s!=null)
+           ta.append(s+",");
+    }//GEN-LAST:event_cbActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,20 +224,21 @@ public class table_entry extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(table_entry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(lms_register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(table_entry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(lms_register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(table_entry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(lms_register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(table_entry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(lms_register.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new table_entry().setVisible(true);
+                new lms_register().setVisible(true);
             }
         });
     }
