@@ -1,3 +1,10 @@
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -52,8 +59,6 @@ public class cms_login extends javax.swing.JFrame {
             }
         });
 
-        pwd.setText("jPasswordField1");
-
         jLabel4.setText("Course ID");
 
         cb1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -92,7 +97,7 @@ public class cms_login extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(pwd)
                             .addComponent(name)
@@ -133,8 +138,18 @@ public class cms_login extends javax.swing.JFrame {
 
     private void no1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_no1ActionPerformed
         // TODO add your handling code here:
-        cms1 frame=new cms1();
-        frame.setVisible(true);
+        System.out.println("Pressed ! Login !");
+        String t1=name.getText();
+        String t2=pwd.getText();
+        if(check_valid_login(t1, t2))
+        {
+            System.out.println("Login Successfull !");
+            JOptionPane.showConfirmDialog(null,"Login Successfull !");
+        }
+        else
+            System.out.println("UnSuccessfull Login");
+        cms1 f=new cms1();
+        f.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_no1ActionPerformed
 
@@ -148,6 +163,25 @@ public class cms_login extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    public boolean check_valid_login(String user_id,String password)
+    {
+        Connection conn=null;
+        try {
+            conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/peer_assessment");
+            System.out.println("Connection Established !");
+            String sql="SELECT COUNT(user_id) FROM student_data WHERE user_id='"+user_id+"', AND password='"+password+"';";
+            Statement statement=conn.createStatement();
+            ResultSet rs= statement.executeQuery(sql);
+            rs.next();
+            int f=rs.getInt("COUNT");
+            if(f>0)
+                return true;
+        } catch (Exception e) 
+        {
+            System.out.println("Error Login  !"+e.getMessage());
+        }
+        return false;
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

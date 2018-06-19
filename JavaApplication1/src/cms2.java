@@ -168,7 +168,7 @@ public class cms2 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
@@ -292,7 +292,7 @@ public class cms2 extends javax.swing.JFrame {
             
             n23.setEnabled(true);
             //cb1.removeItemAt(cb1.getSelectedIndex());
-            tf1.setText("");
+            //tf1.setText("");
             tf2.setText("");
             tf3.setText("");
             tf4.setText("");
@@ -305,7 +305,7 @@ public class cms2 extends javax.swing.JFrame {
             {
                 cb2.removeItemAt(cb2.getSelectedIndex());
                 cb1.removeItemAt(cb1.getSelectedIndex());
-                tf1.setText("");
+                //tf1.setText("");
                 tf2.setText("");
                 tf3.setText("");
                 tf4.setText("");
