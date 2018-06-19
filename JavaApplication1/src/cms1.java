@@ -39,13 +39,15 @@ public class cms1 extends javax.swing.JFrame {
         noa = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel4 = new javax.swing.JLabel();
+        cb = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(425, 350));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Enter prompt");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
 
         prompt.setColumns(20);
         prompt.setLineWrap(true);
@@ -53,27 +55,27 @@ public class cms1 extends javax.swing.JFrame {
         prompt.setWrapStyleWord(true);
         jScrollPane1.setViewportView(prompt);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 340, 100));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 340, 100));
 
         jLabel2.setText("Enter number of students evaluated by each student:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
 
         nos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nosActionPerformed(evt);
             }
         });
-        getContentPane().add(nos, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 60, -1));
+        getContentPane().add(nos, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, 60, -1));
 
         jLabel3.setText("Enter  the number of assessments for each student:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
 
         noa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 noaActionPerformed(evt);
             }
         });
-        getContentPane().add(noa, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 60, -1));
+        getContentPane().add(noa, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 60, -1));
 
         jButton1.setText("Next");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -81,8 +83,13 @@ public class cms1 extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 260, 60, -1));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 162, 360, 10));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, 60, -1));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 360, 10));
+
+        jLabel4.setText("Course Id");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+
+        getContentPane().add(cb, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 140, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -144,10 +151,12 @@ public class cms1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cb;
     public static javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     public static javax.swing.JTextField noa;

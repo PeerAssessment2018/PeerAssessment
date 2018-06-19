@@ -40,8 +40,6 @@ public class cms_login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         name = new javax.swing.JTextField();
         pwd = new javax.swing.JPasswordField();
-        jLabel4 = new javax.swing.JLabel();
-        cb1 = new javax.swing.JComboBox<>();
         no1 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
@@ -58,10 +56,6 @@ public class cms_login extends javax.swing.JFrame {
                 nameActionPerformed(evt);
             }
         });
-
-        jLabel4.setText("Course ID");
-
-        cb1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         no1.setText("Login");
         no1.addActionListener(new java.awt.event.ActionListener() {
@@ -81,28 +75,26 @@ public class cms_login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(156, 156, 156)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(no1))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pwd)
-                            .addComponent(name)
-                            .addComponent(cb1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(54, 54, 54))
+                            .addComponent(jLabel3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(156, 156, 156)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jButton1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(no1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(pwd, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                        .addComponent(name)))
+                .addGap(53, 53, 53))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,13 +112,9 @@ public class cms_login extends javax.swing.JFrame {
                         .addComponent(jLabel3)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(cb1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(no1)
-                    .addComponent(jButton1))
-                .addContainerGap(22, Short.MAX_VALUE))
+                    .addComponent(jButton1)
+                    .addComponent(no1))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -145,13 +133,13 @@ public class cms_login extends javax.swing.JFrame {
         {
             System.out.println("Login Successfull !");
             JOptionPane.showConfirmDialog(null,"Login Successfull !");
+            cms1 f=new cms1();
+            f.setVisible(true);
+            this.setVisible(false);
         }
         else
             System.out.println("UnSuccessfull Login");
         
-        cms1 f=new cms1();
-        f.setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_no1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -216,12 +204,10 @@ public class cms_login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cb1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField name;
     private javax.swing.JButton no1;
     private javax.swing.JPasswordField pwd;

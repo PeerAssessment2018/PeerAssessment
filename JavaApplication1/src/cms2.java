@@ -285,11 +285,10 @@ public class cms2 extends javax.swing.JFrame {
         String od=ta2.getText()+" ";
         int oscale=Integer.parseInt(tf5.getText())+0;
         DataBase_Handler app = new DataBase_Handler();
-        
-        app.insert_question_details_2(cname,cprompt,con);
-        if(cb1.getItemCount()==0)
+        System.out.println(cb1.getItemCount());
+        if(cb1.getItemCount()==1)
         {
-            
+            //app.insert_question_details_2(cname,cprompt,con);
             n23.setEnabled(true);
             //cb1.removeItemAt(cb1.getSelectedIndex());
             //tf1.setText("");
@@ -304,6 +303,7 @@ public class cms2 extends javax.swing.JFrame {
             if(cb2.getItemCount()==1)
             {
                 app.insert_options_details_1(q,"course1",cname,oname,od,oscale);
+                app.insert_question_details_2(cname,cprompt,con);
                 cb2.removeItemAt(cb2.getSelectedIndex());
                 cb1.removeItemAt(cb1.getSelectedIndex());
                 //tf1.setText("");
