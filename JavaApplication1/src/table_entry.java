@@ -29,7 +29,7 @@ public class table_entry extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jPasswordField = new javax.swing.JPasswordField();
+        jTextField5 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
@@ -50,7 +50,7 @@ public class table_entry extends javax.swing.JFrame {
 
         jLabel4.setText("Email");
 
-        jLabel5.setText("Password");
+        jLabel5.setText("password");
 
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -59,7 +59,7 @@ public class table_entry extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Course 1", "Course 2", "Course 3", "Course 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel6.setText("Select Course :");
 
@@ -83,7 +83,7 @@ public class table_entry extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(24, 24, 24)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPasswordField)
+                                    .addComponent(jTextField5)
                                     .addComponent(jTextField4)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -121,7 +121,7 @@ public class table_entry extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -140,7 +140,7 @@ public class table_entry extends javax.swing.JFrame {
        s2=(String)jTextField2.getText();
        s3=(String)jTextField3.getText();
        s4=(String)jTextField4.getText();
-       s5=(String)jPasswordField.getText();
+       s5=(String)jTextField5.getText();
        String course=(String)jComboBox1.getSelectedItem();
        DataBase_Handler c=new DataBase_Handler();
        if(c.insert_student_data_handler(s1, s2, s3, s4, s5,course))
@@ -203,6 +203,6 @@ public class table_entry extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JPasswordField jPasswordField;
+    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
 }
