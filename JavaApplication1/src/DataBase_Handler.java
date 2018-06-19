@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Collections;
+import java.util.Random;
 
 public class DataBase_Handler 
 {
@@ -30,6 +31,7 @@ public class DataBase_Handler
     {
         boolean f=false;
         f=insert_student_data(username, first_name, last_name, email, password);
+        
         try{
             String sql ="SELECT id FROM student_data WHERE username="+"'"+username+"';";//+ " AND "+"'"+first_name+"'"+","+"'"+last_name+"'"+","+"'"+email+"'"+","+"'"+password+"'"+");";
             Statement stmt = conn.createStatement();
@@ -41,6 +43,36 @@ public class DataBase_Handler
             sql ="INSERT INTO student_courseenrollment(user_id,course_id) VALUES ("+id+ ","+"'"+course_id+"');";//+","+"'"+last_name+"'"+","+"'"+email+"'"+","+"'"+password+"'"+");";
             stmt = conn.createStatement();
             f=stmt.execute(sql);   
+        
+            int n = 0;
+            boolean i=false;
+            while(!i)
+            {
+                Random rand=new Random();
+                n=rand.nextInt(999999)+100;
+                
+                sql="SELECT anonymous_user_id FROM student_anonymoususerid";
+                stmt = conn.createStatement();
+                rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    if(rs.getInt("anonymous_user_id")==n)
+                        i=true;
+                }
+                if(i==true)
+                    i=false;
+                else
+                    i=true;
+            }
+            
+            sql ="SELECT id FROM student_data WHERE username="+"'"+username+"';";
+            stmt = conn.createStatement();
+            rs=stmt.executeQuery(sql);
+            rs.next();
+            
+            sql ="INSERT INTO student_anonymoususerid(user_id,anonymous_user_id,course_id) VALUES (" + id + "," + n + ",'"+course_id+"')";
+            stmt = conn.createStatement();
+            f=stmt.execute(sql);
         }
         catch(Exception ex)
         {
@@ -53,9 +85,40 @@ public class DataBase_Handler
     {
         boolean f=false;
         try{
-            String sql ="INSERT INTO author_data(username,first_name,last_name,email,password) VALUES ("+"'"+username+"'"+ ","+"'"+first_name+"'"+","+"'"+last_name+"'"+","+"'"+email+"'"+","+"'"+password+"'"+");";
+            String sql ="INSERT INTO student_data(username,first_name,last_name,email,password) VALUES ("+"'"+username+"'"+ ","+"'"+first_name+"'"+","+"'"+last_name+"'"+","+"'"+email+"'"+","+"'"+password+"'"+");";
             Statement stmt = conn.createStatement();
-            f=stmt.execute(sql);   
+            f=stmt.execute(sql);
+            
+            /*int n = 0;
+            boolean i=false;
+            while(!i)
+            {
+                Random rand=new Random();
+                n=rand.nextInt(999999)+100;
+                
+                sql="SELECT anonymous_user_id FROM student_anonymoususerid";
+                stmt = conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    if(rs.getInt("anonymous_user_id")==n)
+                        i=true;
+                }
+                if(i==true)
+                    i=false;
+                else
+                    i=true;
+            }
+            
+            sql ="SELECT id FROM student_data WHERE username="+"'"+username+"';";
+            stmt = conn.createStatement();
+            ResultSet rs=stmt.executeQuery(sql);
+            rs.next();
+            int id=rs.getInt("id");
+            
+            sql ="INSERT INTO student_anonymoususerid(user_id,anonymous_user_id,course_id) VALUES (" + id + "," + n + ",'"+course_id+"')";
+            stmt = conn.createStatement();
+            f=stmt.execute(sql);*/
         }
         catch(Exception ex)
         {
@@ -373,6 +436,7 @@ public class DataBase_Handler
         }
      
     }
+    
     public void lms3_f1( int user_id, String course_id,String question_id )
     {
         int a_user_id = user_to_anonymous(user_id);
@@ -697,6 +761,9 @@ public class DataBase_Handler
         //db.insert_pa_grade_postshuffle(1,arr,"ques","course1");
         //db.lms3_f(3,"course 1","ques");
         //db.results(1,"course1","ques");
+        db.insert_student_data_handler("asdfg","asd","fg","qwe@gm.com","12@wd","hell1");
+        db.insert_student_data_handler("asdfg","asd","fg","qwe@gm.com","12@wd","hell2");
+        db.insert_student_data_handler("asdfg","asd","fg","qwe@gm.com","12@wd","hell3");
     }
 }
     
