@@ -129,7 +129,8 @@ public class cms_login extends javax.swing.JFrame {
         System.out.println("Pressed ! Login !");
         String t1=name.getText();
         String t2=(String) pwd.getText();
-        if(check_valid_login(t1, t2))
+        DataBase_Handler db=new DataBase_Handler();
+        if(db.check_valid_login_cms(t1, t2))
         {
             System.out.println("Login Successfull !");
             JOptionPane.showConfirmDialog(null,"Login Successfull !");
@@ -152,25 +153,7 @@ public class cms_login extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public boolean check_valid_login(String user_id,String password)
-    {
-        Connection conn=null;
-        try {
-            conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/peer_assessment");
-            System.out.println("Connection Established !");
-            String sql="SELECT COUNT(user_id) FROM author_data WHERE username='"+user_id+"', AND password='"+password+"';";
-            Statement statement=conn.createStatement();
-            ResultSet rs= statement.executeQuery(sql);
-            rs.next();
-            int f=rs.getInt("COUNT");
-            if(f>0)
-                return true;
-        } catch (Exception e) 
-        {
-            System.out.println("Error Login  !"+e.getMessage());
-        }
-        return false;
-    }
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
