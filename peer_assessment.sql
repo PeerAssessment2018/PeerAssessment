@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2018 at 09:37 AM
+-- Generation Time: Jun 19, 2018 at 08:14 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.2.5
 
@@ -159,9 +159,9 @@ CREATE TABLE `student_anonymoususerid` (
 --
 
 INSERT INTO `student_anonymoususerid` (`id`, `user_id`, `anonymous_user_id`, `course_id`) VALUES
-(1, 1, '123', 'hello_world'),
-(2, 3, '256', 'hello'),
-(3, 2, '234', 'hellow');
+(5, 7, '484574', 'hell1'),
+(6, 7, '856873', 'hell2'),
+(7, 7, '993441', 'hell3');
 
 -- --------------------------------------------------------
 
@@ -180,8 +180,12 @@ CREATE TABLE `student_courseenrollment` (
 --
 
 INSERT INTO `student_courseenrollment` (`id`, `user_id`, `course_id`) VALUES
-(1, 1, 'Item 1'),
-(2, 1, 'Item 1');
+(10, 7, 'hell1'),
+(11, 7, 'hell2'),
+(12, 7, 'hell3'),
+(13, 7, 'hell1'),
+(14, 7, 'hell2'),
+(15, 7, 'hell3');
 
 -- --------------------------------------------------------
 
@@ -203,7 +207,7 @@ CREATE TABLE `student_data` (
 --
 
 INSERT INTO `student_data` (`id`, `username`, `first_name`, `last_name`, `email`, `password`) VALUES
-(1, 'samsam12', 'sam', 'sam', 'samsam12@gmail.com', 'saf');
+(7, 'asdfg', 'asd', 'fg', 'qwe@gm.com', '12@wd');
 
 --
 -- Indexes for dumped tables
@@ -313,19 +317,19 @@ ALTER TABLE `question_details`
 -- AUTO_INCREMENT for table `student_anonymoususerid`
 --
 ALTER TABLE `student_anonymoususerid`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `student_courseenrollment`
 --
 ALTER TABLE `student_courseenrollment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `student_data`
 --
 ALTER TABLE `student_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

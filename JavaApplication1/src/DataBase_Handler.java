@@ -89,36 +89,6 @@ public class DataBase_Handler
             Statement stmt = conn.createStatement();
             f=stmt.execute(sql);
             
-            /*int n = 0;
-            boolean i=false;
-            while(!i)
-            {
-                Random rand=new Random();
-                n=rand.nextInt(999999)+100;
-                
-                sql="SELECT anonymous_user_id FROM student_anonymoususerid";
-                stmt = conn.createStatement();
-                ResultSet rs=stmt.executeQuery(sql);
-                while(rs.next())
-                {
-                    if(rs.getInt("anonymous_user_id")==n)
-                        i=true;
-                }
-                if(i==true)
-                    i=false;
-                else
-                    i=true;
-            }
-            
-            sql ="SELECT id FROM student_data WHERE username="+"'"+username+"';";
-            stmt = conn.createStatement();
-            ResultSet rs=stmt.executeQuery(sql);
-            rs.next();
-            int id=rs.getInt("id");
-            
-            sql ="INSERT INTO student_anonymoususerid(user_id,anonymous_user_id,course_id) VALUES (" + id + "," + n + ",'"+course_id+"')";
-            stmt = conn.createStatement();
-            f=stmt.execute(sql);*/
         }
         catch(Exception ex)
         {
