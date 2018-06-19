@@ -48,11 +48,50 @@ public class DataBase_Handler
         }
         return f;
     }
+    
     public boolean insert_student_data(String username,String first_name,String last_name,String email,String password)
     {
         boolean f=false;
         try{
-            String sql ="INSERT INTO student_data(username,first_name,last_name,email,password) VALUES ("+"'"+username+"'"+ ","+"'"+first_name+"'"+","+"'"+last_name+"'"+","+"'"+email+"'"+","+"'"+password+"'"+");";
+            String sql ="INSERT INTO author_data(username,first_name,last_name,email,password) VALUES ("+"'"+username+"'"+ ","+"'"+first_name+"'"+","+"'"+last_name+"'"+","+"'"+email+"'"+","+"'"+password+"'"+");";
+            Statement stmt = conn.createStatement();
+            f=stmt.execute(sql);   
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+        return f;
+    }
+    
+    public boolean insert_faculty_data_handler(String username,String first_name,String last_name,String email,String password,String course_id)
+    {
+        boolean f=false;
+       // f=insert_faculty_data(username, first_name, last_name, email, password);
+        try{
+            String sql ="SELECT id FROM author_data WHERE username="+"'"+username+"';";//+ " AND "+"'"+first_name+"'"+","+"'"+last_name+"'"+","+"'"+email+"'"+","+"'"+password+"'"+");";
+            Statement stmt = conn.createStatement();
+            ResultSet rs=stmt.executeQuery(sql);
+            rs.next();
+            
+            int id=rs.getInt("id");
+            
+            sql ="INSERT INTO author_coursecreated(author_id,course_id) VALUES ("+id+ ","+"'"+course_id+"');";//+","+"'"+last_name+"'"+","+"'"+email+"'"+","+"'"+password+"'"+");";
+            stmt = conn.createStatement();
+            f=stmt.execute(sql);   
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
+        return f;
+    }
+    
+    public boolean insert_faculty_data(String username,String first_name,String last_name,String email,String password)
+    {
+        boolean f=false;
+        try{
+            String sql ="INSERT INTO author_data(username,first_name,last_name,email,password) VALUES ("+"'"+username+"'"+ ","+"'"+first_name+"'"+","+"'"+last_name+"'"+","+"'"+email+"'"+","+"'"+password+"'"+");";
             Statement stmt = conn.createStatement();
             f=stmt.execute(sql);   
         }
