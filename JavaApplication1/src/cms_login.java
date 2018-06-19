@@ -128,7 +128,7 @@ public class cms_login extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.out.println("Pressed ! Login !");
         String t1=name.getText();
-        String t2=pwd.getText();
+        String t2=(String) pwd.getText();
         if(check_valid_login(t1, t2))
         {
             System.out.println("Login Successfull !");
@@ -158,7 +158,7 @@ public class cms_login extends javax.swing.JFrame {
         try {
             conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/peer_assessment");
             System.out.println("Connection Established !");
-            String sql="SELECT COUNT(user_id) FROM student_data WHERE user_id='"+user_id+"', AND password='"+password+"';";
+            String sql="SELECT COUNT(user_id) FROM author_data WHERE username='"+user_id+"', AND password='"+password+"';";
             Statement statement=conn.createStatement();
             ResultSet rs= statement.executeQuery(sql);
             rs.next();
