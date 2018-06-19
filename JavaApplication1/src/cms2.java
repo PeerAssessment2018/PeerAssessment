@@ -276,20 +276,22 @@ public class cms2 extends javax.swing.JFrame {
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // TODO add your handling code here:
-        String q=cms1.prompt.getText();
-        int nc=Integer.parseInt(tf1.getText());
-        String cname=tf2.getText();
-        String cprompt=ta1.getText();
-        int con=Integer.parseInt(tf3.getText());
-        String oname=tf4.getText();
-        String od=ta2.getText();
-        int oscale=Integer.parseInt(tf5.getText());
+        String q=cms1.prompt.getText()+" ";
+        int nc=Integer.parseInt(tf1.getText())+0;
+        String cname=tf2.getText()+" ";
+        String cprompt=ta1.getText()+" ";
+        int con=Integer.parseInt(tf3.getText())+0;
+        String oname=tf4.getText()+" ";
+        String od=ta2.getText()+" ";
+        int oscale=Integer.parseInt(tf5.getText())+0;
         DataBase_Handler app = new DataBase_Handler();
+        
         app.insert_question_details_2(cname,cprompt,con);
-        app.insert_options_details_1(q,"course 1",cname,oname,od,oscale);
-        if(cb2.getItemCount()==0)
+        if(cb1.getItemCount()==0)
         {
-            cb1.removeItemAt(cb1.getSelectedIndex());
+            
+            n23.setEnabled(true);
+            //cb1.removeItemAt(cb1.getSelectedIndex());
             tf1.setText("");
             tf2.setText("");
             tf3.setText("");
@@ -298,13 +300,27 @@ public class cms2 extends javax.swing.JFrame {
             ta1.setText("");
             ta2.setText("");
         }
-        else
-        {
-            cb2.removeItemAt(cb2.getSelectedIndex());
-            tf4.setText("");
-            tf5.setText("");
-            ta2.setText("");
-        }
+        
+            if(cb2.getItemCount()==0)
+            {
+                cb1.removeItemAt(cb1.getSelectedIndex());
+                tf1.setText("");
+                tf2.setText("");
+                tf3.setText("");
+                tf4.setText("");
+                tf5.setText("");
+                ta1.setText("");
+                ta2.setText("");
+            }
+            else   
+            {
+                app.insert_options_details_1(q,"course 1",cname,oname,od,oscale);
+                cb2.removeItemAt(cb2.getSelectedIndex());
+                tf4.setText("");
+                tf5.setText("");
+                ta2.setText("");
+            }
+        
         /*if(cb1.getItemCount()==0)
         {
             n23.setEnabled(true);
