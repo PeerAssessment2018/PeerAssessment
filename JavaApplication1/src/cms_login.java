@@ -204,12 +204,12 @@ public class cms_login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    public static javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField name;
-    private javax.swing.JButton no1;
-    private javax.swing.JPasswordField pwd;
+    public static javax.swing.JTextField name;
+    public static javax.swing.JButton no1;
+    public static javax.swing.JPasswordField pwd;
     // End of variables declaration//GEN-END:variables
 }

@@ -168,7 +168,7 @@ public class cms2 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
@@ -282,6 +282,7 @@ public class cms2 extends javax.swing.JFrame {
         String cprompt=ta1.getText()+" ";
         int con=Integer.parseInt(tf3.getText())+0;
         String oname=tf4.getText()+" ";
+        String course=(String)cms1.cb.getSelectedItem();
         String od=ta2.getText()+" ";
         int oscale=Integer.parseInt(tf5.getText())+0;
         DataBase_Handler app = new DataBase_Handler();
@@ -302,7 +303,7 @@ public class cms2 extends javax.swing.JFrame {
         
             if(cb2.getItemCount()==1)
             {
-                app.insert_options_details_1(q,"course1",cname,oname,od,oscale);
+                app.insert_options_details_1(q,course,cname,oname,od,oscale);
                 app.insert_question_details_2(cname,cprompt,con);
                 cb2.removeItemAt(cb2.getSelectedIndex());
                 cb1.removeItemAt(cb1.getSelectedIndex());
@@ -316,7 +317,7 @@ public class cms2 extends javax.swing.JFrame {
             }
             else   
             {
-                app.insert_options_details_1(q,"course1",cname,oname,od,oscale);
+                app.insert_options_details_1(q,course,cname,oname,od,oscale);
                 cb2.removeItemAt(cb2.getSelectedIndex());
                 tf4.setText("");
                 tf5.setText("");

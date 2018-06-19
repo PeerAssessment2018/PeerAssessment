@@ -1,4 +1,7 @@
 
+import java.util.ArrayList;
+
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -44,6 +47,11 @@ public class cms1 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(425, 350));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Enter prompt");
@@ -105,15 +113,26 @@ public class cms1 extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here
         p = prompt.getText();
+        String course=(String)cb.getSelectedItem();
         n1 = Integer.parseInt(nos.getText());
         n2 = Integer.parseInt(noa.getText());
         DataBase_Handler app = new DataBase_Handler();
-        app.insert_question_details_1("course1", p, n1, n2);
+        app.insert_question_details_1(course, p, n1, n2);
         
         cms2 frame = new cms2();
         frame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        int a_id=Integer.parseInt(cms_login.name.getText());
+        ArrayList<String> courses=new ArrayList<String>();
+        DataBase_Handler app=new DataBase_Handler();
+        courses=app.courses_created(a_id);
+        for(int i=0;i<courses.size();i++)
+            cb.addItem(courses.get(i));
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -151,7 +170,7 @@ public class cms1 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cb;
+    public static javax.swing.JComboBox<String> cb;
     public static javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
