@@ -148,6 +148,7 @@ public class cms_login extends javax.swing.JFrame {
         }
         else
             System.out.println("UnSuccessfull Login");
+        
         cms1 f=new cms1();
         f.setVisible(true);
         this.setVisible(false);

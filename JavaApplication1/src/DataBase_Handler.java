@@ -244,7 +244,7 @@ public class DataBase_Handler
 		Statement stmt = conn.createStatement();
                 stmt.execute(insertString);
                 } catch (Exception e) {
-			System.out.println("ERROR: Could not insert record");
+			System.out.println(e);
 			return;
 		}
     }
