@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Random;
 
 public class DataBase_Handler 
@@ -711,7 +712,7 @@ public class DataBase_Handler
         System.out.println(pas);
     }
      
-       public void insert_pa_grade(int user_id,int assessor_id,String q_id, String course, String cri_id,int points)
+    public void insert_pa_grade(int user_id,int assessor_id,String q_id, String course, String cri_id,int points)
     {		
                 try {
                     user_id=anonymous_to_user(user_id);
@@ -725,6 +726,25 @@ public class DataBase_Handler
 			return;
 		}
     }
+       
+    public ArrayList<String> courses_created(int author_id)
+    {
+        ArrayList<String> courses = new ArrayList<String>();
+        
+        try {
+                String sql=" SELECT course_id FROM author_coursecreated WHERE author_id = " + author_id;
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    courses.add(rs.getString("course_id"));
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+         }
+        return courses;     
+    }
+    
     public static void  main(String args[])
     {
         DataBase_Handler db =new DataBase_Handler(); 
@@ -733,9 +753,11 @@ public class DataBase_Handler
         //db.insert_pa_grade_postshuffle(1,arr,"ques","course1");
         //db.lms3_f(3,"course 1","ques");
         //db.results(1,"course1","ques");
-        db.insert_student_data_handler("asdfg","asd","fg","qwe@gm.com","12@wd","hell1");
-        db.insert_student_data_handler("asdfg","asd","fg","qwe@gm.com","12@wd","hell2");
-        db.insert_student_data_handler("asdfg","asd","fg","qwe@gm.com","12@wd","hell3");
+        //db.insert_student_data_handler("asdfg","asd","fg","qwe@gm.com","12@wd","hell1");
+       // db.insert_student_data_handler("asdfg","asd","fg","qwe@gm.com","12@wd","hell2");
+        //db.insert_student_data_handler("asdfg","asd","fg","qwe@gm.com","12@wd","hell3");
+        ArrayList<String> courses = db.courses_created(1);
+        System.out.println(courses);
     }
 }
     
