@@ -47,10 +47,15 @@ public class lms_register extends javax.swing.JFrame {
 
         jLabel1.setText("User");
 
+        jTextField1.setToolTipText("Enter username which will be used as your user id.");
+
         jLabel2.setText("First Name  :");
+
+        jTextField2.setToolTipText("Enter your first name.");
 
         jLabel3.setText("Last Name :");
 
+        jTextField3.setToolTipText("Enter your last name");
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -59,7 +64,11 @@ public class lms_register extends javax.swing.JFrame {
 
         jLabel4.setText("Email");
 
+        jTextField4.setToolTipText("Provide a valid email address through which you cam be contacted.");
+
         jLabel5.setText("password");
+
+        jTextField5.setToolTipText("Enter password.");
 
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -70,10 +79,13 @@ public class lms_register extends javax.swing.JFrame {
 
         jLabel6.setText("Select Course :");
 
+        ta.setEditable(false);
         ta.setColumns(20);
         ta.setRows(5);
+        ta.setEnabled(false);
         jScrollPane1.setViewportView(ta);
 
+        cb.setToolTipText("Select courses for which you want to be enrolled.");
         cb.setKeySelectionManager(null);
         cb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

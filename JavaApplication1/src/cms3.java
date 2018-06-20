@@ -54,21 +54,26 @@ public class cms3 extends javax.swing.JFrame {
 
         jLabel2.setText("How many answers would you like to set?");
 
+        jTextField1.setToolTipText("Provide number of sample of answers you would like to give.(Integer type entry only)");
+
         jLabel3.setText("Set answer for Answer:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setToolTipText("Select the answer number for which answer is to be set.");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Answer Details"));
 
         jLabel4.setText("Set Answer");
 
         jTextArea1.setColumns(20);
+        jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
+        jTextArea1.setToolTipText("Set answer.");
+        jTextArea1.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextArea1);
 
         jLabel5.setText("Set Answers for Criterion:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setToolTipText("Select criterion for setting the correct grade point.");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Options"));
 

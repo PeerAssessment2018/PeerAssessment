@@ -888,9 +888,71 @@ public class DataBase_Handler
         return response;
     }
     
+    
+    public int get_no_assessed(int user_id)
+    {
+        int no_assessed=0;
+        try {
+            Statement statement=conn.createStatement();
+            String sql="SELECT assessments_done FROM courseware_studentmodule WHERE user_id="+user_id+";";
+            ResultSet rs=statement.executeQuery(sql);
+            rs.next();
+            no_assessed=rs.getInt("assessments_done");
+        } catch (Exception e) 
+        {
+            System.out.println("err getting get_no_assessed !");
+        }
+        System.out.println("no_assessed:"+no_assessed);
+        return no_assessed;
+    }
+    
+    public int get_no_being_assessed(int user_id)
+    {
+        int no_being_assessed=0;
+        try {
+            Statement statement=conn.createStatement();
+            String sql="SELECT times_assessed FROM courseware_studentmodule WHERE user_id="+user_id+";";
+            ResultSet rs=statement.executeQuery(sql);
+            rs.next();
+            no_being_assessed=rs.getInt("times_assessed");
+        } catch (Exception e) 
+        {
+            System.out.println("err getting get_no_assessed !");
+        }
+        System.out.println("no_being_assessed:"+no_being_assessed);
+        return no_being_assessed;
+    }
+    
+    
+    public int get_no_assessor(String course_idString,String question_id)
+    {
+        int no_assessor=0;
+        try {
+            Statement statement=conn.createStatement();
+            ResultSet rs=statement.executeQuery("SELECT no_assessors FROM question_details WHERE course_id='"+course_id+"' AND question_id='"+question_id+"';");
+            rs.next();
+            no_assessor=rs.getInt("no_assessors");
+            
+        } catch (Exception e) {
+        }
+        return no_assessor;
+    }
+    
+    public boolean should_assess(int user_id)
+    {
+        boolean f=false;
+        String course_id="15",question_id="15";
+        
+        if(get_no_being_assessed(user_id)<get_no_assessor(course_id,question_id))
+            f=true;
+        return f;
+    }
+    
     public static void  main(String args[])
     {
         DataBase_Handler db =new DataBase_Handler(); 
+        db.get_no_assessed(07);
+        db.get_no_being_assessed(8);
         //int arr[] = {2,3};
        // db.lms3_f1(1,"course 1","sample prompt");
         //db.insert_pa_grade_postshuffle(1,arr,"ques","course1");
@@ -901,7 +963,10 @@ public class DataBase_Handler
         //db.insert_student_data_handler("asdfg","asd","fg","qwe@gm.com","12@wd","hell3");
         //ArrayList<String> courses = db.courses_created(1);
         //System.out.println(courses);
-        System.out.println(db.response_for_id(15,"hellobird"));
+        //System.out.println(db.response_for_id(15,"hellobird"));
     }
+    
+    
+    
 }
     
