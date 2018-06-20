@@ -888,6 +888,29 @@ public class DataBase_Handler
         return response;
     }
     
+    public void set_no_of_sample_answers(int nosa, String course_id , String question_id)
+    {
+        try{
+            String sql = "UPDATE question_details SET no_of_sample_answers = "+ nosa + " WHERE course_id = '" + course_id +"' AND question_id = '"+question_id +"'";
+            Statement stmt = conn.createStatement();
+            stmt.execute(sql);
+        }catch(SQLException e)
+                {
+                  System.out.println(e); 
+                }
+    }
+    
+    public void set_sample_answer_details(int author_id, String course_id, String question_id, String sample_answer, String criteria, String correct_option )
+    {
+        try{
+            String sql = "INSERT INTO sample_answer_details(author_id,course_id,question_id,sample_answer,criteria,correct_option) VALUES ("+author_id+",'"+course_id+"','"+question_id+"','"+sample_answer+"','"+criteria+"','"+correct_option+"')";
+            Statement stmt = conn.createStatement();
+            stmt.execute(sql);
+        }catch(SQLException e)
+                {
+                  System.out.println(e); 
+                }
+    }
     
     public int get_no_assessed(int user_id)
     {
