@@ -118,6 +118,9 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="tf5">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Enter your password(Be careful as it is case sensitive)"/>
+      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
@@ -142,6 +145,9 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="tf1">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Enter username which will be used as your user id."/>
+      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
@@ -163,6 +169,9 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="tf2">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Enter your first name."/>
+      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
@@ -176,6 +185,9 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="tf3">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Enter your last name."/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf3ActionPerformed"/>
       </Events>
@@ -192,6 +204,9 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="tf4">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Please provide a valid email address through which we can contact you."/>
+      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
@@ -208,6 +223,7 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
+            <Property name="toolTipText" type="java.lang.String" value="Please enter names of all courses and please seperate them using commas(,);"/>
           </Properties>
         </Component>
       </SubComponents>
