@@ -9,11 +9,13 @@
  * @author Khushboo
  */
 public class lms2 extends javax.swing.JFrame {
-
+    public String course_id;
     /**
      * Creates new form lms2
      */
     public lms2() {
+        course_id=(String)lms1.cb1.getSelectedItem();
+        System.out.println("course_id "+course_id);
         initComponents();
     }
 
@@ -171,6 +173,7 @@ public class lms2 extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         lms3 frame=new lms3();
+        
         frame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
