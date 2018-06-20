@@ -164,7 +164,7 @@ public class lms_register extends javax.swing.JFrame {
        s3=(String)jTextField3.getText();
        s4=(String)jTextField4.getText();
        s5=(String)jTextField5.getText();
-       StringTokenizer s=new StringTokenizer(ta.getText());
+       StringTokenizer s=new StringTokenizer(ta.getText(),",");
        boolean f=false;
        DataBase_Handler c=new DataBase_Handler();
        f=c.insert_student_data(s1, s2, s3, s4, s5);
