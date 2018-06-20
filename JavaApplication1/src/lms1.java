@@ -177,10 +177,10 @@ public class lms1 extends javax.swing.JFrame {
         String ans = ta2.getText();
         String p = ta1.getText();
         String name=lms_login.tf.getText();
-        String course=(String)cb1.getSelectedItem();
+        String course=((String)cb1.getSelectedItem()).trim();
         DataBase_Handler app = new DataBase_Handler();
         int id=app.username_to_id(name);
-app.insert_courseware_studentmodule(id,ans,course);
+        app.insert_courseware_studentmodule(id,ans,course);
     }//GEN-LAST:event_saveActionPerformed
 
     /**

@@ -24,8 +24,10 @@ public class lms3 extends javax.swing.JFrame {
         initComponents();
         
         course_id=(String)lms1.cb1.getSelectedItem();
+        System.out.println("---" + course_id);
         DataBase_Handler dbh=new DataBase_Handler();
-        answer=dbh.response_for_id(dbh.username_to_id((String)lms_login.tf.getText()) ,course_id);
+        answer=dbh.response_for_id(dbh.username_to_id(lms_login.tf.getText()) ,course_id);
+        System.out.print("****" + answer);
         ta.setText(answer);
 
     }

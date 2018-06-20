@@ -875,13 +875,12 @@ public class DataBase_Handler
     {
         String response = null;
         try{
-            String sql = "SELECT state FROM courseware_studentmodule WHERE course_id = '" + course_id +"' AND user_id = " +user_id;
+            String sql = "SELECT state FROM courseware_studentmodule WHERE user_id=" +user_id + " AND course_id=' " + course_id +"';";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
-            if(rs.next())
-            {
-                response = rs.getString("state");
-            }
+            rs.next();
+            response = rs.getString("state");
+                     
         }catch(SQLException e)
                 {
                   System.out.println(e); 
@@ -902,6 +901,7 @@ public class DataBase_Handler
         //db.insert_student_data_handler("asdfg","asd","fg","qwe@gm.com","12@wd","hell3");
         //ArrayList<String> courses = db.courses_created(1);
         //System.out.println(courses);
+        System.out.println(db.response_for_id(15,"hellobird"));
     }
 }
     
