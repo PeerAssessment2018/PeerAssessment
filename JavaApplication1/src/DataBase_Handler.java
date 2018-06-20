@@ -871,7 +871,7 @@ public class DataBase_Handler
         return ques;
     }
     
-    public String reposnse_for_id( int user_id, String course_id)
+    public String response_for_id( int user_id, String course_id)
     {
         String response = null;
         try{
