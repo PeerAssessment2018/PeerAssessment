@@ -49,7 +49,7 @@ public class lms3 extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        cb1 = new javax.swing.JComboBox<>();
+        assessor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -146,6 +146,9 @@ public class lms3 extends javax.swing.JFrame {
 
         jLabel6.setText("Assessor:");
 
+        assessor.setEditable(false);
+        assessor.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,7 +179,7 @@ public class lms3 extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(cb2, 0, 113, Short.MAX_VALUE)
-                                .addComponent(cb1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(assessor)))
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(43, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -192,7 +195,7 @@ public class lms3 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(cb1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(assessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -262,8 +265,7 @@ public class lms3 extends javax.swing.JFrame {
         rd5.setVisible(false);
         DataBase_Handler db=new DataBase_Handler();
         int r=db.count_no_of_students();
-        for(int i=1;i<=r;i++)
-            cb1.addItem(""+i);
+        assessor.setText(lms_login.tf.getText());
         db.lms3_f(1,"course 1","sample prompt");
     }//GEN-LAST:event_formWindowOpened
 
@@ -275,12 +277,13 @@ public class lms3 extends javax.swing.JFrame {
         rd4.setVisible(false);
         rd5.setVisible(false);
         DataBase_Handler db=new DataBase_Handler();
-        db.lms3_f1(1,"course 1","sample prompt");
+        String course=(String)lms1.cb1.getSelectedItem();
+        db.lms3_f1(1,course,"sample prompt");
     }//GEN-LAST:event_cb3ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        int assessor_id=Integer.parseInt((String)cb1.getSelectedItem());
+        int assessor_id=Integer.parseInt(assessor.getText());
         int user_id=Integer.parseInt((String)cb2.getSelectedItem());
         String q_id="sample prompt";
         String cri=(String)cb3.getSelectedItem();
@@ -302,11 +305,6 @@ public class lms3 extends javax.swing.JFrame {
         cb3.removeItem(cri);
         if(cb3.getItemCount()==0)
             cb2.removeItem(user_id);
-        if(cb2.getItemCount()==0)
-        {
-            cb1.removeItem(assessor_id);
-            n34.setEnabled(true);
-        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -345,8 +343,8 @@ public class lms3 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField assessor;
     private javax.swing.ButtonGroup buttonGroup1;
-    public static javax.swing.JComboBox<String> cb1;
     public static javax.swing.JComboBox<String> cb2;
     public static javax.swing.JComboBox<String> cb3;
     private javax.swing.JButton jButton2;
