@@ -976,7 +976,7 @@ public class DataBase_Handler
         if(should_assess(user_id))
         {
             try {
-                 String sql="SELECT state,user_id FROM table WHERE user_id!="+user_id+" ORDER BY RAND() LIMIT 1;";
+                 String sql="SELECT state,user_id FROM table WHERE user_id!="+user_id+" ORDER BY date_of_submission ASC LIMIT 1;";
             ResultSet rs=conn.createStatement().executeQuery(sql);
             rs.next();
             answer=rs.getString("state");
