@@ -50,19 +50,27 @@ public class lms2 extends javax.swing.JFrame {
 
         jLabel2.setText("Prompt:");
 
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
+        jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
+        jTextArea1.setToolTipText("This is the question.");
+        jTextArea1.setWrapStyleWord(true);
+        jTextArea1.setEnabled(false);
         jScrollPane1.setViewportView(jTextArea1);
 
         jTextArea2.setColumns(20);
+        jTextArea2.setLineWrap(true);
         jTextArea2.setRows(5);
+        jTextArea2.setToolTipText("Write your answer here.");
+        jTextArea2.setWrapStyleWord(true);
         jScrollPane2.setViewportView(jTextArea2);
 
         jLabel3.setText("Answer:");
 
         jLabel4.setText("Evaluate for Criterion:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setToolTipText("Select criterion for which you would like to give the answer.");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Options"));
 
