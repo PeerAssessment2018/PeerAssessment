@@ -51,11 +51,14 @@ public class cms_login extends javax.swing.JFrame {
 
         jLabel3.setText("Password");
 
+        name.setToolTipText("Enter your username( It is case sensitive.)");
         name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nameActionPerformed(evt);
             }
         });
+
+        pwd.setToolTipText("Enter password(It is also case sensitive.)");
 
         no1.setText("Login");
         no1.addActionListener(new java.awt.event.ActionListener() {

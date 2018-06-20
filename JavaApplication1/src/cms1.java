@@ -60,6 +60,7 @@ public class cms1 extends javax.swing.JFrame {
         prompt.setColumns(20);
         prompt.setLineWrap(true);
         prompt.setRows(5);
+        prompt.setToolTipText("Enter your prompt i.e. question here.");
         prompt.setWrapStyleWord(true);
         jScrollPane1.setViewportView(prompt);
 
@@ -68,6 +69,7 @@ public class cms1 extends javax.swing.JFrame {
         jLabel2.setText("Enter number of students evaluated by each student:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
 
+        nos.setToolTipText("Integer type entry only.");
         nos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nosActionPerformed(evt);
@@ -78,6 +80,7 @@ public class cms1 extends javax.swing.JFrame {
         jLabel3.setText("Enter  the number of assessments for each student:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
 
+        noa.setToolTipText("Integer type entry only.");
         noa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 noaActionPerformed(evt);
@@ -97,6 +100,7 @@ public class cms1 extends javax.swing.JFrame {
         jLabel4.setText("Course Id");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
+        cb.setToolTipText("Choose the course for which you would like to create a prompt.");
         getContentPane().add(cb, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 140, -1));
 
         pack();

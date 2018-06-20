@@ -63,6 +63,7 @@ public class cms2 extends javax.swing.JFrame {
         jLabel2.setText("Enter number of criteria for evaluation:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
+        tf1.setToolTipText("Integer type entry only.");
         tf1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf1ActionPerformed(evt);
@@ -73,6 +74,7 @@ public class cms2 extends javax.swing.JFrame {
         jLabel3.setText("Set details for Criterion:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, -1));
 
+        cb1.setToolTipText("Select the criterion for which you would like to set the details.");
         cb1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb1ActionPerformed(evt);
@@ -89,12 +91,16 @@ public class cms2 extends javax.swing.JFrame {
 
         jLabel5.setText("Criterion Prompt:");
 
+        tf2.setToolTipText("Set the criterion name.");
+
         ta1.setColumns(20);
         ta1.setRows(5);
+        ta1.setToolTipText("Describe the criterion, give details about it. Like criterion logic would be used for evaluating the reasoning behind the given response.");
         jScrollPane1.setViewportView(ta1);
 
         jLabel6.setText("Number of options:");
 
+        tf3.setToolTipText("Integer type entry only. ");
         tf3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf3ActionPerformed(evt);
@@ -103,21 +109,29 @@ public class cms2 extends javax.swing.JFrame {
 
         jLabel7.setText("Set details for Option:");
 
+        cb2.setToolTipText("Select the option for which you would like to set the details.");
+
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Option Details"));
         jPanel2.setDoubleBuffered(false);
         jPanel2.setMinimumSize(new java.awt.Dimension(254, 220));
         jPanel2.setPreferredSize(new java.awt.Dimension(254, 220));
 
-        jLabel10.setText("Scale:");
+        jLabel10.setText("Point");
 
         jLabel8.setText("Option Name:");
 
         ta2.setColumns(20);
+        ta2.setLineWrap(true);
         ta2.setRows(5);
+        ta2.setToolTipText("Describe the option. For example- excellent means that the answer was to the point and poor means the reasoning could not explain the answer.");
+        ta2.setWrapStyleWord(true);
         jScrollPane2.setViewportView(ta2);
+
+        tf4.setToolTipText("Enter option name");
 
         jLabel9.setText("Description:");
 
+        tf5.setToolTipText("Marks awarded for the option.");
         tf5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf5ActionPerformed(evt);

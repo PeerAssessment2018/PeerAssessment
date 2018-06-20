@@ -52,6 +52,9 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JTextField" name="tf1">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Integer type entry only."/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf1ActionPerformed"/>
       </Events>
@@ -79,6 +82,7 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>
         </Property>
+        <Property name="toolTipText" type="java.lang.String" value="Select the criterion for which you would like to set the details."/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb1ActionPerformed"/>
@@ -188,6 +192,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tf2">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Set the criterion name."/>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
@@ -203,6 +210,7 @@
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
+                <Property name="toolTipText" type="java.lang.String" value="Describe the criterion, give details about it. Like criterion logic would be used for evaluating the reasoning behind the given response."/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -216,6 +224,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tf3">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Integer type entry only. "/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf3ActionPerformed"/>
           </Events>
@@ -233,6 +244,7 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value="Select the option for which you would like to set the details."/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -304,7 +316,7 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Scale:"/>
+                <Property name="text" type="java.lang.String" value="Point"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
@@ -322,7 +334,10 @@
                 <Component class="javax.swing.JTextArea" name="ta2">
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
+                    <Property name="lineWrap" type="boolean" value="true"/>
                     <Property name="rows" type="int" value="5"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Describe the option. For example- excellent means that the answer was to the point and poor means the reasoning could not explain the answer."/>
+                    <Property name="wrapStyleWord" type="boolean" value="true"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -331,6 +346,9 @@
               </SubComponents>
             </Container>
             <Component class="javax.swing.JTextField" name="tf4">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Enter option name"/>
+              </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
               </AuxValues>
@@ -341,6 +359,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tf5">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Marks awarded for the option."/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf5ActionPerformed"/>
               </Events>

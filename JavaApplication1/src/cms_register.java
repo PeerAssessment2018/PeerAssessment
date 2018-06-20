@@ -48,6 +48,8 @@ public class cms_register extends javax.swing.JFrame {
 
         jLabel5.setText("password");
 
+        tf5.setToolTipText("Enter your password(Be careful as it is case sensitive)");
+
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,12 +59,17 @@ public class cms_register extends javax.swing.JFrame {
 
         jLabel1.setText("User");
 
+        tf1.setToolTipText("Enter username which will be used as your user id.");
+
         jLabel6.setText("Enter Courses :");
 
         jLabel2.setText("First Name  :");
 
+        tf2.setToolTipText("Enter your first name.");
+
         jLabel3.setText("Last Name :");
 
+        tf3.setToolTipText("Enter your last name.");
         tf3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf3ActionPerformed(evt);
@@ -71,8 +78,11 @@ public class cms_register extends javax.swing.JFrame {
 
         jLabel4.setText("Email");
 
+        tf4.setToolTipText("Please provide a valid email address through which we can contact you.");
+
         ta.setColumns(20);
         ta.setRows(5);
+        ta.setToolTipText("Please enter names of all courses and please seperate them using commas(,);");
         jScrollPane1.setViewportView(ta);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
