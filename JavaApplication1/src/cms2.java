@@ -287,21 +287,7 @@ public class cms2 extends javax.swing.JFrame {
         int oscale=Integer.parseInt(tf5.getText())+0;
         DataBase_Handler app = new DataBase_Handler();
         System.out.println(cb1.getItemCount());
-        if(cb1.getItemCount()==1)
-        {
-            //app.insert_question_details_2(cname,cprompt,con);
-            n23.setEnabled(true);
-            //cb1.removeItemAt(cb1.getSelectedIndex());
-            //tf1.setText("");
-            tf2.setText("");
-            tf3.setText("");
-            tf4.setText("");
-            tf5.setText("");
-            ta1.setText("");
-            ta2.setText("");
-        }
-        
-            if(cb2.getItemCount()==1)
+        if(cb2.getItemCount()==1)
             {
                 app.insert_options_details_1(q,course,cname,oname,od,oscale);
                 app.insert_question_details_2(cname,cprompt,con);
@@ -323,6 +309,21 @@ public class cms2 extends javax.swing.JFrame {
                 tf5.setText("");
                 ta2.setText("");
             }
+        if(cb1.getItemCount()==0)
+        {
+            //app.insert_question_details_2(cname,cprompt,con);
+            n23.setEnabled(true);
+            //cb1.removeItemAt(cb1.getSelectedIndex());
+            //tf1.setText("");
+            tf2.setText("");
+            tf3.setText("");
+            tf4.setText("");
+            tf5.setText("");
+            ta1.setText("");
+            ta2.setText("");
+        }
+        
+            
         
         /*if(cb1.getItemCount()==0)
         {

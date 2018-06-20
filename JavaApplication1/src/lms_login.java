@@ -38,6 +38,12 @@ public class lms_login extends javax.swing.JFrame {
 
         jLabel1.setText("User ID :");
 
+        tf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Password :");
 
         jButton1.setText("Login");
@@ -127,6 +133,10 @@ public class lms_login extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -165,11 +175,11 @@ public class lms_login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    public static javax.swing.JButton jButton1;
+    public static javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPasswordField1;
+    public static javax.swing.JPasswordField jPasswordField1;
     public static javax.swing.JTextField tf;
     // End of variables declaration//GEN-END:variables
 }

@@ -162,11 +162,14 @@ public class lms1 extends javax.swing.JFrame {
         {
             cb1.addItem(st.nextToken());
         }
-        ta1.setText("Sample prompt");
     }//GEN-LAST:event_formWindowOpened
 
     private void cb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb1ActionPerformed
         // TODO add your handling code here:
+        String course=(String)cb1.getSelectedItem();
+        DataBase_Handler db=new DataBase_Handler();
+        String ques=db.course_question(course);
+        ta1.setText(ques);
     }//GEN-LAST:event_cb1ActionPerformed
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
@@ -177,7 +180,7 @@ public class lms1 extends javax.swing.JFrame {
         String course=(String)cb1.getSelectedItem();
         DataBase_Handler app = new DataBase_Handler();
         int id=app.username_to_id(name);
-        app.insert_courseware_studentmodule(id,ans,course);
+app.insert_courseware_studentmodule(id,ans,course);
     }//GEN-LAST:event_saveActionPerformed
 
     /**
