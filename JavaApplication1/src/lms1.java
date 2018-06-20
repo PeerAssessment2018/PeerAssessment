@@ -219,7 +219,7 @@ app.insert_courseware_studentmodule(id,ans,course);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cb1;
+    public static javax.swing.JComboBox<String> cb1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
