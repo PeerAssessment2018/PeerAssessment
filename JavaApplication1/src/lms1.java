@@ -60,6 +60,7 @@ public class lms1 extends javax.swing.JFrame {
 
         jLabel3.setText("Prompt:");
 
+        ta1.setEditable(false);
         ta1.setColumns(20);
         ta1.setLineWrap(true);
         ta1.setRows(5);

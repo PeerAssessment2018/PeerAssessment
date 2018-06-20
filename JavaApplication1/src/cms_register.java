@@ -160,6 +160,9 @@ public class cms_register extends javax.swing.JFrame {
         {
             db.insert_faculty_data_handler(s1, s2, s3, s4, s5, course.nextToken());
         }
+        cms_login f=new cms_login();
+        f.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tf3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf3ActionPerformed
