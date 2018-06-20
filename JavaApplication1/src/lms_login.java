@@ -171,7 +171,6 @@ public class lms_login extends javax.swing.JFrame {
                 new lms_login().setVisible(true);
             }
         });
-        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

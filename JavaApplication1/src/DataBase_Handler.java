@@ -864,11 +864,29 @@ public class DataBase_Handler
             {
                 ques = rs.getString("question_id");
             }
-        }catch(Exception e)
+        }catch(SQLException e)
                 {
                   System.out.println(e); 
                 }
         return ques;
+    }
+    
+    public String reposnse_for_id( int user_id, String course_id)
+    {
+        String response = null;
+        try{
+            String sql = "SELECT state FROM courseware_studentmodule WHERE course_id = '" + course_id +"' AND user_id = " +user_id;
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            if(rs.next())
+            {
+                response = rs.getString("state");
+            }
+        }catch(SQLException e)
+                {
+                  System.out.println(e); 
+                }
+        return response;
     }
     
     public static void  main(String args[])
