@@ -924,7 +924,7 @@ public class DataBase_Handler
     }
     
     
-    public int get_no_assessor(String course_idString,String question_id)
+    public int get_no_assessor(String course_id,String question_id)
     {
         int no_assessor=0;
         try {
@@ -946,6 +946,22 @@ public class DataBase_Handler
         if(get_no_being_assessed(user_id)<get_no_assessor(course_id,question_id))
             f=true;
         return f;
+    }
+    public String get_answer(int user_id)
+    {
+        String answer="";
+        if(should_assess(user_id))
+        {
+            try {
+                 String sql="SELECT state,user_id FROM table WHERE user_id!="+user_id+" ORDER BY RAND() LIMIT 1;";
+            ResultSet rs=conn.createStatement().executeQuery(sql);
+            rs.next();
+            answer=rs.getString("state");
+            } catch (Exception e) {
+                System.out.println("Error getting answer !");
+            }
+        }
+        return answer;    
     }
     
     public static void  main(String args[])
