@@ -835,6 +835,42 @@ public class DataBase_Handler
         return false;
     }
     
+     public int username_to_aid(String username)
+    {
+        int user_id=0;
+        
+        try {
+                String sql=" SELECT id FROM author_data WHERE username = '" + username +"'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                if(rs.next())
+                {
+                    user_id=rs.getInt("id");
+                }
+                } catch (Exception e) {
+		System.out.println("username not found ");
+         }
+        return user_id;     
+    }
+     
+    public String course_question ( String course_id)
+    {
+        String ques = null;
+        try{
+            String sql = "SELECT question_id FROM question_details WHERE course_id = '" + course_id +"'";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            if(rs.next())
+            {
+                ques = rs.getString("question_id");
+            }
+        }catch(Exception e)
+                {
+                  System.out.println(e); 
+                }
+        return ques;
+    }
+    
     public static void  main(String args[])
     {
         DataBase_Handler db =new DataBase_Handler(); 

@@ -126,10 +126,12 @@ public class cms1 extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        int a_id=Integer.parseInt(cms_login.name.getText());
+        DataBase_Handler db= new DataBase_Handler();
+        int a_id = db.username_to_aid(cms_login.name.getText());
         ArrayList<String> courses=new ArrayList<String>();
         DataBase_Handler app=new DataBase_Handler();
         courses=app.courses_created(a_id);
+        
         for(int i=0;i<courses.size();i++)
             cb.addItem(courses.get(i));
     }//GEN-LAST:event_formWindowOpened
