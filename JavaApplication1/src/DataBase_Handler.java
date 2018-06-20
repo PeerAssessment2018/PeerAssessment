@@ -947,7 +947,7 @@ public class DataBase_Handler
     }
     
     
-    public int get_no_assessor(String course_idString,String question_id)
+    public int get_no_assessor(String course_id,String question_id)
     {
         int no_assessor=0;
         try {
