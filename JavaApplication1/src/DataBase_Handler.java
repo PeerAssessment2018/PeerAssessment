@@ -222,11 +222,11 @@ public class DataBase_Handler
 		}
     }
     
-    public void insert_courseware_studentmodule(int user_id,String ans)
+    public void insert_courseware_studentmodule(int user_id,String ans, String course)
         {                
                 try {
 			String insertString = " INSERT INTO courseware_studentmodule ( user_id, course_id, question_id, state )" +" VALUES ( ' " 
-                                +user_id+"' , ' course1 ' , ' "+ lms1.ta1.getText()+" ' , ' " +ans+" ' ) ";
+                                +user_id+"' , ' "+course+" ' , ' "+ lms1.ta1.getText()+" ' , ' " +ans+" ' ) ";
 			Statement stmt = conn.createStatement();
                 stmt.execute(insertString);
                } catch (Exception e) {

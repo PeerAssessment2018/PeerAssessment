@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -155,11 +156,11 @@ public class lms1 extends javax.swing.JFrame {
         
         System.out.println(lms_login.tf.getText());
         ArrayList<String> courses = db.courses_enrolled(db.username_to_id(lms_login.tf.getText()));
-        System.out.println(courses);
-        
-        for (int i = 0; i < courses.size(); i++) 
+        //System.out.println(courses.get(0));
+        StringTokenizer st=new StringTokenizer(courses.get(0),",");
+        while(st.hasMoreTokens())
         {
-            cb1.addItem(courses.get(i));
+            cb1.addItem(st.nextToken());
         }
         ta1.setText("Sample prompt");
     }//GEN-LAST:event_formWindowOpened
@@ -172,9 +173,11 @@ public class lms1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         String ans = ta2.getText();
         String p = ta1.getText();
-        int name =  cb1.getSelectedIndex();
+        String name=lms_login.tf.getText();
+        String course=(String)cb1.getSelectedItem();
         DataBase_Handler app = new DataBase_Handler();
-        app.insert_courseware_studentmodule(name, ans);
+        int id=app.username_to_id(name);
+        app.insert_courseware_studentmodule(id,ans,course);
     }//GEN-LAST:event_saveActionPerformed
 
     /**
