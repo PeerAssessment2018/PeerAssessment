@@ -101,6 +101,11 @@ public class cms1 extends javax.swing.JFrame {
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
         cb.setToolTipText("Choose the course for which you would like to create a prompt.");
+        cb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbActionPerformed(evt);
+            }
+        });
         getContentPane().add(cb, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 140, -1));
 
         pack();
@@ -139,6 +144,10 @@ public class cms1 extends javax.swing.JFrame {
         for(int i=0;i<courses.size();i++)
             cb.addItem(courses.get(i));
     }//GEN-LAST:event_formWindowOpened
+
+    private void cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbActionPerformed
 
     /**
      * @param args the command line arguments
