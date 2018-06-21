@@ -85,6 +85,10 @@ public class cms1 extends javax.swing.JFrame {
 
         jLabel3.setText("Each learner must be graded by:");
 
+        nos.setToolTipText("Number of responses to be evaluated by each learner");
+
+        noa.setToolTipText("Number of assessments for each response");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(

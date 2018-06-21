@@ -27,7 +27,6 @@ public class cms2 extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        tf1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cb1 = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
@@ -37,7 +36,6 @@ public class cms2 extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ta1 = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
-        tf3 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         cb2 = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
@@ -47,14 +45,15 @@ public class cms2 extends javax.swing.JFrame {
         ta2 = new javax.swing.JTextArea();
         tf4 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        tf5 = new javax.swing.JTextField();
+        points = new javax.swing.JSpinner();
+        no_of_option = new javax.swing.JSpinner();
         p21 = new javax.swing.JButton();
         save = new javax.swing.JButton();
         n23 = new javax.swing.JButton();
+        noc = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(430, 725));
-        setPreferredSize(new java.awt.Dimension(430, 725));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Rubrics");
@@ -62,14 +61,6 @@ public class cms2 extends javax.swing.JFrame {
 
         jLabel2.setText("Enter number of criteria for evaluation:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
-
-        tf1.setToolTipText("Integer type entry only.");
-        tf1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(tf1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 90, -1));
 
         jLabel3.setText("Set details for Criterion:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, -1));
@@ -97,17 +88,9 @@ public class cms2 extends javax.swing.JFrame {
         ta1.setRows(5);
         ta1.setTabSize(0);
         ta1.setToolTipText("Describe the criterion, give details about it. Like criterion logic would be used for evaluating the reasoning behind the given response.");
-        ta1.setNextFocusableComponent(tf3);
         jScrollPane1.setViewportView(ta1);
 
         jLabel6.setText("Number of options:");
-
-        tf3.setToolTipText("Integer type entry only. ");
-        tf3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf3ActionPerformed(evt);
-            }
-        });
 
         jLabel7.setText("Set details for Option:");
 
@@ -134,13 +117,6 @@ public class cms2 extends javax.swing.JFrame {
 
         jLabel9.setText("Description:");
 
-        tf5.setToolTipText("Marks awarded for the option.");
-        tf5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf5ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -156,9 +132,9 @@ public class cms2 extends javax.swing.JFrame {
                     .addComponent(jScrollPane2)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tf5)
-                        .addGap(6, 6, 6)))
+                        .addGap(18, 18, 18)
+                        .addComponent(points, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -174,7 +150,7 @@ public class cms2 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(tf5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(points, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -198,10 +174,10 @@ public class cms2 extends javax.swing.JFrame {
                             .addComponent(jLabel5))
                         .addGap(15, 15, 15)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cb2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(tf3)
-                                .addGap(69, 69, 69))
-                            .addComponent(cb2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(no_of_option, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -218,7 +194,7 @@ public class cms2 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(tf3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(no_of_option, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -255,28 +231,17 @@ public class cms2 extends javax.swing.JFrame {
         });
         getContentPane().add(n23, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 600, -1, -1));
 
+        noc.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                nocStateChanged(evt);
+            }
+        });
+        getContentPane().add(noc, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 90, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     	
-    private void tf3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf3ActionPerformed
-        // TODO add your handling code here:
-        int ic=cb2.getItemCount();
-        for(int i=0;i<ic;i++)
-        {
-            cb2.removeItemAt(i);
-        }
-        int noc=Integer.parseInt(tf3.getText());
-        for(int i=0;i<noc;i++)
-        {
-            cb2.addItem("Option "+(i+1));
-        }
-    }//GEN-LAST:event_tf3ActionPerformed
-
-    private void tf5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf5ActionPerformed
-
     private void n23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n23ActionPerformed
         // TODO add your handling code here:
         cms3 frame=new cms3();
@@ -294,17 +259,17 @@ public class cms2 extends javax.swing.JFrame {
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // TODO add your handling code here:
         String q=cms1.prompt.getText()+" ";
-        int nc=Integer.parseInt(tf1.getText())+0;
+        int nc=(int)noc.getValue();
         String cname=tf2.getText()+" ";
         String cprompt=ta1.getText()+" ";
-        int con=Integer.parseInt(tf3.getText())+0;
+        int con=(int)no_of_option.getValue();
         String oname=tf4.getText()+" ";
         String course=(String)cms1.cb.getSelectedItem();
         String od=ta2.getText()+" ";
-        int oscale=Integer.parseInt(tf5.getText())+0;
+        int oscale=(int)points.getValue();
         DataBase_Handler app = new DataBase_Handler();
         System.out.println(cb1.getItemCount());
-        if(cb2.getItemCount()==1)
+            if(cb2.getItemCount()==1)
             {
                 app.insert_options_details_1(q,course,cname,oname,od,oscale);
                 app.insert_question_details_2(cname,cprompt,con);
@@ -312,9 +277,9 @@ public class cms2 extends javax.swing.JFrame {
                 cb1.removeItemAt(cb1.getSelectedIndex());
                 //tf1.setText("");
                 tf2.setText("");
-                tf3.setText("");
+                no_of_option.setValue(0);
                 tf4.setText("");
-                tf5.setText("");
+                points.setValue(0);
                 ta1.setText("");
                 ta2.setText("");
             }
@@ -323,7 +288,7 @@ public class cms2 extends javax.swing.JFrame {
                 app.insert_options_details_1(q,course,cname,oname,od,oscale);
                 cb2.removeItemAt(cb2.getSelectedIndex());
                 tf4.setText("");
-                tf5.setText("");
+                points.setValue(0);
                 ta2.setText("");
             }
             if(cb1.getItemCount()==0)
@@ -333,9 +298,9 @@ public class cms2 extends javax.swing.JFrame {
                 //cb1.removeItemAt(cb1.getSelectedIndex());
                 //tf1.setText("");
                 tf2.setText("");
-                tf3.setText("");
+                no_of_option.setValue(0);
                 tf4.setText("");
-                tf5.setText("");
+                points.setValue(0);
                 ta1.setText("");
                 ta2.setText("");
             }
@@ -404,23 +369,23 @@ public class cms2 extends javax.swing.JFrame {
         }*/
     }//GEN-LAST:event_saveActionPerformed
 
-    private void tf1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf1ActionPerformed
+    private void cb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb1ActionPerformed
         // TODO add your handling code here:
-        int ic=cb1.getItemCount();
+    }//GEN-LAST:event_cb1ActionPerformed
+
+    private void nocStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_nocStateChanged
+        // TODO add your handling code here
+         int ic=cb1.getItemCount();
         for(int i=0;i<ic;i++)
         {
             cb1.removeItemAt(i);
         }
-        int noc=Integer.parseInt(tf1.getText());
-        for(int i=0;i<noc;i++)
+        int noc1=(int)noc.getValue();
+        for(int i=0;i<noc1;i++)
         {
             cb1.addItem("Criterion "+(i+1));
         }
-    }//GEN-LAST:event_tf1ActionPerformed
-
-    private void cb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb1ActionPerformed
+    }//GEN-LAST:event_nocStateChanged
 
     /**
      * @param args the command line arguments
@@ -477,14 +442,14 @@ public class cms2 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton n23;
+    private javax.swing.JSpinner no_of_option;
+    private javax.swing.JSpinner noc;
     private javax.swing.JButton p21;
+    private javax.swing.JSpinner points;
     private javax.swing.JButton save;
     public static javax.swing.JTextArea ta1;
     public static javax.swing.JTextArea ta2;
-    public static javax.swing.JTextField tf1;
     public static javax.swing.JTextField tf2;
-    public static javax.swing.JTextField tf3;
     public static javax.swing.JTextField tf4;
-    public static javax.swing.JTextField tf5;
     // End of variables declaration//GEN-END:variables
 }

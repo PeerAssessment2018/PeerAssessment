@@ -209,8 +209,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="nos">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Number of responses to be evaluated by each learner"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="noa">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Number of assessments for each response"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
