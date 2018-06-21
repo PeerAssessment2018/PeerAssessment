@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Collections;
+import java.util.Collection;
 import java.util.Locale;
 import java.util.Random;
 
@@ -250,7 +251,7 @@ public class DataBase_Handler
 		}
     }
     
-     public void insert_pa_grade_postshuffle(int user_id, int arr[] , String question_id, String course_id )
+     public void insert_pa_grade_postshuffle(int user_id, int arr[] , String course_id, String question_id )
     {
         /*Convert arr from user_id list to anonymous_user_id from the student_anonymoususerid table*/
         
@@ -298,6 +299,7 @@ public class DataBase_Handler
         /*for each criteria give seperate entry in the pa_grade table*/
         /*Duplicate the above entries for different ids from ArrayList*/
         
+        System.out.println("*****" + arr2.length);
         for(int i=0;i<arr2.length;i++)
         {
             for(int j=0;j<criterias.size();j++)
@@ -961,37 +963,62 @@ public class DataBase_Handler
         return no_assessor;
     }
     
+    public int get_no_assessments(String course_id,String question_id)
+    {
+        int no_assessor=0;
+        try {
+            Statement statement=conn.createStatement();
+            ResultSet rs=statement.executeQuery("SELECT no_assessment FROM question_details WHERE course_id='"+course_id+"' AND question_id='"+question_id+"';");
+            rs.next();
+            no_assessor=rs.getInt("no_assessment");
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return no_assessor;
+    }
+    
     public boolean should_assess(int user_id)
     {
         boolean f=false;
         String course_id="15",question_id="15";
         
-        if(get_no_being_assessed(user_id)<get_no_assessor(course_id,question_id))
+        if(get_no_assessed(user_id)<get_no_assessor(course_id,question_id))
             f=true;
         return f;
     }
-    public String get_answer(int user_id)
+    
+    public String[] get_answer(int user_id, String course_id, String question_id)
     {
-        String answer="";
-        if(should_assess(user_id))
-        {
-            try {
-                 String sql="SELECT state,user_id FROM table WHERE user_id!="+user_id+" ORDER BY date_of_submission ASC LIMIT 1;";
+        
+        // whenever called selects one suitable person to assess ny the user_id , creates the entry in pa_grade table
+        //Issue : has to be called multiple times to complete the peer assessment process for a particular user
+        
+        
+        String str[]=new String[2];
+                
+        try {
+            String sql="SELECT state,user_id FROM courseware_studentmodule WHERE user_id!="+user_id+" AND times_assessed < " + get_no_assessments(course_id,question_id) + " AND course_id = '" +course_id +"' AND question_id = '" + question_id +"' ORDER BY date_of_submission ASC LIMIT 1;";
             ResultSet rs=conn.createStatement().executeQuery(sql);
             rs.next();
-            answer=rs.getString("state");
-            } catch (Exception e) {
-                System.out.println("Error getting answer !");
+            str[0]=rs.getString("state");
+            str[1] = String.valueOf(rs.getInt("user_id"));
+            }catch (SQLException e) {
+                System.out.println("Error getting answer !" + e);
             }
-        }
-        return answer;    
+        
+        int arr[] = new int[1];
+        arr[0]=Integer.parseInt(str[1]);
+        insert_pa_grade_postshuffle(user_id, arr ,course_id, question_id );
+        
+        return str;    
     }
     
     public static void  main(String args[])
     {
         DataBase_Handler db =new DataBase_Handler(); 
-        db.get_no_assessed(07);
-        db.get_no_being_assessed(8);
+        //db.get_no_assessed(07);
+        //db.get_no_being_assessed(8);
         //int arr[] = {2,3};
        // db.lms3_f1(1,"course 1","sample prompt");
         //db.insert_pa_grade_postshuffle(1,arr,"ques","course1");
@@ -1003,9 +1030,13 @@ public class DataBase_Handler
         //ArrayList<String> courses = db.courses_created(1);
         //System.out.println(courses);
         //System.out.println(db.response_for_id(15,"hellobird"));
-    }
-    
-    
-    
+        
+        //int x = db.get_no_assessments("hello", "?");
+        
+        String data[] = new String[2];
+        data=db.get_answer(1,"hello","?");
+        int x = Integer.parseInt(data[1]);
+        System.out.println(data[0]+ " " + x);
+    } 
 }
     
