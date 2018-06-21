@@ -358,33 +358,68 @@ public class DataBase_Handler
     
     public void lms3_f( int user_id, String course_id,String question_id )
     {
-        int a_user_id = user_to_anonymous(user_id);
-        //System.out.println(a_user_id);
-        ArrayList<Integer> ids_to_assess = new ArrayList<Integer>();
+              
+        ArrayList<String> criterias = new ArrayList<String>();
         
-            try {
+        try {
                 //int x = 10;
                 //System.out.println(x);
-                String sql=" SELECT user_id FROM pa_grade WHERE anonymous_assesser_id = " + a_user_id ;
+                System.out.println("quest - " + question_id);
+                String sql=" SELECT criterion_id FROM question_details WHERE course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
 		Statement stmt=conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
                 {
-                    int temp = rs.getInt("user_id");
-                    if(!ids_to_assess.contains(temp))
-                        ids_to_assess.add(temp);
+                    criterias.add(rs.getString("criterion_id"));
                 }
-                //System.out.println(ids_to_assess);
                 } catch (Exception e) {
 		System.out.println(e);
-            }
+            }   
         
-        ArrayList<Integer> a_user_ids=new ArrayList<Integer>();
-        for(int i=0;i<ids_to_assess.size();i++)
+       System.out.println("cri - " + criterias);
+       
+       lms3.cb3.removeAllItems();
+        
+        for(int i=0;i<criterias.size();i++)
         {
-            a_user_ids.add(user_to_anonymous(ids_to_assess.get(i)));
-            lms3.cb2.addItem(""+a_user_ids.get(i));
+            lms3 frame=new lms3();
+            lms4 frame1=new lms4();
+            //if(frame.isVisible()==true)
+            lms3.cb3.addItem(criterias.get(i));
+            /*if(frame1.isVisible()==true)
+            lms4.cb2.addItem(criterias.get(i));*/
         }
+     
+    }
+    
+    public ArrayList<String> r_lms3_f(int user_id, String course_id,String question_id )
+    {
+              
+        ArrayList<String> criterias = new ArrayList<String>();
+        
+        try {
+                //int x = 10;
+                //System.out.println(x);
+                System.out.println("quest - " + question_id);
+                String sql=" SELECT criterion_id FROM question_details WHERE course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    criterias.add(rs.getString("criterion_id"));
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+            }   
+        
+       System.out.println("cri - " + criterias);
+       
+       return criterias;
+    }
+    
+    public void lms3_f1( int user_id, String course_id,String question_id )
+    {
+             
         ArrayList<String> criterias = new ArrayList<String>();
         
         try {
@@ -400,26 +435,13 @@ public class DataBase_Handler
                 } catch (Exception e) {
 		System.out.println(e);
             }   
-        for(int i=0;i<criterias.size();i++)
-        {
-            lms3 frame=new lms3();
-            lms4 frame1=new lms4();
-            if(frame.isVisible()==true)
-            lms3.cb3.addItem(criterias.get(i));
-            if(frame1.isVisible()==true)
-            lms4.cb2.addItem(criterias.get(i));
-        }
-     
-    }
-    
-    public void lms3_f1( int user_id, String course_id,String question_id )
-    {
+        
         ArrayList<String> options = new ArrayList<String>();
         ArrayList<String> options_description = new ArrayList<String>();
         ArrayList<Integer> options_points = new ArrayList<Integer>();
         
         String selected_criteria = (String)lms3.cb3.getSelectedItem();
-        System.out.println(selected_criteria);
+        
         //String selected_criteria = "cked";
         
         try {
@@ -437,6 +459,7 @@ public class DataBase_Handler
                 } catch (Exception e) {
 		System.out.println(e);
             }   
+        
         System.out.println(options.size());
         System.out.println(options);
         lms3 f=new lms3();
@@ -539,6 +562,8 @@ public class DataBase_Handler
         }
         //System.out.println(options_points);
     }
+    
+    
     public void lms3_f2( int user_id, String course_id,String question_id )
     {
         int a_user_id = user_to_anonymous(user_id);
@@ -904,12 +929,32 @@ public class DataBase_Handler
     
     public int get_no_assessments(String course_id,String question_id)
     {
+        
+        // returns the number of assesments *for* each student
+               
         int no_assessor=0;
         try {
             Statement statement=conn.createStatement();
             ResultSet rs=statement.executeQuery("SELECT no_assessment FROM question_details WHERE course_id='"+course_id+"' AND question_id='"+question_id+"';");
             rs.next();
             no_assessor=rs.getInt("no_assessment");
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return no_assessor;
+    }
+    
+    public int get_no_assessors(String course_id,String question_id)
+    {
+        //returns the number of assessments to be done *by* each student
+        
+        int no_assessor=0;
+        try {
+            Statement statement=conn.createStatement();
+            ResultSet rs=statement.executeQuery("SELECT no_assessors FROM question_details WHERE course_id='"+course_id+"' AND question_id='"+question_id+"';");
+            rs.next();
+            no_assessor=rs.getInt("no_assessors");
             
         } catch (SQLException e) {
             System.out.println(e);
@@ -1049,29 +1094,18 @@ public class DataBase_Handler
         }
         
     }
+    
+    public boolean check_PA(int user_id, String course_id , String question_id)
+    {
+        if(get_no_assessed(user_id) < get_no_assessors(course_id,question_id))
+            return true;
+        return false;
+    }
+     
     public static void  main(String args[])
     {
         DataBase_Handler db =new DataBase_Handler(); 
-        //db.get_no_assessed(07);
-        //db.get_no_being_assessed(8);
-        //int arr[] = {2,3};
-       // db.lms3_f1(1,"course 1","sample prompt");
-        //db.insert_pa_grade_postshuffle(1,arr,"ques","course1");
-        //db.lms3_f(3,"course 1","ques");
-        //db.results(1,"course1","ques");
-        //db.insert_student_data_handler("asdfg","asd","fg","qwe@gm.com","12@wd","hell1");
-       // db.insert_student_data_handler("asdfg","asd","fg","qwe@gm.com","12@wd","hell2");
-        //db.insert_student_data_handler("asdfg","asd","fg","qwe@gm.com","12@wd","hell3");
-        //ArrayList<String> courses = db.courses_created(1);
-        //System.out.println(courses);
-        //System.out.println(db.response_for_id(15,"hellobird"));
         
-        //int x = db.get_no_assessments("hello", "?");
-        
-        /*String data[] = new String[2];
-        data=db.get_answer(1,"hello","?");
-        int x = Integer.parseInt(data[1]);
-        System.out.println(data[0]+ " " + x);*/
     } 
 }
     

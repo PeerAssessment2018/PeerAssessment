@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 /*
@@ -13,24 +14,18 @@ import java.util.StringTokenizer;
  */
 public class lms3 extends javax.swing.JFrame {
 
-    /**
+    /*
      * Creates new form lms3
+    
      */
-     private String answer,course_id;
+    
+     private String data[] = new String[2];
      //private int user_id;
     
     public lms3() 
     {
         initComponents();
-        
-        course_id=(String)lms1.cb1.getSelectedItem();
-        //System.out.println("---" + course_id);
-        DataBase_Handler dbh=new DataBase_Handler();
-        
-        /*answer=dbh.response_for_id(dbh.username_to_id(lms_login.tf.getText()) ,course_id);
-        System.out.print("****" + answer);
-        ta.setText(answer);*/
-
+              
     }
 
     /**
@@ -61,8 +56,6 @@ public class lms3 extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        assessor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -157,11 +150,6 @@ public class lms3 extends javax.swing.JFrame {
 
         jLabel5.setText("Next will only be activated when you assess the min no. of responses.");
 
-        jLabel6.setText("Assessor:");
-
-        assessor.setEditable(false);
-        assessor.setEnabled(false);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -178,38 +166,27 @@ public class lms3 extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel4)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(cb3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel6))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(cb2, 0, 113, Short.MAX_VALUE)
-                                .addComponent(assessor)))
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(104, 104, 104))
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cb2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(assessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(cb2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -256,8 +233,8 @@ public class lms3 extends javax.swing.JFrame {
 
     private void cb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb2ActionPerformed
         // TODO add your handling code here:
-        DataBase_Handler db=new DataBase_Handler();
-        db.lms3_f2(1,"course 1","sample prompt");
+        /*DataBase_Handler db=new DataBase_Handler();
+        db.lms3_f2(1,"course 1","sample prompt");*/
     }//GEN-LAST:event_cb2ActionPerformed
 
     private void rd4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd4ActionPerformed
@@ -277,9 +254,26 @@ public class lms3 extends javax.swing.JFrame {
         rd4.setVisible(false);
         rd5.setVisible(false);
         DataBase_Handler db=new DataBase_Handler();
-        int r=db.count_no_of_students();
-        assessor.setText(lms_login.tf.getText());
-        db.lms3_f(1,"course 1","sample prompt");
+        
+        
+                
+        if(db.check_PA(student_temp.user_id, student_temp.course_id, student_temp.question_id))
+        {
+            data = db.get_answer(student_temp.user_id, student_temp.course_id, student_temp.question_id);
+            ta.setText(data[0]);
+            ArrayList<String> criterias = db.r_lms3_f(student_temp.user_id,student_temp.course_id,student_temp.question_id);
+            for(int i = 0 ; i< criterias.size() ; i++)
+                cb3.addItem(criterias.get(i));
+            //System.out.println(data[0]);
+        }
+        else
+        {
+            lms4 frame=new lms4();
+            frame.setVisible(true);
+            this.setVisible(false);
+        }
+        
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void cb3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb3ActionPerformed
@@ -289,14 +283,14 @@ public class lms3 extends javax.swing.JFrame {
         rd3.setVisible(false);
         rd4.setVisible(false);
         rd5.setVisible(false);
-        DataBase_Handler db=new DataBase_Handler();
-        String course=(String)lms1.cb1.getSelectedItem();
-        db.lms3_f1(1,course,"sample prompt");
+       //DataBase_Handler db=new DataBase_Handler();
+        //String course=(String)lms1.cb1.getSelectedItem();
+        //db.lms3_f1(1,course,"sample prompt");
     }//GEN-LAST:event_cb3ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        int assessor_id=Integer.parseInt(assessor.getText());
+        /*int assessor_id=student_temp.user_id;
         int user_id=Integer.parseInt((String)cb2.getSelectedItem());
         String q_id="sample prompt";
         String cri=(String)cb3.getSelectedItem();
@@ -317,7 +311,7 @@ public class lms3 extends javax.swing.JFrame {
         db.insert_pa_grade(user_id,assessor_id,q_id,"course1",cri,points);
         cb3.removeItem(cri);
         if(cb3.getItemCount()==0)
-            cb2.removeItem(user_id);
+            cb2.removeItem(user_id);*/
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -356,7 +350,6 @@ public class lms3 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField assessor;
     private javax.swing.ButtonGroup buttonGroup1;
     public static javax.swing.JComboBox<String> cb2;
     public static javax.swing.JComboBox<String> cb3;
@@ -367,7 +360,6 @@ public class lms3 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton n34;

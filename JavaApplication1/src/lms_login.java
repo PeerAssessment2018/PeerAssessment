@@ -118,6 +118,7 @@ public class lms_login extends javax.swing.JFrame {
         DataBase_Handler db = new DataBase_Handler();
         if(db.check_valid_login_lms(t1, t2))
         {
+            student_temp.user_id = db.username_to_id(t1);
             System.out.println("Login Successfull !");
             JOptionPane.showConfirmDialog(null,"Login Successfull !");
             
