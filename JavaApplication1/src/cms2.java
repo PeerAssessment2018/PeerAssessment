@@ -332,7 +332,7 @@ public class cms2 extends javax.swing.JFrame {
             if(cb2.getItemCount()==1)
             {
                 app.insert_options_details_1(q,course,cname,oname,od,oscale);
-               // app.insert_question_details_2(cname,cprompt,con);
+                app.insert_question_details_2(cname,cprompt,con);
                 cb2.removeItemAt(cb2.getSelectedIndex());
                // cb1.removeItemAt(cb1.getSelectedIndex());
                 //tf1.setText("");
@@ -340,7 +340,7 @@ public class cms2 extends javax.swing.JFrame {
                 //no_of_option.setValue(0);
                 tf4.setText("");
                 points.setValue(0);
-                ta1.setText("");
+                //ta1.setText("");
                 ta2.setText("");
             }
             else   
@@ -353,7 +353,7 @@ public class cms2 extends javax.swing.JFrame {
             }
             if(cb2.getItemCount()==0)
             {
-                app.insert_question_details_2(cname,cprompt,con);
+                //app.insert_question_details_2(cname,cprompt,con);
                 cb1.removeItemAt(cb1.getSelectedIndex());
                 //tf1.setText("");
                 tf2.setText("");
