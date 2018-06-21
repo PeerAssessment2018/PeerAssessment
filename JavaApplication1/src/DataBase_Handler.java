@@ -991,7 +991,7 @@ public class DataBase_Handler
     public String[] get_answer(int user_id, String course_id, String question_id)
     {
         
-        // whenever called selects one suitable person to assess ny the user_id , creates the entry in pa_grade table
+        // whenever called selects one suitable person to assess by the user_id , creates the entry in pa_grade table
         //Issue : has to be called multiple times to complete the peer assessment process for a particular user
         
         
@@ -1013,6 +1013,7 @@ public class DataBase_Handler
         
         return str;    
     }
+    
     public ArrayList<String> criteria(String course_id, String question_id)
     {
         ArrayList<String> criterias = new ArrayList<String>();
@@ -1033,6 +1034,7 @@ public class DataBase_Handler
         return criterias;
         
     }
+    
     public void option(String cri_id,String course_id,String question_id)
     {
         ArrayList<String> options = new ArrayList<String>();
@@ -1127,10 +1129,10 @@ public class DataBase_Handler
         
         //int x = db.get_no_assessments("hello", "?");
         
-        String data[] = new String[2];
+        /*String data[] = new String[2];
         data=db.get_answer(1,"hello","?");
         int x = Integer.parseInt(data[1]);
-        System.out.println(data[0]+ " " + x);
+        System.out.println(data[0]+ " " + x);*/
     } 
 }
     

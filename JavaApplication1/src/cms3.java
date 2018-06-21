@@ -33,7 +33,6 @@ public class cms3 extends javax.swing.JFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        no_of_ans = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cb1 = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
@@ -51,6 +50,7 @@ public class cms3 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         end = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        no_of_ans = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -63,13 +63,7 @@ public class cms3 extends javax.swing.JFrame {
 
         jLabel2.setText("How many answers would you like to set?");
 
-        no_of_ans.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                no_of_ansActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Set answer for Answer:");
+        jLabel3.setText("Set Sample:");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Answer Details"));
 
@@ -192,6 +186,12 @@ public class cms3 extends javax.swing.JFrame {
 
         jButton3.setText("Save");
 
+        no_of_ans.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                no_of_ansStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -216,8 +216,8 @@ public class cms3 extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(no_of_ans)
-                            .addComponent(cb1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cb1, 0, 84, Short.MAX_VALUE)
+                            .addComponent(no_of_ans))))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -258,13 +258,6 @@ public class cms3 extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_endActionPerformed
 
-    private void no_of_ansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_no_of_ansActionPerformed
-       cb1.removeAllItems();
-       int nosa = Integer.parseInt(no_of_ans.getText());
-       for(int i = 1; i <= nosa ; i++)
-           cb1.addItem("Answer " + i);
-    }//GEN-LAST:event_no_of_ansActionPerformed
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         end.setEnabled(false);
@@ -291,6 +284,14 @@ public class cms3 extends javax.swing.JFrame {
         String question_id=cms1.prompt.getText();
         db.option(cri_id, course_id, question_id);
     }//GEN-LAST:event_cb2ActionPerformed
+
+    private void no_of_ansStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_no_of_ansStateChanged
+        // TODO add your handling code here:
+        cb1.removeAllItems();
+        int nosa = (int)(no_of_ans.getValue());
+        for(int i = 1; i <= nosa ; i++)
+           cb1.addItem("Answer " + i);
+    }//GEN-LAST:event_no_of_ansStateChanged
 
     /**
      * @param args the command line arguments
@@ -343,7 +344,7 @@ public class cms3 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTextField no_of_ans;
+    private javax.swing.JSpinner no_of_ans;
     public static javax.swing.JRadioButton rd1;
     public static javax.swing.JRadioButton rd2;
     public static javax.swing.JRadioButton rd3;
