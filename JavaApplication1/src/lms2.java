@@ -57,6 +57,7 @@ public class lms2 extends javax.swing.JFrame {
         jTextArea1.setToolTipText("This is the question.");
         jTextArea1.setWrapStyleWord(true);
         jTextArea1.setEnabled(false);
+        jTextArea1.setNextFocusableComponent(jTextArea2);
         jScrollPane1.setViewportView(jTextArea1);
 
         jTextArea2.setColumns(20);

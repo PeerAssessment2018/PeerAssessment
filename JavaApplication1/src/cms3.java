@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -27,36 +30,42 @@ public class cms3 extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        no_of_ans = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cb1 = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        ta = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cb2 = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
+        rd1 = new javax.swing.JRadioButton();
+        rd2 = new javax.swing.JRadioButton();
+        rd3 = new javax.swing.JRadioButton();
+        rd4 = new javax.swing.JRadioButton();
+        rd5 = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        end = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Set Details for Sample Answer");
 
         jLabel2.setText("How many answers would you like to set?");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        no_of_ans.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                no_of_ansActionPerformed(evt);
             }
         });
 
@@ -66,30 +75,34 @@ public class cms3 extends javax.swing.JFrame {
 
         jLabel4.setText("Set Answer");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        ta.setColumns(20);
+        ta.setRows(5);
+        jScrollPane1.setViewportView(ta);
 
         jLabel5.setText("Set Answers for Criterion:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        cb2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                cb2ActionPerformed(evt);
             }
         });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Options"));
 
-        jRadioButton1.setText("Option 1");
+        buttonGroup1.add(rd1);
+        rd1.setText("Option 1");
 
-        jRadioButton2.setText("Option 2");
+        buttonGroup1.add(rd2);
+        rd2.setText("Option 2");
 
-        jRadioButton3.setText("Option 3");
+        buttonGroup1.add(rd3);
+        rd3.setText("Option 3");
 
-        jRadioButton4.setText("Option 4");
+        buttonGroup1.add(rd4);
+        rd4.setText("Option 4");
 
-        jRadioButton5.setText("Option 5");
+        buttonGroup1.add(rd5);
+        rd5.setText("Option 5");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -99,18 +112,18 @@ public class cms3 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jRadioButton3)
+                        .addComponent(rd3)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jRadioButton2)
+                                .addComponent(rd2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jRadioButton5))
+                                .addComponent(rd5))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
+                                .addComponent(rd1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jRadioButton4)))
+                                .addComponent(rd4)))
                         .addGap(17, 17, 17))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -118,14 +131,14 @@ public class cms3 extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton4))
+                    .addComponent(rd1)
+                    .addComponent(rd4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton5))
+                    .addComponent(rd2)
+                    .addComponent(rd5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton3)
+                .addComponent(rd3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -144,7 +157,7 @@ public class cms3 extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(cb2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -156,7 +169,7 @@ public class cms3 extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cb2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -170,10 +183,10 @@ public class cms3 extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("End");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        end.setText("End");
+        end.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                endActionPerformed(evt);
             }
         });
 
@@ -195,7 +208,7 @@ public class cms3 extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
+                        .addComponent(end))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,7 +216,7 @@ public class cms3 extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
+                            .addComponent(no_of_ans)
                             .addComponent(cb1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
@@ -215,7 +228,7 @@ public class cms3 extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(no_of_ans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -225,7 +238,7 @@ public class cms3 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(end)
                     .addComponent(jButton3))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -240,17 +253,44 @@ public class cms3 extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void endActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endActionPerformed
         // TODO add your handling code here:
         System.exit(0);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_endActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void no_of_ansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_no_of_ansActionPerformed
        cb1.removeAllItems();
-       int nosa = Integer.parseInt(jTextField1.getText());
+       int nosa = Integer.parseInt(no_of_ans.getText());
        for(int i = 1; i <= nosa ; i++)
            cb1.addItem("Answer " + i);
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_no_of_ansActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        end.setEnabled(false);
+        rd1.setVisible(false);
+        rd2.setVisible(false);
+        rd3.setVisible(false);
+        rd4.setVisible(false);
+        rd5.setVisible(false);
+        String course_id=(String) cms1.cb.getSelectedItem();
+        String question=cms1.prompt.getText();
+        DataBase_Handler db=new DataBase_Handler();
+        ArrayList<String> criterias=db.criteria(course_id, question);
+        for(int i=0;i<criterias.size();i++)
+        {
+            cb2.addItem(criterias.get(i));
+        }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void cb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb2ActionPerformed
+        // TODO add your handling code here:
+        DataBase_Handler db=new DataBase_Handler();
+        String cri_id=(String)cb2.getSelectedItem();
+        String course_id=(String) cms1.cb.getSelectedItem();
+        String question_id=cms1.prompt.getText();
+        db.option(cri_id, course_id, question_id);
+    }//GEN-LAST:event_cb2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,11 +329,12 @@ public class cms3 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> cb1;
+    public static javax.swing.ButtonGroup buttonGroup2;
+    public static javax.swing.JComboBox<String> cb1;
+    public static javax.swing.JComboBox<String> cb2;
+    private javax.swing.JButton end;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -301,13 +342,13 @@ public class cms3 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    public static javax.swing.JTextField no_of_ans;
+    public static javax.swing.JRadioButton rd1;
+    public static javax.swing.JRadioButton rd2;
+    public static javax.swing.JRadioButton rd3;
+    public static javax.swing.JRadioButton rd4;
+    public static javax.swing.JRadioButton rd5;
+    public static javax.swing.JTextArea ta;
     // End of variables declaration//GEN-END:variables
 }
