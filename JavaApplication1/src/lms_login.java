@@ -38,6 +38,7 @@ public class lms_login extends javax.swing.JFrame {
 
         jLabel1.setText("User ID :");
 
+        tf.setToolTipText("Enter username.");
         tf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfActionPerformed(evt);
@@ -59,6 +60,8 @@ public class lms_login extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+
+        jPasswordField1.setToolTipText("Enter password.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

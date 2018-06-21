@@ -95,7 +95,9 @@ public class cms2 extends javax.swing.JFrame {
 
         ta1.setColumns(20);
         ta1.setRows(5);
+        ta1.setTabSize(0);
         ta1.setToolTipText("Describe the criterion, give details about it. Like criterion logic would be used for evaluating the reasoning behind the given response.");
+        ta1.setNextFocusableComponent(tf3);
         jScrollPane1.setViewportView(ta1);
 
         jLabel6.setText("Number of options:");
@@ -123,6 +125,7 @@ public class cms2 extends javax.swing.JFrame {
         ta2.setColumns(20);
         ta2.setLineWrap(true);
         ta2.setRows(5);
+        ta2.setTabSize(0);
         ta2.setToolTipText("Describe the option. For example- excellent means that the answer was to the point and poor means the reasoning could not explain the answer.");
         ta2.setWrapStyleWord(true);
         jScrollPane2.setViewportView(ta2);

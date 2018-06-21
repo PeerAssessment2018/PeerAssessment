@@ -83,6 +83,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tf">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Enter username."/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfActionPerformed"/>
       </Events>
@@ -118,6 +121,9 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Enter password."/>
+      </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
       </AuxValues>
