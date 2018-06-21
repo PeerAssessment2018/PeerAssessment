@@ -986,7 +986,101 @@ public class DataBase_Handler
         }
         return answer;    
     }
-    
+    public ArrayList<String> criteria(String course_id, String question_id)
+    {
+        ArrayList<String> criterias = new ArrayList<String>();
+        
+        try {
+                //int x = 10;
+                //System.out.println(x);
+                String sql=" SELECT criterion_id FROM question_details WHERE course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    criterias.add(rs.getString("criterion_id"));
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+            }  
+        return criterias;
+        
+    }
+    public void option(String cri_id,String course_id,String question_id)
+    {
+        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options_description = new ArrayList<String>();
+        ArrayList<Integer> options_points = new ArrayList<Integer>();
+       
+        try {
+                //int x = 10;
+                //System.out.println(x);
+                String sql=" SELECT option_id,option_description,option_points FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id + "' AND criterion_id = '" + cri_id +"'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    options.add(rs.getString("option_id"));
+                    options_description.add(rs.getString("option_description"));
+                    options_points.add(rs.getInt("option_points"));
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+            }   
+        System.out.println(options.size());
+        System.out.println(options);
+        cms3 f=new cms3();
+       // lms4 f1=new lms4();
+        if(f.isVisible()==true)
+        {
+        if(options.size()==1)
+        {
+            cms3.rd1.setVisible(true);
+            cms3.rd1.setText(options.get(0));
+        }
+        else if(options.size()==2)
+        {
+            cms3.rd1.setVisible(true);
+            cms3.rd1.setText(options.get(0));
+            cms3.rd2.setVisible(true);
+            cms3.rd2.setText(options.get(1));
+        }
+        else if(options.size()==3)
+        {
+            cms3.rd1.setVisible(true);
+            cms3.rd1.setText(options.get(0));
+            cms3.rd2.setVisible(true);
+            cms3.rd2.setText(options.get(1));
+            cms3.rd3.setVisible(true);
+            cms3.rd3.setText(options.get(2));
+        }
+        else if(options.size()==4)
+        {
+            cms3.rd1.setVisible(true);
+            cms3.rd1.setText(options.get(0));
+            cms3.rd2.setVisible(true);
+            cms3.rd2.setText(options.get(1));
+            cms3.rd3.setVisible(true);
+            cms3.rd3.setText(options.get(2));
+            cms3.rd4.setVisible(true);
+            cms3.rd4.setText(options.get(3));
+        }
+        else if(options.size()==5)
+        {
+            cms3.rd1.setVisible(true);
+            cms3.rd1.setText(options.get(0));
+            cms3.rd2.setVisible(true);
+            cms3.rd2.setText(options.get(1));
+            cms3.rd3.setVisible(true);
+            cms3.rd3.setText(options.get(2));
+            cms3.rd4.setVisible(true);
+            cms3.rd4.setText(options.get(3));
+            cms3.rd5.setVisible(true);
+            cms3.rd5.setText(options.get(4));
+        }
+        }
+        
+    }
     public static void  main(String args[])
     {
         DataBase_Handler db =new DataBase_Handler(); 
