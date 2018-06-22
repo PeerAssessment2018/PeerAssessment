@@ -55,6 +55,12 @@ public class cms2 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(430, 725));
+        setPreferredSize(new java.awt.Dimension(360, 725));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Rubrics");
 
@@ -145,7 +151,7 @@ public class cms2 extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(tf4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -213,7 +219,7 @@ public class cms2 extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(cb2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -265,13 +271,14 @@ public class cms2 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(180, 180, 180)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(p21)
                 .addGap(5, 5, 5)
                 .addComponent(save)
                 .addGap(3, 3, 3)
-                .addComponent(n23))
+                .addComponent(n23)
+                .addContainerGap(201, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,12 +294,13 @@ public class cms2 extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(cb1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 505, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(p21)
                     .addComponent(save)
-                    .addComponent(n23)))
+                    .addComponent(n23))
+                .addContainerGap())
         );
 
         pack();
@@ -315,6 +323,10 @@ public class cms2 extends javax.swing.JFrame {
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // TODO add your handling code here:
+        student_temp.course_id=(String)cms1.cb.getSelectedItem();
+        student_temp.question_id=cms1.prompt.getText();
+        author_temp.no_assessor=(int)cms1.nos.getValue();
+        author_temp.no_assessments=(int)cms1.noa.getValue();
         String q=cms1.prompt.getText()+" ";
         int nc=(int)noc.getValue();
         String cname=tf2.getText()+" ";
@@ -325,32 +337,11 @@ public class cms2 extends javax.swing.JFrame {
         String od=ta2.getText()+" ";
         int oscale=(int)points.getValue();
         DataBase_Handler app = new DataBase_Handler();
+        System.out.println(author_temp.author_id+author_temp.question_id+author_temp.course_id+author_temp.no_assessor+author_temp.no_assessments);
         System.out.println(cb1.getItemCount());
-            if(cb2.getItemCount()==1)
-            {
-                app.insert_options_details_1(q,course,cname,oname,od,oscale);
-                app.insert_question_details_2(cname,cprompt,con);
-                cb2.removeItemAt(cb2.getSelectedIndex());
-                cb1.removeItemAt(cb1.getSelectedIndex());
-                //tf1.setText("");
-                tf2.setText("");
-                no_of_option.setValue(0);
-                tf4.setText("");
-                points.setValue(0);
-                ta1.setText("");
-                ta2.setText("");
-            }
-            else   
-            {
-                app.insert_options_details_1(q,course,cname,oname,od,oscale);
-                cb2.removeItemAt(cb2.getSelectedIndex());
-                tf4.setText("");
-                points.setValue(0);
-                ta2.setText("");
-            }
             if(cb1.getItemCount()==0)
             {
-                //app.insert_question_details_2(cname,cprompt,con);
+               // app.insert_question_details_2(cname,cprompt,con);
                 n23.setEnabled(true);
                 //cb1.removeItemAt(cb1.getSelectedIndex());
                 //tf1.setText("");
@@ -361,69 +352,42 @@ public class cms2 extends javax.swing.JFrame {
                 ta1.setText("");
                 ta2.setText("");
             }
-        
             
-        
-        /*if(cb1.getItemCount()==0)
+            if(cb2.getItemCount()==1)
         {
-            n23.setEnabled(true);
-        }
-        else
-        {
-            int nc=Integer.parseInt(tf1.getText());
-            String cname[]=new String[nc];
-            String cprompt[]=new String[nc];
-            int con[]=new int[nc];
-            String oname[][]=new String[nc][];
-            String odesc[][]=new String[nc][];
-            int oscale[][]=new int[nc][];
-            while(cb1.getItemCount()!=0)
-            {
-                int i=cb2.getSelectedIndex();
-                cname[i]=tf2.getText();
-                cprompt[i]=ta1.getText();
-                con[i]=Integer.parseInt(tf3.getText());
-                oname[i]=new String[con[i]];
-                odesc[i]=new String[con[i]];
-                oscale[i]=new int[con[i]];
-                if(cb2.getItemCount()==0)
-                {
-                    tf2.setText("");
-                    ta1.setText("");
-                    tf3.setText("");
-                    cb1.removeItemAt(i);
-                }
-                else
-                {
-                    while(cb2.getItemCount()!=0)
-                    {
-                        System.out.println(cb2.getItemCount());
-                        int j=cb2.getSelectedIndex();
-                        oname[i][j]=tf4.getText();
-                        odesc[i][j]=ta2.getText();
-                        oscale[i][j]=Integer.parseInt(tf5.getText());
-                        tf4.setText("");
-                        ta2.setText("");
-                        tf5.setText("");
-                        cb2.removeItemAt(j);
-                    }
-                }
+                app.insert_question_details_2(cname,cprompt,con);
+                app.insert_options_details_1(q,course,cname,oname,od,oscale);
+                cb2.removeItemAt(cb2.getSelectedIndex());
+               // cb1.removeItemAt(cb1.getSelectedIndex());
+                //tf1.setText("");
+               // tf2.setText("");
+                //no_of_option.setValue(0);
+                tf4.setText("");
+                points.setValue(0);
+                //ta1.setText("");
+                ta2.setText("");
             }
-            String q=cms1.prompt.getText();
-            //Fetch criterion name,prompt and number of options
-            for(int i=0;i<nc;i++)
+            else if(cb2.getItemCount()!=0)
             {
-                DBHandler_cms2 app = new DBHandler_cms2();
-                app.insert_question_details_1(cname[i],cprompt[i],con[i]);
-                for(int j=0;j<con[i];j++)
-                {
-                   // DBHandler_cms2 app1 = new DBHandler_cms2();
-                    //app1.insert_options_details_1(q,"course 1",cname[i],oname[i][j],odesc[i][j],oscale[i][j]);
-                }
+                app.insert_options_details_1(q,course,cname,oname,od,oscale);
+                cb2.removeItemAt(cb2.getSelectedIndex());
+                tf4.setText("");
+                points.setValue(0);
+                ta2.setText("");
             }
-            //Now store the above details into database
-            //After storing details clear text fields
-        }*/
+            if(cb2.getItemCount()==0 && cb1.getItemCount()!=0)
+            {
+                //app.insert_question_details_2(cname,cprompt,con);
+                cb1.removeItemAt(cb1.getSelectedIndex());
+                //tf1.setText("");
+               tf2.setText("");
+                no_of_option.setValue(0);
+                tf4.setText("");
+                points.setValue(0);
+                ta1.setText("");
+                ta2.setText("");
+            }
+            
     }//GEN-LAST:event_saveActionPerformed
 
     private void cb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb1ActionPerformed
@@ -461,12 +425,16 @@ public class cms2 extends javax.swing.JFrame {
         {
             cb2.removeItemAt(i);
         }
-        int noc1=(int)noc.getValue();
+        int noc1=(int)no_of_option.getValue();
         for(int i=0;i<noc1;i++)
         {
             cb2.addItem("Option "+(i+1));
         }
     }//GEN-LAST:event_no_of_optionStateChanged
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

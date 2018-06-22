@@ -212,11 +212,17 @@
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Number of responses to be evaluated by each learner"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JSpinner" name="noa">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Number of assessments for each response"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

@@ -10,8 +10,9 @@
  */
 public class author_temp {
     
-    public static int authior_id;
+    public static int author_id;
     public static String course_id;
     public static String question_id;
-    
+    public static int no_assessor;
+    public static int no_assessments;
 }

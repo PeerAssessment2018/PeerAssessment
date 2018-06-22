@@ -212,11 +212,14 @@ public class DataBase_Handler
     
     public void insert_question_details_2(String cri_name, String cri_prompt,int nop)
     {		
-                try {String question=cms1.prompt.getText();
-			String insertString =" UPDATE question_details "+ " SET criterion_id = ' "+ cri_name +" ', criterion_prompt = '"+
-                                cri_prompt+" ' , no_of_options = "+nop + " WHERE question_id = '"+question+"'";
+        
+                try {
+			String insertString =" INSERT INTO question_details (course"
+                       + "_id, question_id, no_assessors, no_assessment,criterion_id, criterion_prompt, no_of_options) VALUES ('"+author_temp.course_id+
+                       "' , '"+author_temp.question_id+"' , "+author_temp.no_assessor+", "+author_temp.no_assessments+", '"+cri_name+"' , '"+cri_prompt+"' , "+nop+");";
                 Statement stmt = conn.createStatement();
                 stmt.execute(insertString);
+                
                 } catch (Exception e) {
 			System.out.println("ERROR: Could not insert record");
 			return;
