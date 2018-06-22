@@ -70,6 +70,12 @@ public class cms3 extends javax.swing.JFrame {
 
         jLabel3.setText("Set Sample:");
 
+        cb1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb1ActionPerformed(evt);
+            }
+        });
+
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Answer Details"));
 
         jLabel4.setText("Set Answer");
@@ -128,7 +134,7 @@ public class cms3 extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rd1)
                     .addComponent(rd4))
@@ -137,8 +143,7 @@ public class cms3 extends javax.swing.JFrame {
                     .addComponent(rd2)
                     .addComponent(rd5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rd3)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addComponent(rd3))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -171,8 +176,8 @@ public class cms3 extends javax.swing.JFrame {
                     .addComponent(cb2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(24, 24, 24))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButton1.setText("Prev");
@@ -245,8 +250,8 @@ public class cms3 extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(cb1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(end)
@@ -286,9 +291,9 @@ public class cms3 extends javax.swing.JFrame {
         for(int i=0;i<criterias.size();i++)
         {
             cb2.addItem(criterias.get(i));
-            System.out.println(criterias);
+           // System.out.println(criterias);
         }
-        System.out.println("**********" + criterias);
+       // System.out.println("**********" + criterias);
     }//GEN-LAST:event_formWindowOpened
 
     private void cb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb2ActionPerformed
@@ -404,6 +409,28 @@ public class cms3 extends javax.swing.JFrame {
             rd5.setVisible(false);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void cb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb1ActionPerformed
+        // TODO add your handling code here:
+        cb2.removeAllItems();
+        rd1.setVisible(false);
+        rd2.setVisible(false);
+        rd3.setVisible(false);
+        rd4.setVisible(false);
+        rd5.setVisible(false);
+        
+        String course_id = author_temp.course_id;
+        String question=author_temp.question_id;
+        
+        DataBase_Handler db=new DataBase_Handler();
+        ArrayList<String> criterias = db.r_lms3_f(author_temp.author_id,course_id, question);
+        for(int i=0;i<criterias.size();i++)
+        {
+            cb2.addItem(criterias.get(i));
+            //System.out.println(criterias);
+        }
+      //  System.out.println("**********" + criterias);
+    }//GEN-LAST:event_cb1ActionPerformed
 
     /**
      * @param args the command line arguments
