@@ -381,16 +381,16 @@ public class DataBase_Handler
         
        System.out.println("cri - " + criterias);
        
-       lms3.cb3.removeAllItems();
+      // lms3.cb3.removeAllItems();
         
         for(int i=0;i<criterias.size();i++)
         {
-            lms3 frame=new lms3();
-            lms4 frame1=new lms4();
-            //if(frame.isVisible()==true)
-            lms3.cb3.addItem(criterias.get(i));
-            /*if(frame1.isVisible()==true)
-            lms4.cb2.addItem(criterias.get(i));*/
+        //    lms3 frame=new lms3();
+            cms3 frame1=new cms3();
+          //  if(frame.isVisible()==true)
+            //lms3.cb3.addItem(criterias.get(i));
+            if(frame1.isVisible()==true)
+            cms3.cb2.addItem(criterias.get(i));
         }
      
     }
@@ -589,9 +589,13 @@ public class DataBase_Handler
         ArrayList<String> options = new ArrayList<String>();
         ArrayList<String> options_description = new ArrayList<String>();
         ArrayList<Integer> options_points = new ArrayList<Integer>();
-        
-        String selected_criteria = (String)lms3.cb3.getSelectedItem();
-        
+        lms3 f=new lms3();
+        String selected_criteria="";
+        if(f.isVisible()==true)
+        selected_criteria = (String)lms3.cb3.getSelectedItem();
+        cms3 f1=new cms3();
+        if(f1.isVisible()==true)
+            selected_criteria=(String)cms3.cb2.getSelectedItem();
         //String selected_criteria = "cked";
         
         try {
@@ -610,8 +614,8 @@ public class DataBase_Handler
 		System.out.println(e);
             }   
         
-        System.out.println(options.size());
-        System.out.println(options);
+        //System.out.println(options.size());
+        //System.out.println(options);
         
         return options;
         /*
@@ -738,8 +742,13 @@ public class DataBase_Handler
         ArrayList<String> options = new ArrayList<String>();
         ArrayList<String> options_description = new ArrayList<String>();
         ArrayList<Integer> options_points = new ArrayList<Integer>();
-        
-        String selected_criteria = (String)lms3.cb3.getSelectedItem();
+        lms3 f=new lms3();
+        String selected_criteria="";
+        if(f.isVisible()==true)
+        selected_criteria = (String)lms3.cb3.getSelectedItem();
+        cms3 f1=new cms3();
+        if(f1.isVisible()==true)
+            selected_criteria=(String)cms3.cb2.getSelectedItem();
         
         //String selected_criteria = "cked";
         
@@ -759,8 +768,8 @@ public class DataBase_Handler
 		System.out.println(e);
             }   
         
-        System.out.println(options.size());
-        System.out.println(options);
+        //System.out.println(options.size());
+        //System.out.println(options);
         
         return options_description;
     }
@@ -788,9 +797,13 @@ public class DataBase_Handler
         ArrayList<String> options = new ArrayList<String>();
         ArrayList<String> options_description = new ArrayList<String>();
         ArrayList<Integer> options_points = new ArrayList<Integer>();
-        
-        String selected_criteria = (String)lms3.cb3.getSelectedItem();
-        
+        lms3 f=new lms3();
+        String selected_criteria="";
+        if(f.isVisible()==true)
+        selected_criteria = (String)lms3.cb3.getSelectedItem();
+        cms3 f1=new cms3();
+        if(f1.isVisible()==true)
+            selected_criteria=(String)cms3.cb2.getSelectedItem();
         //String selected_criteria = "cked";
         
         try {
@@ -809,8 +822,8 @@ public class DataBase_Handler
 		System.out.println(e);
             }   
         
-        System.out.println(options.size());
-        System.out.println(options);
+       // System.out.println(options.size());
+        //System.out.println(options);
         
         return options_points;
     }
@@ -1274,6 +1287,7 @@ public class DataBase_Handler
                 } catch (Exception e) {
 		System.out.println(e);
             }  
+        System.out.println(criterias);
         return criterias;
         
     }

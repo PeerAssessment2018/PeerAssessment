@@ -177,10 +177,6 @@ public class cms1 extends javax.swing.JFrame {
         // TODO add your handling code here
         p = prompt.getText();
         String course=(String)cb.getSelectedItem();
-        
-        //System.out.println("cms1 pre - > " + author_temp.author_id+p+course+author_temp.no_assessor+author_temp.no_assessments);
-       
-        
         n1 = (int) nos.getValue();
         n2 = (int) noa.getValue();
        // DataBase_Handler app = new DataBase_Handler();

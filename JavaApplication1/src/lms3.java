@@ -301,48 +301,48 @@ public class lms3 extends javax.swing.JFrame {
         if(options.size()==1)
         {
             //add options_description and points in each
-            lms3.rd1.setVisible(true);
-            lms3.rd1.setText(options.get(0));
+            rd1.setVisible(true);
+            rd1.setText(options.get(0));
         }
         else if(options.size()==2)
         {
-            lms3.rd1.setVisible(true);
-            lms3.rd1.setText(options.get(0));
-            lms3.rd2.setVisible(true);
-            lms3.rd2.setText(options.get(1));
+            rd1.setVisible(true);
+            rd1.setText(options.get(0));
+            rd2.setVisible(true);
+            rd2.setText(options.get(1));
         }
         else if(options.size()==3)
         {
-            lms3.rd1.setVisible(true);
-            lms3.rd1.setText(options.get(0));
-            lms3.rd2.setVisible(true);
-            lms3.rd2.setText(options.get(1));
-            lms3.rd3.setVisible(true);
-            lms3.rd3.setText(options.get(2));
+            rd1.setVisible(true);
+            rd1.setText(options.get(0));
+            rd2.setVisible(true);
+            rd2.setText(options.get(1));
+            rd3.setVisible(true);
+            rd3.setText(options.get(2));
         }
         else if(options.size()==4)
         {
-            lms3.rd1.setVisible(true);
-            lms3.rd1.setText(options.get(0));
-            lms3.rd2.setVisible(true);
-            lms3.rd2.setText(options.get(1));
-            lms3.rd3.setVisible(true);
-            lms3.rd3.setText(options.get(2));
-            lms3.rd4.setVisible(true);
-            lms3.rd4.setText(options.get(3));
+            rd1.setVisible(true);
+            rd1.setText(options.get(0));
+            rd2.setVisible(true);
+            rd2.setText(options.get(1));
+            rd3.setVisible(true);
+            rd3.setText(options.get(2));
+            rd4.setVisible(true);
+            rd4.setText(options.get(3));
         }
         else if(options.size()==5)
         {
-            lms3.rd1.setVisible(true);
-            lms3.rd1.setText(options.get(0));
-            lms3.rd2.setVisible(true);
-            lms3.rd2.setText(options.get(1));
-            lms3.rd3.setVisible(true);
-            lms3.rd3.setText(options.get(2));
-            lms3.rd4.setVisible(true);
-            lms3.rd4.setText(options.get(3));
-            lms3.rd5.setVisible(true);
-            lms3.rd5.setText(options.get(4));
+            rd1.setVisible(true);
+            rd1.setText(options.get(0));
+            rd2.setVisible(true);
+            rd2.setText(options.get(1));
+            rd3.setVisible(true);
+            rd3.setText(options.get(2));
+            rd4.setVisible(true);
+            rd4.setText(options.get(3));
+            rd5.setVisible(true);
+            rd5.setText(options.get(4));
         }
     }//GEN-LAST:event_cb3ActionPerformed
 

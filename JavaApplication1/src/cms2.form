@@ -63,7 +63,11 @@
                       <Component id="n23" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
+<<<<<<< HEAD
               <EmptySpace pref="20" max="32767" attributes="0"/>
+=======
+              <EmptySpace pref="26" max="32767" attributes="0"/>
+>>>>>>> 1f5ba1345a37cb4d6bdbc0ef360d3ef3610fb8ac
           </Group>
       </Group>
     </DimensionLayout>
