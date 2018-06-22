@@ -567,41 +567,19 @@ public class DataBase_Handler
     }
     
     
-    public ArrayList<String> r_lms3_f1( int user_id, String course_id,String question_id )
+    public ArrayList<String> r_lms3_f1( int user_id, String course_id,String question_id,String criteria)
     {
              
-        ArrayList<String> criterias = new ArrayList<String>();
-        
-        try {
-                //int x = 10;
-                //System.out.println(x);
-                String sql=" SELECT criterion_id FROM question_details WHERE course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
-		Statement stmt=conn.createStatement();
-                ResultSet rs=stmt.executeQuery(sql);
-                while(rs.next())
-                {
-                    criterias.add(rs.getString("criterion_id"));
-                }
-                } catch (Exception e) {
-		System.out.println(e);
-            }   
-        
         ArrayList<String> options = new ArrayList<String>();
         ArrayList<String> options_description = new ArrayList<String>();
         ArrayList<Integer> options_points = new ArrayList<Integer>();
-        lms3 f=new lms3();
-        String selected_criteria="";
-        if(f.isVisible()==true)
-        selected_criteria = (String)lms3.cb3.getSelectedItem();
-        cms3 f1=new cms3();
-        if(f1.isVisible()==true)
-            selected_criteria=(String)cms3.cb2.getSelectedItem();
-        //String selected_criteria = "cked";
+                
+        
         
         try {
                 //int x = 10;
                 //System.out.println(x);
-                String sql=" SELECT option_id,option_description,option_points FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id + "' AND criterion_id = '" + selected_criteria +"'";
+                String sql=" SELECT option_id,option_description,option_points FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id + "' AND criterion_id = '" + criteria +"'";
 		Statement stmt=conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
@@ -720,42 +698,17 @@ public class DataBase_Handler
         //System.out.println(options_points);*/
     }
     
-    public ArrayList<String> r2_lms3_f1( int user_id, String course_id,String question_id )
+    public ArrayList<String> r2_lms3_f1( int user_id, String course_id,String question_id , String criteria )
     {
-             
-        ArrayList<String> criterias = new ArrayList<String>();
-        
-        try {
-                //int x = 10;
-                //System.out.println(x);
-                String sql=" SELECT criterion_id FROM question_details WHERE course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
-		Statement stmt=conn.createStatement();
-                ResultSet rs=stmt.executeQuery(sql);
-                while(rs.next())
-                {
-                    criterias.add(rs.getString("criterion_id"));
-                }
-                } catch (Exception e) {
-		System.out.println(e);
-            }   
-        
+       
         ArrayList<String> options = new ArrayList<String>();
         ArrayList<String> options_description = new ArrayList<String>();
         ArrayList<Integer> options_points = new ArrayList<Integer>();
-        lms3 f=new lms3();
-        String selected_criteria="";
-        if(f.isVisible()==true)
-        selected_criteria = (String)lms3.cb3.getSelectedItem();
-        cms3 f1=new cms3();
-        if(f1.isVisible()==true)
-            selected_criteria=(String)cms3.cb2.getSelectedItem();
-        
-        //String selected_criteria = "cked";
         
         try {
                 //int x = 10;
                 //System.out.println(x);
-                String sql=" SELECT option_id,option_description,option_points FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id + "' AND criterion_id = '" + selected_criteria +"'";
+                String sql=" SELECT option_id,option_description,option_points FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id + "' AND criterion_id = '" + criteria +"'";
 		Statement stmt=conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
@@ -775,41 +728,17 @@ public class DataBase_Handler
     }
     
         
-    public ArrayList<Integer> r3_lms3_f1( int user_id, String course_id,String question_id )
+    public ArrayList<Integer> r3_lms3_f1( int user_id, String course_id,String question_id , String criteria )
     {
-             
-        ArrayList<String> criterias = new ArrayList<String>();
-        
-        try {
-                //int x = 10;
-                //System.out.println(x);
-                String sql=" SELECT criterion_id FROM question_details WHERE course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
-		Statement stmt=conn.createStatement();
-                ResultSet rs=stmt.executeQuery(sql);
-                while(rs.next())
-                {
-                    criterias.add(rs.getString("criterion_id"));
-                }
-                } catch (Exception e) {
-		System.out.println(e);
-            }   
-        
+       
         ArrayList<String> options = new ArrayList<String>();
         ArrayList<String> options_description = new ArrayList<String>();
         ArrayList<Integer> options_points = new ArrayList<Integer>();
-        lms3 f=new lms3();
-        String selected_criteria="";
-        if(f.isVisible()==true)
-        selected_criteria = (String)lms3.cb3.getSelectedItem();
-        cms3 f1=new cms3();
-        if(f1.isVisible()==true)
-            selected_criteria=(String)cms3.cb2.getSelectedItem();
-        //String selected_criteria = "cked";
         
         try {
                 //int x = 10;
                 //System.out.println(x);
-                String sql=" SELECT option_id,option_description,option_points FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id + "' AND criterion_id = '" + selected_criteria +"'";
+                String sql=" SELECT option_id,option_description,option_points FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id + "' AND criterion_id = '" + criteria +"'";
 		Statement stmt=conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
@@ -822,7 +751,7 @@ public class DataBase_Handler
 		System.out.println(e);
             }   
         
-       // System.out.println(options.size());
+        //System.out.println(options.size());
         //System.out.println(options);
         
         return options_points;

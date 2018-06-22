@@ -280,11 +280,7 @@ public class cms2 extends javax.swing.JFrame {
                         .addComponent(save)
                         .addGap(3, 3, 3)
                         .addComponent(n23)))
-<<<<<<< HEAD
                 .addContainerGap(20, Short.MAX_VALUE))
-=======
-                .addContainerGap(26, Short.MAX_VALUE))
->>>>>>> 1f5ba1345a37cb4d6bdbc0ef360d3ef3610fb8ac
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

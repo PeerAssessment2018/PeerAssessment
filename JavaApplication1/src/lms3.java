@@ -292,11 +292,11 @@ public class lms3 extends javax.swing.JFrame {
         rd3.setVisible(false);
         rd4.setVisible(false);
         rd5.setVisible(false);
-        
+        String cri_id=(String)cb3.getSelectedItem();
         DataBase_Handler db=new DataBase_Handler();
-        options = db.r_lms3_f1(student_temp.user_id,student_temp.course_id,student_temp.question_id);
-        options_description = db.r2_lms3_f1(student_temp.user_id,student_temp.course_id,student_temp.question_id);
-        options_points = db.r3_lms3_f1(student_temp.user_id,student_temp.course_id,student_temp.question_id);
+        options = db.r_lms3_f1(student_temp.user_id,student_temp.course_id,student_temp.question_id,cri_id);
+        options_description = db.r2_lms3_f1(student_temp.user_id,student_temp.course_id,student_temp.question_id,cri_id);
+        options_points = db.r3_lms3_f1(student_temp.user_id,student_temp.course_id,student_temp.question_id,cri_id);
         
         if(options.size()==1)
         {

@@ -14,7 +14,7 @@ import java.util.StringTokenizer;
  */
 public class cms3 extends javax.swing.JFrame {
 
-     ArrayList<String> options = new ArrayList<String>();
+    ArrayList<String> options = new ArrayList<String>();
     ArrayList<String> options_description = new ArrayList<String>();
     ArrayList<Integer> options_points = new ArrayList<Integer>();
    
@@ -277,10 +277,12 @@ public class cms3 extends javax.swing.JFrame {
         rd3.setVisible(false);
         rd4.setVisible(false);
         rd5.setVisible(false);
-        String course_id=(String) cms1.cb.getSelectedItem();
-        String question=cms1.prompt.getText();
+        
+        String course_id = author_temp.course_id;
+        String question=author_temp.question_id;
+        
         DataBase_Handler db=new DataBase_Handler();
-        ArrayList<String> criterias=db.r_lms3_f(author_temp.author_id,course_id, question);
+        ArrayList<String> criterias = db.r_lms3_f(author_temp.author_id,course_id, question);
         for(int i=0;i<criterias.size();i++)
         {
             cb2.addItem(criterias.get(i));
@@ -296,9 +298,9 @@ public class cms3 extends javax.swing.JFrame {
         String course_id=(String) cms1.cb.getSelectedItem();
         String question_id=cms1.prompt.getText();
         DataBase_Handler db=new DataBase_Handler();
-        options = db.r_lms3_f1(author_temp.author_id,author_temp.course_id,author_temp.question_id);
-        options_description = db.r2_lms3_f1(author_temp.author_id,author_temp.course_id,author_temp.question_id);
-        options_points = db.r3_lms3_f1(author_temp.author_id,author_temp.course_id,author_temp.question_id);
+        options = db.r_lms3_f1(author_temp.author_id,author_temp.course_id,author_temp.question_id,cri_id);
+        options_description = db.r2_lms3_f1(author_temp.author_id,author_temp.course_id,author_temp.question_id,cri_id);
+        options_points = db.r3_lms3_f1(author_temp.author_id,author_temp.course_id,author_temp.question_id,cri_id);
         
          switch (options.size()) {
              case 1:
