@@ -16,9 +16,15 @@ public class lms3 extends javax.swing.JFrame {
 
     /*
      * Creates new form lms3
+    options
+    options
     
      */
     
+    ArrayList<String> options = new ArrayList<String>();
+    ArrayList<String> options_description = new ArrayList<String>();
+    ArrayList<Integer> options_points = new ArrayList<Integer>();
+            
      private String data[] = new String[2];
      //private int user_id;
     
@@ -40,7 +46,6 @@ public class lms3 extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        cb2 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ta = new javax.swing.JTextArea();
@@ -56,6 +61,7 @@ public class lms3 extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -68,13 +74,7 @@ public class lms3 extends javax.swing.JFrame {
 
         jLabel2.setText("Assessing for:");
 
-        cb2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb2ActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("User's Response:");
+        jLabel3.setText("Peer's Response:");
 
         ta.setColumns(20);
         ta.setRows(5);
@@ -82,6 +82,7 @@ public class lms3 extends javax.swing.JFrame {
 
         jLabel4.setText("Evaluate for Criterion:");
 
+        cb3.setEditable(true);
         cb3.setToolTipText("jkfhsdkjfh");
         cb3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,6 +151,8 @@ public class lms3 extends javax.swing.JFrame {
 
         jLabel5.setText("Next will only be activated when you assess the min no. of responses.");
 
+        jLabel6.setText("Peer 1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,20 +179,20 @@ public class lms3 extends javax.swing.JFrame {
                                 .addComponent(jLabel2))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(cb2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(27, 27, 27)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(cb2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -226,16 +229,11 @@ public class lms3 extends javax.swing.JFrame {
 
     private void n34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n34ActionPerformed
         // TODO add your handling code here:
-        lms4 frame=new lms4();
+        
+        /*lms4 frame=new lms4();
         frame.setVisible(true);
-        this.setVisible(false);
+        this.setVisible(false);*/
     }//GEN-LAST:event_n34ActionPerformed
-
-    private void cb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb2ActionPerformed
-        // TODO add your handling code here:
-        /*DataBase_Handler db=new DataBase_Handler();
-        db.lms3_f2(1,"course 1","sample prompt");*/
-    }//GEN-LAST:event_cb2ActionPerformed
 
     private void rd4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd4ActionPerformed
         // TODO add your handling code here:
@@ -283,35 +281,90 @@ public class lms3 extends javax.swing.JFrame {
         rd3.setVisible(false);
         rd4.setVisible(false);
         rd5.setVisible(false);
-       //DataBase_Handler db=new DataBase_Handler();
-        //String course=(String)lms1.cb1.getSelectedItem();
-        //db.lms3_f1(1,course,"sample prompt");
+        
+        DataBase_Handler db=new DataBase_Handler();
+        options = db.r_lms3_f1(student_temp.user_id,student_temp.course_id,student_temp.question_id);
+        options_description = db.r2_lms3_f1(student_temp.user_id,student_temp.course_id,student_temp.question_id);
+        options_points = db.r3_lms3_f1(student_temp.user_id,student_temp.course_id,student_temp.question_id);
+        
+        if(options.size()==1)
+        {
+            //add options_description and points in each
+            lms3.rd1.setVisible(true);
+            lms3.rd1.setText(options.get(0));
+        }
+        else if(options.size()==2)
+        {
+            lms3.rd1.setVisible(true);
+            lms3.rd1.setText(options.get(0));
+            lms3.rd2.setVisible(true);
+            lms3.rd2.setText(options.get(1));
+        }
+        else if(options.size()==3)
+        {
+            lms3.rd1.setVisible(true);
+            lms3.rd1.setText(options.get(0));
+            lms3.rd2.setVisible(true);
+            lms3.rd2.setText(options.get(1));
+            lms3.rd3.setVisible(true);
+            lms3.rd3.setText(options.get(2));
+        }
+        else if(options.size()==4)
+        {
+            lms3.rd1.setVisible(true);
+            lms3.rd1.setText(options.get(0));
+            lms3.rd2.setVisible(true);
+            lms3.rd2.setText(options.get(1));
+            lms3.rd3.setVisible(true);
+            lms3.rd3.setText(options.get(2));
+            lms3.rd4.setVisible(true);
+            lms3.rd4.setText(options.get(3));
+        }
+        else if(options.size()==5)
+        {
+            lms3.rd1.setVisible(true);
+            lms3.rd1.setText(options.get(0));
+            lms3.rd2.setVisible(true);
+            lms3.rd2.setText(options.get(1));
+            lms3.rd3.setVisible(true);
+            lms3.rd3.setText(options.get(2));
+            lms3.rd4.setVisible(true);
+            lms3.rd4.setText(options.get(3));
+            lms3.rd5.setVisible(true);
+            lms3.rd5.setText(options.get(4));
+        }
     }//GEN-LAST:event_cb3ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        /*int assessor_id=student_temp.user_id;
-        int user_id=Integer.parseInt((String)cb2.getSelectedItem());
-        String q_id="sample prompt";
+        int assessor_id=student_temp.user_id;
+        //int user_id=Integer.parseInt((String)cb2.getSelectedItem());
+        
+        String q_id=student_temp.question_id;
+        String course_id = student_temp.course_id;
         String cri=(String)cb3.getSelectedItem();
         StringTokenizer option=new StringTokenizer("");
+        
         if(rd1.isSelected()==true)
-            option=new StringTokenizer(rd1.getText());
+            option=new StringTokenizer(rd1.getText()+" " + options_description.get(0)+" " + options_points.get(0));
         else if(rd2.isSelected()==true)
-            option=new StringTokenizer(rd2.getText());
+            option=new StringTokenizer(rd2.getText()+" " + options_description.get(1)+" " + options_points.get(1));
         else if(rd3.isSelected()==true)
-            option=new StringTokenizer(rd3.getText());
+            option=new StringTokenizer(rd3.getText()+" " + options_description.get(2)+" " + options_points.get(2));
         else if(rd4.isSelected()==true)
-            option=new StringTokenizer(rd4.getText());
+            option=new StringTokenizer(rd4.getText()+" " + options_description.get(3)+" " + options_points.get(3));
         else if(rd5.isSelected()==true)
-            option=new StringTokenizer(rd5.getText());
+            option=new StringTokenizer(rd5.getText()+" " + options_description.get(3)+" " + options_points.get(4));
+        
         String s1=option.nextToken();
+        String s2=option.nextToken();
+        
         int points=Integer.parseInt(option.nextToken());
+        
         DataBase_Handler db=new DataBase_Handler();
-        db.insert_pa_grade(user_id,assessor_id,q_id,"course1",cri,points);
+        db.insert_pa_grade(Integer.parseInt(data[1]),db.user_to_anonymous(assessor_id),course_id,q_id,cri,points);
         cb3.removeItem(cri);
-        if(cb3.getItemCount()==0)
-            cb2.removeItem(user_id);*/
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -351,7 +404,6 @@ public class lms3 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    public static javax.swing.JComboBox<String> cb2;
     public static javax.swing.JComboBox<String> cb3;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -360,6 +412,7 @@ public class lms3 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton n34;

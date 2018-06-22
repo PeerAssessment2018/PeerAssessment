@@ -251,33 +251,31 @@ public class DataBase_Handler
 		}
     }
     
-     public void insert_pa_grade_postshuffle(int user_id, int arr[] , String course_id, String question_id )
+     /*public void insert_pa_grade_postshuffle(int user_id, int assesser_id , String course_id, String question_id )
     {
-        /*Convert arr from user_id list to anonymous_user_id from the student_anonymoususerid table*/
+        //Convert arr from user_id list to anonymous_user_id from the student_anonymoususerid table
         
-        int arr2[] = new int[arr.length];
-        ArrayList<String> criterias = new ArrayList<String>();
         
-        for(int i=0; i<arr.length;i++)
-        {
+            ArrayList<String> criterias = new ArrayList<String>();
+        
             try {
                 //int x = 10;
                 //System.out.println(x);
-                String sql=" SELECT anonymous_user_id FROM student_anonymoususerid WHERE user_id = " + arr[i] ;
+                String sql=" SELECT anonymous_user_id FROM student_anonymoususerid WHERE user_id = " + assesser_id ;
 		Statement stmt=conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 if(rs.next())
-                    arr2[i] = rs.getInt("anonymous_user_id");
+                    assesser_id = rs.getInt("anonymous_user_id");
                 else
                     System.out.println("no results");
-                System.out.println(arr2[i]);
+                System.out.println(assesser_id);
                 } catch (Exception e) {
 		System.out.println("ERROR: Could not fetch record");
 		return;
             }
-        }
+       
         
-        /*Fetch the criteris ids from question id and course_id which are common to different criteria ids in question_details table*/
+        //Fetch the criteris ids from question id and course_id which are common to different criteria ids in question_details table
         
         try {
                 //int x = 10;
@@ -292,21 +290,20 @@ public class DataBase_Handler
 		return;
             }
         
-        /*for(int i=0; i<criterias.size();i++)
-            System.out.println(criterias.get(i));*/
+        //for(int i=0; i<criterias.size();i++)
+         //   System.out.println(criterias.get(i));//
         
         
-        /*for each criteria give seperate entry in the pa_grade table*/
-        /*Duplicate the above entries for different ids from ArrayList*/
+        //for each criteria give seperate entry in the pa_grade table
+        //Duplicate the above entries for different ids from ArrayList
         
-        System.out.println("*****" + arr2.length);
-        for(int i=0;i<arr2.length;i++)
-        {
+        
+        
             for(int j=0;j<criterias.size();j++)
             {
                 try {
 			String sql=" INSERT INTO pa_grade ( user_id, anonymous_assesser_id, course_id, question_id, criteria_id, grade_points) VALUES "  + " (" + user_id + ","
-					+ arr2[i] + ","+ "'" + course_id + "'" + ", '" + question_id + "' ," + "'" + criterias.get(j) + "'," + 0 +")";
+					+ assesser_id + ","+ "'" + course_id + "'" + ", '" + question_id + "' ," + "'" + criterias.get(j) + "'," + 0 +")";
 		Statement stmt = conn.createStatement();
                 stmt.execute(sql);
                 } catch (SQLException e) {
@@ -314,8 +311,9 @@ public class DataBase_Handler
 			return;
 		}
             }
-        }
+        
     }
+    */
     
     public int anonymous_to_user(int auid)
     {
@@ -564,11 +562,259 @@ public class DataBase_Handler
     }
     
     
+    public ArrayList<String> r_lms3_f1( int user_id, String course_id,String question_id )
+    {
+             
+        ArrayList<String> criterias = new ArrayList<String>();
+        
+        try {
+                //int x = 10;
+                //System.out.println(x);
+                String sql=" SELECT criterion_id FROM question_details WHERE course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    criterias.add(rs.getString("criterion_id"));
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+            }   
+        
+        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options_description = new ArrayList<String>();
+        ArrayList<Integer> options_points = new ArrayList<Integer>();
+        
+        String selected_criteria = (String)lms3.cb3.getSelectedItem();
+        
+        //String selected_criteria = "cked";
+        
+        try {
+                //int x = 10;
+                //System.out.println(x);
+                String sql=" SELECT option_id,option_description,option_points FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id + "' AND criterion_id = '" + selected_criteria +"'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    options.add(rs.getString("option_id"));
+                    options_description.add(rs.getString("option_description"));
+                    options_points.add(rs.getInt("option_points"));
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+            }   
+        
+        System.out.println(options.size());
+        System.out.println(options);
+        
+        return options;
+        /*
+        lms3 f=new lms3();
+        lms4 f1=new lms4();
+        if(f.isVisible()==true)
+        {
+        if(options.size()==1)
+        {
+            lms3.rd1.setVisible(true);
+            lms3.rd1.setText(options.get(0));
+        }
+        else if(options.size()==2)
+        {
+            lms3.rd1.setVisible(true);
+            lms3.rd1.setText(options.get(0));
+            lms3.rd2.setVisible(true);
+            lms3.rd2.setText(options.get(1));
+        }
+        else if(options.size()==3)
+        {
+            lms3.rd1.setVisible(true);
+            lms3.rd1.setText(options.get(0));
+            lms3.rd2.setVisible(true);
+            lms3.rd2.setText(options.get(1));
+            lms3.rd3.setVisible(true);
+            lms3.rd3.setText(options.get(2));
+        }
+        else if(options.size()==4)
+        {
+            lms3.rd1.setVisible(true);
+            lms3.rd1.setText(options.get(0));
+            lms3.rd2.setVisible(true);
+            lms3.rd2.setText(options.get(1));
+            lms3.rd3.setVisible(true);
+            lms3.rd3.setText(options.get(2));
+            lms3.rd4.setVisible(true);
+            lms3.rd4.setText(options.get(3));
+        }
+        else if(options.size()==5)
+        {
+            lms3.rd1.setVisible(true);
+            lms3.rd1.setText(options.get(0));
+            lms3.rd2.setVisible(true);
+            lms3.rd2.setText(options.get(1));
+            lms3.rd3.setVisible(true);
+            lms3.rd3.setText(options.get(2));
+            lms3.rd4.setVisible(true);
+            lms3.rd4.setText(options.get(3));
+            lms3.rd5.setVisible(true);
+            lms3.rd5.setText(options.get(4));
+        }
+        }
+        if(f1.isVisible()==true)
+        {
+            if(options.size()==1)
+        {
+            lms4.rd1.setVisible(true);
+            lms4.rd1.setText(options.get(0));
+        }
+        else if(options.size()==2)
+        {
+            lms4.rd1.setVisible(true);
+            lms4.rd1.setText(options.get(0));
+            lms4.rd2.setVisible(true);
+            lms4.rd2.setText(options.get(1));
+        }
+        else if(options.size()==3)
+        {
+            lms4.rd1.setVisible(true);
+            lms4.rd1.setText(options.get(0));
+            lms4.rd2.setVisible(true);
+            lms4.rd2.setText(options.get(1));
+            lms4.rd3.setVisible(true);
+            lms4.rd3.setText(options.get(2));
+        }
+        else if(options.size()==4)
+        {
+            lms4.rd1.setVisible(true);
+            lms4.rd1.setText(options.get(0));
+            lms4.rd2.setVisible(true);
+            lms4.rd2.setText(options.get(1));
+            lms4.rd3.setVisible(true);
+            lms4.rd3.setText(options.get(2));
+            lms4.rd4.setVisible(true);
+            lms4.rd4.setText(options.get(3));
+        }
+        else if(options.size()==5)
+        {
+            lms4.rd1.setVisible(true);
+            lms4.rd1.setText(options.get(0));
+            lms4.rd2.setVisible(true);
+            lms4.rd2.setText(options.get(1));
+            lms4.rd3.setVisible(true);
+            lms4.rd3.setText(options.get(2));
+            lms4.rd4.setVisible(true);
+            lms4.rd4.setText(options.get(3));
+            lms4.rd5.setVisible(true);
+            lms4.rd5.setText(options.get(4));
+        }
+        }
+        //System.out.println(options_points);*/
+    }
+    
+    public ArrayList<String> r2_lms3_f1( int user_id, String course_id,String question_id )
+    {
+             
+        ArrayList<String> criterias = new ArrayList<String>();
+        
+        try {
+                //int x = 10;
+                //System.out.println(x);
+                String sql=" SELECT criterion_id FROM question_details WHERE course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    criterias.add(rs.getString("criterion_id"));
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+            }   
+        
+        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options_description = new ArrayList<String>();
+        ArrayList<Integer> options_points = new ArrayList<Integer>();
+        
+        String selected_criteria = (String)lms3.cb3.getSelectedItem();
+        
+        //String selected_criteria = "cked";
+        
+        try {
+                //int x = 10;
+                //System.out.println(x);
+                String sql=" SELECT option_id,option_description,option_points FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id + "' AND criterion_id = '" + selected_criteria +"'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    options.add(rs.getString("option_id"));
+                    options_description.add(rs.getString("option_description"));
+                    options_points.add(rs.getInt("option_points"));
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+            }   
+        
+        System.out.println(options.size());
+        System.out.println(options);
+        
+        return options_description;
+    }
+    
+        
+    public ArrayList<Integer> r3_lms3_f1( int user_id, String course_id,String question_id )
+    {
+             
+        ArrayList<String> criterias = new ArrayList<String>();
+        
+        try {
+                //int x = 10;
+                //System.out.println(x);
+                String sql=" SELECT criterion_id FROM question_details WHERE course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    criterias.add(rs.getString("criterion_id"));
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+            }   
+        
+        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options_description = new ArrayList<String>();
+        ArrayList<Integer> options_points = new ArrayList<Integer>();
+        
+        String selected_criteria = (String)lms3.cb3.getSelectedItem();
+        
+        //String selected_criteria = "cked";
+        
+        try {
+                //int x = 10;
+                //System.out.println(x);
+                String sql=" SELECT option_id,option_description,option_points FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id + "' AND criterion_id = '" + selected_criteria +"'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    options.add(rs.getString("option_id"));
+                    options_description.add(rs.getString("option_description"));
+                    options_points.add(rs.getInt("option_points"));
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+            }   
+        
+        System.out.println(options.size());
+        System.out.println(options);
+        
+        return options_points;
+    }
+    
     public void lms3_f2( int user_id, String course_id,String question_id )
     {
-        int a_user_id = user_to_anonymous(user_id);
+        //int a_user_id = user_to_anonymous(user_id);
         //System.out.println(a_user_id);
-        ArrayList<Integer> ids_to_assess = new ArrayList<Integer>();
+        /*<Integer> ids_to_assess = new ArrayList<Integer>();
         
             try {
                 //int x = 10;
@@ -624,7 +870,7 @@ public class DataBase_Handler
         if(f.isVisible()==true)
             lms3.ta.setText(responses.get(j));
         if(f1.isVisible()==true)
-            lms4.ta.setText(responses.get(j));
+            lms4.ta.setText(responses.get(j));*/
     }
     
      public void results(int user_id, String course_id, String question_id)
@@ -678,16 +924,16 @@ public class DataBase_Handler
         System.out.println(pas);
     }
      
-    public void insert_pa_grade(int user_id,int assessor_id,String q_id, String course, String cri_id,int points)
+    public void insert_pa_grade(int user_id,int assessor_id,String course, String q_id, String cri_id,int points)
     {		
                 try {
                     user_id=anonymous_to_user(user_id);
                     assessor_id=user_to_anonymous(assessor_id);
-			String insertString="INSERT INTO pa_grade (user_id, anonymous_assessor_id, question_id, course, crieteria_id,"
-                                + " grade_points) VALUES ("+user_id+","+assessor_id+", '"+q_id+"' , '"+course+"','"+cri_id+"' ,"+points+")";
+			String insertString="INSERT INTO pa_grade (user_id, anonymous_assessor_id, course_id, question_id, crieteria_id,"
+                                + " grade_points) VALUES ("+user_id+","+assessor_id+", '"+course+"' , '"+q_id+"','"+cri_id+"' ,"+points+")";
 		Statement stmt = conn.createStatement();
                 stmt.execute(insertString);
-                } catch (Exception e) {
+                } catch (SQLException e) {
 			System.out.println("ERROR: Could not insert record");
 			return;
 		}
@@ -912,21 +1158,7 @@ public class DataBase_Handler
         return no_being_assessed;
     }
     
-    
-    public int get_no_assessor(String course_id,String question_id)
-    {
-        int no_assessor=0;
-        try {
-            Statement statement=conn.createStatement();
-            ResultSet rs=statement.executeQuery("SELECT no_assessors FROM question_details WHERE course_id='"+course_id+"' AND question_id='"+question_id+"';");
-            rs.next();
-            no_assessor=rs.getInt("no_assessors");
-            
-        } catch (Exception e) {
-        }
-        return no_assessor;
-    }
-    
+      
     public int get_no_assessments(String course_id,String question_id)
     {
         
@@ -967,7 +1199,7 @@ public class DataBase_Handler
         boolean f=false;
         String course_id="15",question_id="15";
         
-        if(get_no_assessed(user_id)<get_no_assessor(course_id,question_id))
+        if(get_no_assessed(user_id)<get_no_assessors(course_id,question_id))
             f=true;
         return f;
     }
@@ -980,21 +1212,41 @@ public class DataBase_Handler
         
         
         String str[]=new String[2];
-                
+          
+        //boolean valid = false;
+        
+        //while(!valid)
+        //{
         try {
-            String sql="SELECT state,user_id FROM courseware_studentmodule WHERE user_id!="+user_id+" AND times_assessed < " + get_no_assessments(course_id,question_id) + " AND course_id = '" +course_id +"' AND question_id = '" + question_id +"' ORDER BY date_of_submission ASC LIMIT 1;";
+            String sql;
+            //System.out.println(get_no_assessed(user_id));
+            if(get_no_assessed(user_id)==0)
+            {
+                System.out.println("first SQL");
+                sql="SELECT * FROM courseware_studentmodule WHERE user_id!="+user_id+" AND times_assessed < " + get_no_assessments(course_id,question_id) + " AND course_id = '" +course_id +"' AND question_id = '" + question_id +"' ORDER BY date_of_submission ASC LIMIT 1;";
+            }
+            else
+            {
+                System.out.println("second SQL");
+                sql="SELECT * FROM courseware_studentmodule WHERE user_id!="+user_id+" AND times_assessed < " + get_no_assessments(course_id,question_id) + " AND course_id = '" +course_id +"' AND question_id = '" + question_id +"' AND user_id NOT IN (SELECT user_id FROM pa_grade WHERE anonymous_assesser_id = " + user_to_anonymous(user_id) +") ORDER BY date_of_submission ASC LIMIT 1;";
+            }
             ResultSet rs=conn.createStatement().executeQuery(sql);
             rs.next();
             str[0]=rs.getString("state");
             str[1] = String.valueOf(rs.getInt("user_id"));
+            /*ResultSet rs2 = conn.createStatement().executeQuery("SELECT COUNT(*) AS match FROM pa_grade WHERE user_id = " + Integer.parseInt(str[1]) + " AND anonymous_assesser_id= " + user_to_anonymous(user_id) + " ;");
+            rs2.next();
+            int t = rs.getInt("match");
+            if(t==0)
+                valid=true;
+            */
             }catch (SQLException e) {
                 System.out.println("Error getting answer !" + e);
             }
         
-        int arr[] = new int[1];
-        arr[0]=Integer.parseInt(str[1]);
-        insert_pa_grade_postshuffle(user_id, arr ,course_id, question_id );
+        //insert_pa_grade_postshuffle(Integer.parseInt(str[1]), user_id ,course_id, question_id );
         
+        //}
         return str;    
     }
     
@@ -1105,6 +1357,8 @@ public class DataBase_Handler
     public static void  main(String args[])
     {
         DataBase_Handler db =new DataBase_Handler(); 
+        String str[] = db.get_answer(1,"hello","?");
+        System.out.println( str[0]+ " " + str[1] );
         
     } 
 }
