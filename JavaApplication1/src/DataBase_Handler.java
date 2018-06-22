@@ -855,7 +855,7 @@ public class DataBase_Handler
         ArrayList<Integer> marks = new ArrayList<>();
         
          try {
-                String sql=" SELECT AVG(grade_points) as avg_grade FROM pa_grade WHERE user_id = " + user_id + " AND course_id = '" + course_id + "'AND question_id = '" + question_id + "' GROUP BY anonymous_assesser_id HAVING count(*)>1";
+                String sql=" SELECT AVG(grade_points) as avg_grade FROM pa_grade WHERE user_id = " + user_id + " AND course_id = '" + course_id + "'AND question_id = '" + question_id + "' GROUP BY anonymous_assessor_id HAVING count(*)>1";
 		Statement stmt=conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
@@ -1171,13 +1171,13 @@ public class DataBase_Handler
             //System.out.println(get_no_assessed(user_id));
             if(get_no_assessed(user_id)==0)
             {
-                System.out.println("first SQL");
-                sql="SELECT * FROM courseware_studentmodule WHERE user_id!="+user_id+" AND times_assessed < " + get_no_assessments(course_id,question_id) + " AND course_id = '" +course_id +"' AND question_id = '" + question_id +"' ORDER BY date_of_submission ASC LIMIT 1;";
+                System.out.println("first SQL"); 
+                sql="SELECT * FROM courseware_studentmodule WHERE submitted = " +1 + " AND user_id!="+user_id+" AND times_assessed < " + get_no_assessments(course_id,question_id) + " AND course_id = '" +course_id +"' AND question_id = '" + question_id +"' ORDER BY date_of_submission ASC LIMIT 1;"; 
             }
             else
             {
-                System.out.println("second SQL");
-                sql="SELECT * FROM courseware_studentmodule WHERE user_id!="+user_id+" AND times_assessed < " + get_no_assessments(course_id,question_id) + " AND course_id = '" +course_id +"' AND question_id = '" + question_id +"' AND user_id NOT IN (SELECT user_id FROM pa_grade WHERE anonymous_assesser_id = " + user_to_anonymous(user_id) +") ORDER BY date_of_submission ASC LIMIT 1;";
+                System.out.println("second SQL"); 
+                sql="SELECT * FROM courseware_studentmodule WHERE submitted = " + 1 + " AND user_id!="+user_id+" AND times_assessed < " + get_no_assessments(course_id,question_id) + " AND course_id = '" +course_id +"' AND question_id = '" + question_id +"' AND user_id NOT IN (SELECT user_id FROM pa_grade WHERE anonymous_assessor_id = " + user_to_anonymous(user_id) +") ORDER BY date_of_submission ASC LIMIT 1;";
             }
             ResultSet rs=conn.createStatement().executeQuery(sql);
             rs.next();
@@ -1320,6 +1320,22 @@ public class DataBase_Handler
                 } catch (SQLException e) {
 		System.out.println(e);
             }   
+    }
+        
+     public int assessments_done(int user_id,String course_id, String question_id)
+    {
+        int a_d = 0;
+        
+        try {
+                String sql=" SELECT assessments_done FROM courseware_studentmodule WHERE user_id = " + user_id + " AND course_id = '" + course_id + "' AND question_id = '" + question_id +"'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                if(rs.next())
+                a_d=rs.getInt("assessments_done");
+               } catch (SQLException e) {
+		System.out.println(e);
+            }   
+        return a_d;
     }
         
     public void append_times_assessed(int user_id,String course_id, String question_id)
