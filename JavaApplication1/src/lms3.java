@@ -26,6 +26,9 @@ public class lms3 extends javax.swing.JFrame {
     ArrayList<Integer> options_points = new ArrayList<Integer>();
             
      private String data[] = new String[2];
+     ArrayList<String> criterias_list = new ArrayList<String>();
+     ArrayList<Integer> points_list = new ArrayList<Integer>();
+     boolean check_if_submitted;
      //private int user_id;
     
     public lms3() 
@@ -243,18 +246,13 @@ public class lms3 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rd5ActionPerformed
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-        n34.setEnabled(false);
-        rd1.setVisible(false);
-        rd2.setVisible(false);
-        rd3.setVisible(false);
-        rd4.setVisible(false);
-        rd5.setVisible(false);
+    private void Initialize()
+    {
+         
         DataBase_Handler db=new DataBase_Handler();
         
         
-                
+        check_if_submitted = false;        
         if(db.check_PA(student_temp.user_id, student_temp.course_id, student_temp.question_id))
         {
             data = db.get_answer(student_temp.user_id, student_temp.course_id, student_temp.question_id);
@@ -270,8 +268,21 @@ public class lms3 extends javax.swing.JFrame {
             frame.setVisible(true);
             this.setVisible(false);
         }
+     
+    }
+    
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+       
+        n34.setEnabled(false);
+        rd1.setVisible(false);
+        rd2.setVisible(false);
+        rd3.setVisible(false);
+        rd4.setVisible(false);
+        rd5.setVisible(false);
         
-        
+       Initialize();
+     
     }//GEN-LAST:event_formWindowOpened
 
     private void cb3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb3ActionPerformed
@@ -361,10 +372,27 @@ public class lms3 extends javax.swing.JFrame {
         
         int points=Integer.parseInt(option.nextToken());
         
-        DataBase_Handler db=new DataBase_Handler();
-        db.insert_pa_grade(Integer.parseInt(data[1]),db.user_to_anonymous(assessor_id),course_id,q_id,cri,points);
+        criterias_list.add(cri);
+        points_list.add(points);
         cb3.removeItem(cri);
+           
+        if(cb3.getItemCount()==0)
+        {   
+            DataBase_Handler db=new DataBase_Handler();
+            db.insert_pa_grade(Integer.parseInt(data[1]),db.user_to_anonymous(assessor_id),course_id,q_id,criterias_list,points_list);
+            db.append_assessments_done(student_temp.user_id,  student_temp.course_id, student_temp.question_id);
+            db.append_times_assessed(Integer.parseInt(data[1]), student_temp.course_id, student_temp.question_id);
+            criterias_list.clear();
+            points_list.clear();
+            check_if_submitted = true;
+        }
         
+        cb3.removeItem(cri);
+           
+        if(check_if_submitted)
+        {
+            Initialize();
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

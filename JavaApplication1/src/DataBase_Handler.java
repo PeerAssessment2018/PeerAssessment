@@ -227,10 +227,12 @@ public class DataBase_Handler
     }
     
     public void insert_courseware_studentmodule(int user_id,String ans, String course)
-        {                
+        {           
+            
+            java.sql.Date sqlDate = new java.sql.Date(System.currentTimeMillis());
                 try {
-			String insertString = " INSERT INTO courseware_studentmodule ( user_id, course_id, question_id, state )" +" VALUES ( ' " 
-                                +user_id+"' , ' "+course+" ' , ' "+ lms1.ta1.getText()+" ' , ' " +ans+" ' ) ";
+			String insertString = " INSERT INTO courseware_studentmodule ( user_id, course_id, question_id, state,date_of_submission )" +" VALUES ( " +
+                                +user_id+" , '"+course+"' , '"+ lms1.ta1.getText()+"' , '" +ans+"','"+ sqlDate  +"') ";
 			Statement stmt = conn.createStatement();
                 stmt.execute(insertString);
                } catch (Exception e) {
@@ -927,21 +929,23 @@ public class DataBase_Handler
         System.out.println(pas);
     }
      
-    public void insert_pa_grade(int user_id,int assessor_id,String course, String q_id, String cri_id,int points)
+    public void insert_pa_grade(int user_id,int assessor_id,String course, String q_id, ArrayList<String> cri_id,ArrayList<Integer> points)
     {		
-                try {
-                    user_id=anonymous_to_user(user_id);
-                    assessor_id=user_to_anonymous(assessor_id);
-			String insertString="INSERT INTO pa_grade (user_id, anonymous_assessor_id, course_id, question_id, crieteria_id,"
-                                + " grade_points) VALUES ("+user_id+","+assessor_id+", '"+course+"' , '"+q_id+"','"+cri_id+"' ,"+points+")";
-		Statement stmt = conn.createStatement();
-                stmt.execute(insertString);
-                } catch (SQLException e) {
-			System.out.println("ERROR: Could not insert record");
-			return;
-		}
+        for(int i =0 ; i<cri_id.size(); i++)
+                {
+                    System.out.println("in insert_pa_grade --> " + user_id +" "+ assessor_id +" "+ course + " "+q_id + " "+ cri_id +" "+ points);
+                    try {
+                        String insertString="INSERT INTO pa_grade (user_id, anonymous_assessor_id, course_id, question_id, criteria_id,"
+                                    + " grade_points) VALUES ("+user_id+","+assessor_id+", '"+course+"' , '"+q_id+"','"+cri_id.get(i)+"' ,"+points.get(i)+")";
+                    Statement stmt = conn.createStatement();
+                    stmt.execute(insertString);
+                    } catch (SQLException e) {
+                            System.out.println("ERROR: Could not insert record in pa_grade" + e);
+                            return;
+                    }
+                }
     }
-       
+    
     public ArrayList<String> courses_available()
     {
         ArrayList<String> courses = new ArrayList<String>();
@@ -1357,6 +1361,42 @@ public class DataBase_Handler
         return false;
     }
      
+    public void append_assessments_done(int user_id,String course_id, String question_id)
+    {
+        int a_d = 0;
+        try {
+                String sql=" SELECT assessments_done FROM courseware_studentmodule WHERE user_id = " + user_id + " AND course_id = '" + course_id + "' AND question_id = '" + question_id +"'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                if(rs.next())
+                a_d=rs.getInt("assessments_done") + 1;
+                
+                String sql2="UPDATE courseware_studentmodule SET assessments_done = " + a_d + " WHERE user_id = " + user_id + " AND course_id = '" + course_id + "' AND question_id = '" + question_id +"'";
+		stmt=conn.createStatement();
+                stmt.execute(sql2);
+                } catch (SQLException e) {
+		System.out.println(e);
+            }   
+    }
+        
+    public void append_times_assessed(int user_id,String course_id, String question_id)
+    {
+        int t_a = 0;
+        try {
+                String sql=" SELECT times_assessed FROM courseware_studentmodule WHERE user_id = " + user_id + " AND course_id = '" + course_id + "' AND question_id = '" + question_id +"'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                if(rs.next())
+                t_a=rs.getInt("times_assessed") + 1;
+                
+                String sql2 = "UPDATE courseware_studentmodule SET times_assessed = " + t_a + " WHERE user_id = " + user_id + " AND course_id = '" + course_id + "' AND question_id = '" + question_id +"'";
+		stmt=conn.createStatement();
+                stmt.execute(sql2);
+                } catch (SQLException e) {
+		System.out.println(e);
+            }   
+    }    
+    
     public static void  main(String args[])
     {
         DataBase_Handler db =new DataBase_Handler(); 
