@@ -351,19 +351,6 @@ public class cms2 extends javax.swing.JFrame {
                 points.setValue(0);
                 ta2.setText("");
             }
-            if(cb2.getItemCount()==0)
-            {
-                //app.insert_question_details_2(cname,cprompt,con);
-                cb1.removeItemAt(cb1.getSelectedIndex());
-                //tf1.setText("");
-                tf2.setText("");
-                no_of_option.setValue(0);
-                tf4.setText("");
-                points.setValue(0);
-                ta1.setText("");
-                ta2.setText("");
-
-            }
             if(cb1.getItemCount()==0)
             {
                 app.insert_question_details_2(cname,cprompt,con);
@@ -377,6 +364,19 @@ public class cms2 extends javax.swing.JFrame {
                 ta1.setText("");
                 ta2.setText("");
             }
+            if(cb2.getItemCount()==0)
+            {
+                //app.insert_question_details_2(cname,cprompt,con);
+                cb1.removeItemAt(cb1.getSelectedIndex());
+                //tf1.setText("");
+               tf2.setText("");
+                no_of_option.setValue(0);
+                tf4.setText("");
+                points.setValue(0);
+                ta1.setText("");
+                ta2.setText("");
+            }
+            
     }//GEN-LAST:event_saveActionPerformed
 
     private void cb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb1ActionPerformed

@@ -247,8 +247,8 @@ public class cms1 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSpinner noa;
-    private javax.swing.JSpinner nos;
+    public static javax.swing.JSpinner noa;
+    public static javax.swing.JSpinner nos;
     public static javax.swing.JTextArea prompt;
     // End of variables declaration//GEN-END:variables
 }
