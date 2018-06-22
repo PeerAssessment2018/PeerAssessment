@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,6 +14,10 @@ import java.util.ArrayList;
  */
 public class cms3 extends javax.swing.JFrame {
 
+     ArrayList<String> options = new ArrayList<String>();
+    ArrayList<String> options_description = new ArrayList<String>();
+    ArrayList<Integer> options_points = new ArrayList<Integer>();
+   
     /**
      * Creates new form cms3
      */
@@ -133,7 +138,7 @@ public class cms3 extends javax.swing.JFrame {
                     .addComponent(rd5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(rd3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -165,9 +170,9 @@ public class cms3 extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(24, 24, 24))
         );
 
         jButton1.setText("Prev");
@@ -178,6 +183,7 @@ public class cms3 extends javax.swing.JFrame {
         });
 
         end.setText("End");
+        end.setEnabled(false);
         end.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 endActionPerformed(evt);
@@ -185,6 +191,11 @@ public class cms3 extends javax.swing.JFrame {
         });
 
         jButton3.setText("Save");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         no_of_ans.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -234,13 +245,13 @@ public class cms3 extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(cb1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(end)
                     .addComponent(jButton3))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -269,20 +280,71 @@ public class cms3 extends javax.swing.JFrame {
         String course_id=(String) cms1.cb.getSelectedItem();
         String question=cms1.prompt.getText();
         DataBase_Handler db=new DataBase_Handler();
-        ArrayList<String> criterias=db.criteria(course_id, question);
+        ArrayList<String> criterias=db.r_lms3_f(author_temp.author_id,course_id, question);
         for(int i=0;i<criterias.size();i++)
         {
             cb2.addItem(criterias.get(i));
+            System.out.println(criterias);
         }
+        System.out.println("**********" + criterias);
     }//GEN-LAST:event_formWindowOpened
 
     private void cb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb2ActionPerformed
         // TODO add your handling code here:
-        DataBase_Handler db=new DataBase_Handler();
+       // DataBase_Handler db=new DataBase_Handler();
         String cri_id=(String)cb2.getSelectedItem();
         String course_id=(String) cms1.cb.getSelectedItem();
         String question_id=cms1.prompt.getText();
-        db.option(cri_id, course_id, question_id);
+        DataBase_Handler db=new DataBase_Handler();
+        options = db.r_lms3_f1(author_temp.author_id,author_temp.course_id,author_temp.question_id);
+        options_description = db.r2_lms3_f1(author_temp.author_id,author_temp.course_id,author_temp.question_id);
+        options_points = db.r3_lms3_f1(author_temp.author_id,author_temp.course_id,author_temp.question_id);
+        
+         switch (options.size()) {
+             case 1:
+                 //add options_description and points in each
+                 rd1.setVisible(true);
+                 rd1.setText(options.get(0));
+                 break;
+             case 2:
+                 rd1.setVisible(true);
+                 rd1.setText(options.get(0));
+                 rd2.setVisible(true);
+                 rd2.setText(options.get(1));
+                 break;
+             case 3:
+                 rd1.setVisible(true);
+                 rd1.setText(options.get(0));
+                 rd2.setVisible(true);
+                 rd2.setText(options.get(1));
+                 rd3.setVisible(true);
+                 rd3.setText(options.get(2));
+                 break;
+             case 4:
+                 rd1.setVisible(true);
+                 rd1.setText(options.get(0));
+                 rd2.setVisible(true);
+                 rd2.setText(options.get(1));
+                 rd3.setVisible(true);
+                 rd3.setText(options.get(2));
+                 rd4.setVisible(true);
+                 rd4.setText(options.get(3));
+                 break;
+             case 5:
+                 rd1.setVisible(true);
+                 rd1.setText(options.get(0));
+                 rd2.setVisible(true);
+                 rd2.setText(options.get(1));
+                 rd3.setVisible(true);
+                 rd3.setText(options.get(2));
+                 rd4.setVisible(true);
+                 rd4.setText(options.get(3));
+                 rd5.setVisible(true);
+                 rd5.setText(options.get(4));
+                 break;
+             default:
+                 break;
+         }
     }//GEN-LAST:event_cb2ActionPerformed
 
     private void no_of_ansStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_no_of_ansStateChanged
@@ -291,7 +353,55 @@ public class cms3 extends javax.swing.JFrame {
         int nosa = (int)(no_of_ans.getValue());
         for(int i = 1; i <= nosa ; i++)
            cb1.addItem("Answer " + i);
+        String q_id=author_temp.question_id;
+        String course_id = author_temp.course_id;
+      //  int noa=(int)no_of_ans.getValue();
+        DataBase_Handler db=new DataBase_Handler();
+        db.set_no_of_sample_answers(nosa, course_id, q_id);
     }//GEN-LAST:event_no_of_ansStateChanged
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int assessor_id=author_temp.author_id;
+        String sample_ans=ta.getText();
+        String q_id=author_temp.question_id;
+        String course_id = author_temp.course_id;
+        StringTokenizer option=new StringTokenizer("");
+        if(rd1.isSelected()==true)
+            option=new StringTokenizer(rd1.getText()+" " + options_description.get(0)+" " + options_points.get(0));
+        else if(rd2.isSelected()==true)
+            option=new StringTokenizer(rd2.getText()+" " + options_description.get(1)+" " + options_points.get(1));
+        else if(rd3.isSelected()==true)
+            option=new StringTokenizer(rd3.getText()+" " + options_description.get(2)+" " + options_points.get(2));
+        else if(rd4.isSelected()==true)
+            option=new StringTokenizer(rd4.getText()+" " + options_description.get(3)+" " + options_points.get(3));
+        else if(rd5.isSelected()==true)
+            option=new StringTokenizer(rd5.getText()+" " + options_description.get(3)+" " + options_points.get(4));
+        String s1=option.nextToken();
+        String s2=option.nextToken();
+        int points=Integer.parseInt(option.nextToken());
+        DataBase_Handler db=new DataBase_Handler();
+        if(cb1.getItemCount()==0)
+        {
+            end.setEnabled(true);
+        }
+        if(cb2.getItemCount()==0)
+        {
+            cb1.removeItemAt(cb1.getSelectedIndex());
+        }
+        else
+        {
+            String cri=(String)cb2.getSelectedItem();
+            db.set_sample_answer_details(assessor_id, course_id, q_id, sample_ans, cri,s1);
+            ta.setText("");
+            cb2.removeItemAt(cb2.getSelectedIndex());
+            rd1.setVisible(false);
+            rd2.setVisible(false);
+            rd3.setVisible(false);
+            rd4.setVisible(false);
+            rd5.setVisible(false);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -333,7 +443,7 @@ public class cms3 extends javax.swing.JFrame {
     public static javax.swing.ButtonGroup buttonGroup2;
     public static javax.swing.JComboBox<String> cb1;
     public static javax.swing.JComboBox<String> cb2;
-    private javax.swing.JButton end;
+    public static javax.swing.JButton end;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -344,7 +454,7 @@ public class cms3 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner no_of_ans;
+    public static javax.swing.JSpinner no_of_ans;
     public static javax.swing.JRadioButton rd1;
     public static javax.swing.JRadioButton rd2;
     public static javax.swing.JRadioButton rd3;
