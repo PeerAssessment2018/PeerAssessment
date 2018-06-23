@@ -421,7 +421,6 @@ public class lms3 extends javax.swing.JFrame {
 
         if(check_if_submitted)
             Initialize();
-       
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

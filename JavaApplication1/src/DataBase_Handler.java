@@ -28,6 +28,15 @@ public class DataBase_Handler
         {
             System.out.println(ex.getMessage());
         }
+          /*try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn=DriverManager.getConnection("jdbc:mysql://db4free.net:3306/pa_tool?autoReconnect=true&useSSL=false","adminpa","adminadmin");
+            System.out.println("Connection established !!");
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }*/
     }
     public boolean insert_student_data_handler(String username,String first_name,String last_name,String email,String password,String course_id)
     {
