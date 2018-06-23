@@ -75,7 +75,7 @@ public class lms1 extends javax.swing.JFrame {
         ta2.setRows(5);
         jScrollPane2.setViewportView(ta2);
 
-        jButton1.setText("Next");
+        jButton1.setText("Submit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -145,6 +145,14 @@ public class lms1 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String ans = ta2.getText();
+        String p = ta1.getText();
+        String name=lms_login.tf.getText();
+        String course=((String)cb1.getSelectedItem()).trim();
+        DataBase_Handler app = new DataBase_Handler();
+        int id=app.username_to_id(name);
+        app.insert_courseware_studentmodule(id,ans,ta1.getText(),course,1);
+        
         lms2 frame = new lms2();
         frame.setVisible(true);
         this.setVisible(false);
@@ -158,9 +166,22 @@ public class lms1 extends javax.swing.JFrame {
         ArrayList<String> courses = db.courses_enrolled(db.username_to_id(lms_login.tf.getText()));
         //System.out.println(courses.get(0));
         StringTokenizer st=new StringTokenizer(courses.get(0),",");
+        
+        
+        
         while(st.hasMoreTokens())
         {
             cb1.addItem(st.nextToken());
+        }
+        if(db.response_submitted(student_temp.user_id,student_temp.question_id,student_temp.course_id)==1)
+        {
+            lms2 frame = new lms2();
+            frame.setVisible(true);
+            this.setVisible(false);
+        }
+        else if(db.response_submitted(student_temp.user_id,student_temp.question_id,student_temp.course_id)==0)
+        {
+            ta2.setText(db.response_for_id(student_temp.user_id,student_temp.course_id,student_temp.question_id));
         }
     }//GEN-LAST:event_formWindowOpened
 
@@ -182,7 +203,7 @@ public class lms1 extends javax.swing.JFrame {
         String course=((String)cb1.getSelectedItem()).trim();
         DataBase_Handler app = new DataBase_Handler();
         int id=app.username_to_id(name);
-        app.insert_courseware_studentmodule(id,ans,course);
+        app.insert_courseware_studentmodule(id,ans,ta1.getText(),course,0);
     }//GEN-LAST:event_saveActionPerformed
 
     /**

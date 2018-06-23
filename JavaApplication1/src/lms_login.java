@@ -120,7 +120,7 @@ public class lms_login extends javax.swing.JFrame {
         {
             student_temp.user_id = db.username_to_id(t1);
             System.out.println("Login Successfull !");
-            JOptionPane.showConfirmDialog(null,"Login Successfull !");
+            JOptionPane.showMessageDialog(null,"Login Successfull !");
             
             lms1 f=new lms1();
             f.setVisible(true);

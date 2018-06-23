@@ -1,3 +1,8 @@
+
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,6 +18,12 @@ public class lms4 extends javax.swing.JFrame {
     /**
      * Creates new form lms4
      */
+    ArrayList<String> options = new ArrayList<String>();
+    ArrayList<String> options_description = new ArrayList<String>();
+    ArrayList<Integer> options_points = new ArrayList<Integer>();
+    ArrayList<String> criterias_list = new ArrayList<String>();
+    ArrayList<Integer> points_list = new ArrayList<Integer>();
+    
     public lms4() {
         initComponents();
     }
@@ -26,6 +37,7 @@ public class lms4 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -33,15 +45,12 @@ public class lms4 extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         cb2 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         rd1 = new javax.swing.JRadioButton();
         rd2 = new javax.swing.JRadioButton();
         rd3 = new javax.swing.JRadioButton();
         rd4 = new javax.swing.JRadioButton();
         rd5 = new javax.swing.JRadioButton();
-        jLabel4 = new javax.swing.JLabel();
-        cb1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -55,13 +64,13 @@ public class lms4 extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 11, 96, -1));
 
         jLabel2.setText("Your Response:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 72, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
         ta.setColumns(20);
         ta.setRows(5);
         jScrollPane1.setViewportView(ta);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 72, 248, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 248, -1));
 
         jLabel3.setText("Evaluate for Criterion:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 179, -1, -1));
@@ -73,7 +82,7 @@ public class lms4 extends javax.swing.JFrame {
         });
         getContentPane().add(cb2, new org.netbeans.lib.awtextra.AbsoluteConstraints(146, 176, 209, -1));
 
-        jButton1.setText("Next");
+        jButton1.setText("Submit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -81,17 +90,10 @@ public class lms4 extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 306, -1, -1));
 
-        jButton2.setText("Prev");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(235, 306, -1, -1));
-
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Options"));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        buttonGroup1.add(rd1);
         rd1.setText("Option 1");
         rd1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,12 +102,15 @@ public class lms4 extends javax.swing.JFrame {
         });
         jPanel1.add(rd1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
+        buttonGroup1.add(rd2);
         rd2.setText("Option 2");
         jPanel1.add(rd2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
+        buttonGroup1.add(rd3);
         rd3.setText("Option 3");
         jPanel1.add(rd3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
+        buttonGroup1.add(rd4);
         rd4.setText("Option 4");
         rd4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,6 +119,7 @@ public class lms4 extends javax.swing.JFrame {
         });
         jPanel1.add(rd4, new org.netbeans.lib.awtextra.AbsoluteConstraints(204, 23, -1, -1));
 
+        buttonGroup1.add(rd5);
         rd5.setText("Option 5");
         rd5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,26 +130,66 @@ public class lms4 extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 207, 292, 92));
 
-        jLabel4.setText("User:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 49, -1, -1));
-
-        getContentPane().add(cb1, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 46, 248, -1));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        lms3 frame=new lms3();
-        frame.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        lms5 frame=new lms5();
-        frame.setVisible(true);
-        this.setVisible(false);
+        rd1.setVisible(false);
+        rd2.setVisible(false);
+        rd3.setVisible(false);
+        rd4.setVisible(false);
+        rd5.setVisible(false);
+        DataBase_Handler db=new DataBase_Handler();
+        //db.lms3_f1(student_temp.user_id,student_temp.course_id,student_temp.question_id);
+        
+        String cri=(String)cb2.getSelectedItem();
+        StringTokenizer option=new StringTokenizer("");
+        
+        if(rd1.isSelected()==true)
+            option=new StringTokenizer(rd1.getText()+" " + options_description.get(0)+" " + options_points.get(0));
+        else if(rd2.isSelected()==true)
+            option=new StringTokenizer(rd2.getText()+" " + options_description.get(1)+" " + options_points.get(1));
+        else if(rd3.isSelected()==true)
+            option=new StringTokenizer(rd3.getText()+" " + options_description.get(2)+" " + options_points.get(2));
+        else if(rd4.isSelected()==true)
+            option=new StringTokenizer(rd4.getText()+" " + options_description.get(3)+" " + options_points.get(3));
+        else if(rd5.isSelected()==true)
+            option=new StringTokenizer(rd5.getText()+" " + options_description.get(3)+" " + options_points.get(4));
+        
+        System.out.println(option);
+        String s1=option.nextToken();
+        String s2=option.nextToken();
+        
+        int points=Integer.parseInt(option.nextToken());
+        
+        criterias_list.add(cri);
+        points_list.add(points);
+        
+        cb2.removeItem(cri); 
+                        
+        int total_points = 0;
+        int max_points = 0;
+        float gradef = 0;
+        if(cb2.getItemCount()==0)
+        {   
+            for( int i = 0; i< points_list.size(); i++)
+            {
+                total_points += points_list.get(i);
+                max_points += db.max_points_for_criteria(student_temp.course_id, student_temp.question_id, criterias_list.get(i));
+            }
+            System.out.println(total_points + " /// " + max_points);
+            criterias_list.clear();
+            points_list.clear();
+            gradef = (float)total_points/(float)max_points;
+            int grade = Math.round(gradef*10);
+            db.insert_self_grade(student_temp.user_id,student_temp.course_id, student_temp.question_id,grade);
+            lms5 frame=new lms5();
+            frame.setVisible(true);
+            this.setVisible(false);
+        }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void rd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd1ActionPerformed
@@ -160,19 +206,19 @@ public class lms4 extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        rd1.setVisible(false);
-        rd2.setVisible(false);
-        rd3.setVisible(false);
-        rd4.setVisible(false);
-        rd5.setVisible(false);
         DataBase_Handler db=new DataBase_Handler();
-        int r=db.count_no_of_students();
-        for(int i=1;i<=r;i++)
-            cb1.addItem(""+i);
-        int c=Integer.parseInt((String)cb1.getSelectedItem());
-        System.out.println(c);
-        db.lms3_f(c,"course 1","sample prompt");
-        db.lms3_f2(c,"course 1","sample prompt");
+        //System.out.println("**************?*************");
+        
+        //check_if_submitted = false;        
+        //if(db.check_PA(student_temp.user_id, student_temp.course_id, student_temp.question_id))
+            //data = db.get_answer(student_temp.user_id, student_temp.course_id, student_temp.question_id);
+            //p.setText("Peer " + (db.assessments_done(student_temp.user_id, student_temp.course_id, student_temp.question_id)+1));
+            //ta.setText();
+            ta.setText(db.response_for_id(student_temp.user_id,student_temp.course_id,student_temp.question_id));
+            ArrayList<String> criterias = db.r_lms3_f(student_temp.user_id,student_temp.course_id,student_temp.question_id);
+            for(int i = 0 ; i< criterias.size() ; i++)
+                cb2.addItem(criterias.get(i));
+         
     }//GEN-LAST:event_formWindowOpened
 
     private void cb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb2ActionPerformed
@@ -182,8 +228,58 @@ public class lms4 extends javax.swing.JFrame {
         rd3.setVisible(false);
         rd4.setVisible(false);
         rd5.setVisible(false);
+        String cri_id=(String)cb2.getSelectedItem();
         DataBase_Handler db=new DataBase_Handler();
-        db.lms3_f1(1,"course 1","sample prompt");
+        options = db.r_lms3_f1(student_temp.user_id,student_temp.course_id,student_temp.question_id,cri_id);
+        options_description = db.r2_lms3_f1(student_temp.user_id,student_temp.course_id,student_temp.question_id,cri_id);
+        options_points = db.r3_lms3_f1(student_temp.user_id,student_temp.course_id,student_temp.question_id,cri_id);
+        
+        if(options.size()==1)
+        {
+            //add options_description and points in each
+            rd1.setVisible(true);
+            rd1.setText(options.get(0));
+        }
+        else if(options.size()==2)
+        {
+            rd1.setVisible(true);
+            rd1.setText(options.get(0));
+            rd2.setVisible(true);
+            rd2.setText(options.get(1));
+        }
+        else if(options.size()==3)
+        {
+            rd1.setVisible(true);
+            rd1.setText(options.get(0));
+            rd2.setVisible(true);
+            rd2.setText(options.get(1));
+            rd3.setVisible(true);
+            rd3.setText(options.get(2));
+        }
+        else if(options.size()==4)
+        {
+            rd1.setVisible(true);
+            rd1.setText(options.get(0));
+            rd2.setVisible(true);
+            rd2.setText(options.get(1));
+            rd3.setVisible(true);
+            rd3.setText(options.get(2));
+            rd4.setVisible(true);
+            rd4.setText(options.get(3));
+        }
+        else if(options.size()==5)
+        {
+            rd1.setVisible(true);
+            rd1.setText(options.get(0));
+            rd2.setVisible(true);
+            rd2.setText(options.get(1));
+            rd3.setVisible(true);
+            rd3.setText(options.get(2));
+            rd4.setVisible(true);
+            rd4.setText(options.get(3));
+            rd5.setVisible(true);
+            rd5.setText(options.get(4));
+        } 
     }//GEN-LAST:event_cb2ActionPerformed
 
     /**
@@ -222,14 +318,12 @@ public class lms4 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JComboBox<String> cb1;
+    private javax.swing.ButtonGroup buttonGroup1;
     public static javax.swing.JComboBox<String> cb2;
     public static javax.swing.JButton jButton1;
-    public static javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JRadioButton rd1;
