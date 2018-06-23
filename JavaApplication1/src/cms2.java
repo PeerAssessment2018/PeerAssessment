@@ -1,4 +1,5 @@
 
+import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
 /*
@@ -60,8 +61,9 @@ public class cms2 extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         crit = new javax.swing.JLabel();
         save = new javax.swing.JButton();
-        n23 = new javax.swing.JButton();
         noc = new javax.swing.JSpinner();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(775, 600));
@@ -293,18 +295,10 @@ public class cms2 extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        save.setText("Save");
+        save.setText("Submit");
         save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveActionPerformed(evt);
-            }
-        });
-
-        n23.setText("Submit");
-        n23.setEnabled(false);
-        n23.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                n23ActionPerformed(evt);
             }
         });
 
@@ -313,6 +307,10 @@ public class cms2 extends javax.swing.JFrame {
                 nocStateChanged(evt);
             }
         });
+
+        jLabel11.setText("Please note that after filling details of each option press submit button and once pressed no changes would be allowed for the option.");
+
+        jLabel12.setText("So please carefully fill in the details.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -335,13 +333,14 @@ public class cms2 extends javax.swing.JFrame {
                         .addComponent(cb1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(save)
-                        .addGap(3, 3, 3)
-                        .addComponent(n23)))
-                .addGap(28, 28, 28))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(627, 627, 627)
+                                .addComponent(save))
+                            .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12))))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -357,11 +356,13 @@ public class cms2 extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(cb1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(save)
-                    .addComponent(n23))
+                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(save)
                 .addContainerGap())
         );
 
@@ -369,13 +370,6 @@ public class cms2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     	
-    private void n23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_n23ActionPerformed
-        // TODO add your handling code here:
-        cms3 frame=new cms3();
-        frame.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_n23ActionPerformed
-
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // TODO add your handling code here:
         student_temp.course_id=(String)cms1.cb.getSelectedItem();
@@ -404,16 +398,19 @@ public class cms2 extends javax.swing.JFrame {
         System.out.println(cb1.getItemCount());
             if(cb1.getItemCount()==0)
             {
-               // app.insert_question_details_2(cname,cprompt,con);
-                n23.setEnabled(true);
-                //cb1.removeItemAt(cb1.getSelectedIndex());
-                //tf1.setText("");
                 tf2.setText("");
                 no_of_option.setValue(0);
                 tf4.setText("");
                 points.setValue(0);
                 ta1.setText("");
                 ta2.setText("");
+               // app.insert_question_details_2(cname,cprompt,con);
+                JOptionPane.showMessageDialog(null,"All your details for the rubrics have been submitted! No further changes allowed!");
+                cms3 frame=new cms3();
+                frame.setVisible(true);
+                this.setVisible(false);
+                //cb1.removeItemAt(cb1.getSelectedIndex());
+                //tf1.setText("");
             }
             else
             {
@@ -433,6 +430,7 @@ public class cms2 extends javax.swing.JFrame {
                 points.setValue(0);
                 //ta1.setText("");
                 ta2.setText("");
+                JOptionPane.showMessageDialog(null,"All your details for the option and criterion has been submitted! No further changes allowed!");
             }
             else if(cb2.getItemCount()!=0)
             {
@@ -442,6 +440,7 @@ public class cms2 extends javax.swing.JFrame {
                 points.setValue(0);
                 ta2.setText("");
                 opt.setText("Option "+(con-cb2.getItemCount()+1)+" of "+con);
+                JOptionPane.showMessageDialog(null,"All your details for the option has been submitted! No further changes allowed!");
             }
             if(cb2.getItemCount()==0 && cb1.getItemCount()!=0)
             {
@@ -565,6 +564,8 @@ public class cms2 extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -576,7 +577,6 @@ public class cms2 extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton n23;
     private javax.swing.JSpinner no_of_option;
     private javax.swing.JSpinner noc;
     private javax.swing.JLabel opt;

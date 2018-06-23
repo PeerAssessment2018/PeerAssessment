@@ -136,7 +136,7 @@ public class cms_login extends javax.swing.JFrame {
         if(db.check_valid_login_cms(t1, t2))
         {
             System.out.println("Login Successfull !");
-            JOptionPane.showConfirmDialog(null,"Login Successfull !");
+            JOptionPane.showMessageDialog(null,"Login Successfull !");
             cms1 f=new cms1();
             f.setVisible(true);
             this.setVisible(false);

@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 
 
@@ -182,12 +183,19 @@ public class cms1 extends javax.swing.JFrame {
         author_temp.question_id=p;
         author_temp.no_assessor=n1;
         author_temp.no_assessments=n2;
-        
-         System.out.println("cms1 " + author_temp.author_id+author_temp.question_id+author_temp.course_id+author_temp.no_assessor+author_temp.no_assessments);
-       
-        cms2 frame = new cms2();
-        frame.setVisible(true);
-        this.setVisible(false);
+        System.out.println("cms1 " + author_temp.author_id+author_temp.question_id+author_temp.course_id+author_temp.no_assessor+author_temp.no_assessments);
+        int res = JOptionPane.showConfirmDialog(null, "Are you want to submit? You won't be able to make any changes after submission.", "", JOptionPane.YES_NO_OPTION);
+        switch (res) {
+            case JOptionPane.YES_OPTION:
+            JOptionPane.showMessageDialog(null, "Submitted Successfully!");
+            cms2 frame = new cms2();
+            frame.setVisible(true);
+            this.setVisible(false);
+            break;
+            case JOptionPane.NO_OPTION:
+            JOptionPane.showMessageDialog(null, "Submission is Canceled");
+            break;
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

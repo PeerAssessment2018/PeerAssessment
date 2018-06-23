@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -53,9 +54,11 @@ public class cms3 extends javax.swing.JFrame {
         rd4 = new javax.swing.JRadioButton();
         rd5 = new javax.swing.JRadioButton();
         ans_of = new javax.swing.JLabel();
-        end = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         no_of_ans = new javax.swing.JSpinner();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -185,15 +188,7 @@ public class cms3 extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        end.setText("End");
-        end.setEnabled(false);
-        end.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                endActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Save");
+        jButton3.setText("Submit");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -206,6 +201,12 @@ public class cms3 extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setText("Please press submit button after filling details for each sample answer.");
+
+        jLabel7.setText("Once submit is pressed no more changes will be allowed.");
+
+        jLabel8.setText("So please carefully fill in the details.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -216,21 +217,24 @@ public class cms3 extends javax.swing.JFrame {
                 .addGap(104, 104, 104))
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(end))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cb1, 0, 84, Short.MAX_VALUE)
-                            .addComponent(no_of_ans))))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel8)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(cb1, 0, 84, Short.MAX_VALUE)
+                                .addComponent(no_of_ans)))))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,24 +251,27 @@ public class cms3 extends javax.swing.JFrame {
                     .addComponent(cb1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(end)
-                    .addComponent(jButton3))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(5, 5, 5)))
+                .addGap(53, 53, 53))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void endActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_endActionPerformed
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        end.setEnabled(false);
+       // end.setEnabled(false);
         rd1.setVisible(false);
         rd2.setVisible(false);
         rd3.setVisible(false);
@@ -380,7 +387,8 @@ public class cms3 extends javax.swing.JFrame {
         DataBase_Handler db=new DataBase_Handler();
         if(cb1.getItemCount()==0)
         {
-            end.setEnabled(true);
+            JOptionPane.showMessageDialog(null,"Your responses have been submitted successfully! You won't be able to make any further changes.");
+            System.exit(0);
         }
         if(cb2.getItemCount()==0)
         {
@@ -391,6 +399,7 @@ public class cms3 extends javax.swing.JFrame {
         {
             String cri=(String)cb2.getSelectedItem();
             db.set_sample_answer_details(assessor_id, course_id, q_id, sample_ans, cri,s1);
+            JOptionPane.showMessageDialog(null,"Details for the sample answer have been submitted!");
             ta.setText("");
             cb2.removeItemAt(cb2.getSelectedIndex());
             rd1.setVisible(false);
@@ -398,6 +407,10 @@ public class cms3 extends javax.swing.JFrame {
             rd3.setVisible(false);
             rd4.setVisible(false);
             rd5.setVisible(false);
+        }
+        if(cb1.getItemCount()==0)
+        {
+            jButton3.setText("Submit");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -464,13 +477,15 @@ public class cms3 extends javax.swing.JFrame {
     public static javax.swing.ButtonGroup buttonGroup2;
     public static javax.swing.JComboBox<String> cb1;
     public static javax.swing.JComboBox<String> cb2;
-    public static javax.swing.JButton end;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

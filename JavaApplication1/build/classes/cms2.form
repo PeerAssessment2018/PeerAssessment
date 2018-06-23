@@ -36,7 +36,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="354" pref="354" max="-2" attributes="0"/>
@@ -54,18 +54,20 @@
                       <EmptySpace min="35" pref="35" max="-2" attributes="0"/>
                       <Component id="cb1" min="-2" pref="90" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="30" pref="30" max="-2" attributes="0"/>
-                      <Component id="panel1" min="-2" pref="692" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="save" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
-                      <Component id="n23" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="627" max="-2" attributes="0"/>
+                              <Component id="save" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="panel1" min="-2" pref="692" max="-2" attributes="0"/>
+                          <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace pref="28" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -85,12 +87,13 @@
                   <Component id="cb1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="panel1" pref="325" max="32767" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="save" min="-2" max="-2" attributes="0"/>
-                  <Component id="n23" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="panel1" min="-2" pref="320" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="save" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -509,25 +512,26 @@
     </Container>
     <Component class="javax.swing.JButton" name="save">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Save"/>
+        <Property name="text" type="java.lang.String" value="Submit"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="n23">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Submit"/>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="n23ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JSpinner" name="noc">
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="nocStateChanged"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel11">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Please note that after filling details of each option press submit button and once pressed no changes would be allowed for the option."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel12">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="So please carefully fill in the details."/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
