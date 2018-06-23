@@ -210,13 +210,13 @@ public class DataBase_Handler
 	}     
     }
     
-    public void insert_question_details_2(String cri_name, String cri_prompt,int nop)
+    public void insert_question_details_2(String cri_name, String cri_prompt,int nop,int fb)
     {		
         
                 try {
 			String insertString =" INSERT INTO question_details (course"
-                       + "_id, question_id, no_assessors, no_assessment,criterion_id, criterion_prompt, no_of_options) VALUES ('"+author_temp.course_id+
-                       "' , '"+author_temp.question_id+"' , "+author_temp.no_assessor+", "+author_temp.no_assessments+", '"+cri_name+"' , '"+cri_prompt+"' , "+nop+");";
+                       + "_id, question_id, no_assessors, no_assessment,criterion_id, criterion_prompt, no_of_options, feedback) VALUES ('"+author_temp.course_id+
+                       "' , '"+author_temp.question_id+"' , "+author_temp.no_assessor+", "+author_temp.no_assessments+", '"+cri_name+"' , '"+cri_prompt+"' , "+nop+","+fb+");";
                 Statement stmt = conn.createStatement();
                 stmt.execute(insertString);
                 
@@ -871,7 +871,7 @@ public class DataBase_Handler
         System.out.println(pas);
     }
      
-    public void insert_pa_grade(int user_id,int assessor_id,String course, String q_id, ArrayList<String> cri_id,ArrayList<Integer> points)
+    public void insert_pa_grade(int user_id,int assessor_id,String course, String q_id, ArrayList<String> cri_id,ArrayList<Integer> points,ArrayList<String> feedback)
     {		
         for(int i =0 ; i<cri_id.size(); i++)
                 {

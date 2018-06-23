@@ -29,6 +29,7 @@ public class lms3 extends javax.swing.JFrame {
      private String data[] = new String[2];
      ArrayList<String> criterias_list = new ArrayList<String>();
      ArrayList<Integer> points_list = new ArrayList<Integer>();
+     ArrayList<String> feedback=new ArrayList<String>();
      boolean check_if_submitted;
      //private int user_id;
     
@@ -65,6 +66,9 @@ public class lms3 extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         p = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        fb = new javax.swing.JTextArea();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -149,6 +153,14 @@ public class lms3 extends javax.swing.JFrame {
 
         p.setText("Peer 1");
 
+        fb.setEditable(false);
+        fb.setColumns(20);
+        fb.setRows(5);
+        fb.setEnabled(false);
+        jScrollPane2.setViewportView(fb);
+
+        jLabel6.setText("Feedback:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -166,7 +178,6 @@ public class lms3 extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(cb3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel3)
@@ -175,13 +186,19 @@ public class lms3 extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(p, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(p, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane2))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -197,7 +214,11 @@ public class lms3 extends javax.swing.JFrame {
                     .addComponent(cb3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
@@ -263,7 +284,23 @@ public class lms3 extends javax.swing.JFrame {
         rd3.setVisible(false);
         rd4.setVisible(false);
         rd5.setVisible(false);
-        
+        if(author_temp.fb==0)
+        {
+            fb.setEnabled(false);
+            fb.setEditable(false);
+        }
+        else if(author_temp.fb==1)
+        {
+            fb.setEnabled(true);
+            fb.setEditable(true);
+            fb.setToolTipText("This feedback is optional. Delete the text before you give feedback.");
+        }
+        else if(author_temp.fb==2)
+        {
+            fb.setEditable(true);
+            fb.setEnabled(true);
+            fb.setToolTipText("This feedback is mandatory. Delete the text before you give feedback.");
+        }
        Initialize();
      
     }//GEN-LAST:event_formWindowOpened
@@ -354,7 +391,10 @@ public class lms3 extends javax.swing.JFrame {
         String s2=option.nextToken();
         
         int points=Integer.parseInt(option.nextToken());
-        
+        String fback=fb.getText();
+        if(fback.equals(""))
+            fback="None";
+        feedback.add(fback);
         criterias_list.add(cri);
         points_list.add(points);
         
@@ -363,7 +403,7 @@ public class lms3 extends javax.swing.JFrame {
         if(cb3.getItemCount()==0)
         {   
             DataBase_Handler db=new DataBase_Handler();
-            db.insert_pa_grade(Integer.parseInt(data[1]),db.user_to_anonymous(assessor_id),course_id,q_id,criterias_list,points_list);
+            db.insert_pa_grade(Integer.parseInt(data[1]),db.user_to_anonymous(assessor_id),course_id,q_id,criterias_list,points_list,feedback);
             JOptionPane.showMessageDialog(null,"Assessment done for Peer " + (db.assessments_done(student_temp.user_id, student_temp.course_id, student_temp.question_id)+1));
             db.append_assessments_done(student_temp.user_id,  student_temp.course_id, student_temp.question_id);
             db.append_times_assessed(Integer.parseInt(data[1]), student_temp.course_id, student_temp.question_id);
@@ -415,6 +455,7 @@ public class lms3 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     public static javax.swing.JComboBox<String> cb3;
+    private javax.swing.JTextArea fb;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -422,8 +463,10 @@ public class lms3 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel p;
     public static javax.swing.JRadioButton rd1;
     public static javax.swing.JRadioButton rd2;
