@@ -28,6 +28,15 @@ public class DataBase_Handler
         {
             System.out.println(ex.getMessage());
         }
+          /*try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn=DriverManager.getConnection("jdbc:mysql://db4free.net:3306/pa_tool?autoReconnect=true&useSSL=false","adminpa","adminadmin");
+            System.out.println("Connection established !!");
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }*/
     }
     public boolean insert_student_data_handler(String username,String first_name,String last_name,String email,String password,String course_id)
     {
@@ -226,20 +235,53 @@ public class DataBase_Handler
 		}
     }
     
-    public void insert_courseware_studentmodule(int user_id,String ans, String course)
-        {           
-            
+    public int response_submitted(int user_id,String question_id, String course)
+    {
+        try
+            {
+               String sql =  "SELECT user_id,submitted FROM courseware_studentmodule WHERE user_id = "+user_id + " AND course_id = '" + course+ "' AND question_id = '" + question_id +"'";
+               Statement stmt = conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                rs.next();
+                if(rs.getInt("submitted")==0)
+                    return 0;
+                else if(rs.getInt("submitted")==1)
+                    return 1;
+            }catch(SQLException e){
+                System.out.println(e);
+            } 
+        return 2;
+    }
+    
+       
+    public void insert_courseware_studentmodule(int user_id,String ans,String question_id, String course,int submitted)
+        {         
+           
             java.sql.Date sqlDate = new java.sql.Date(System.currentTimeMillis());
-                try {
-			String insertString = " INSERT INTO courseware_studentmodule ( user_id, course_id, question_id, state,date_of_submission )" +" VALUES ( " +
-                                +user_id+" , '"+course+"' , '"+ lms1.ta1.getText()+"' , '" +ans+"','"+ sqlDate  +"') ";
+            
+            if(response_submitted(user_id,question_id,course)==2)   
+            {try {
+			String insertString = " INSERT INTO courseware_studentmodule ( user_id, course_id, question_id, state,date_of_submission, submitted )" +" VALUES ( " +
+                                +user_id+" , '"+course+"' , '"+ lms1.ta1.getText()+"' , '" +ans+"','"+ sqlDate  +"', " + submitted +" ) ";
 			Statement stmt = conn.createStatement();
                 stmt.execute(insertString);
                } catch (Exception e) {
 			System.out.println("ERROR: Could not insert record");
-			e.printStackTrace();
 			return;
 		}
+            }
+            
+            else if((response_submitted(user_id,question_id,course)==0))
+            {
+                try{
+                String sql = "UPDATE courseware_studentmodule SET state = '" + ans + "',submitted = "+submitted+" WHERE user_id = "+user_id + " AND state = '" + ans + "' AND course_id = '" + course+ "' AND question_id = '" + question_id +"'";
+                Statement stmt = conn.createStatement();
+                stmt.execute(sql);
+                }catch(SQLException e)
+                {
+                    System.out.println(e);
+                }
+            }
         }
        
     public void insert_options_details_1(String ques_id, String course_id,String cri_id,String op_id,String op_desc,int scale)
@@ -1032,11 +1074,11 @@ public class DataBase_Handler
         return ques;
     }
     
-    public String response_for_id( int user_id, String course_id)
+    public String response_for_id( int user_id, String course_id , String question_id)
     {
         String response = null;
         try{
-            String sql = "SELECT state FROM courseware_studentmodule WHERE user_id=" +user_id + " AND course_id=' " + course_id +"';";
+            String sql = "SELECT state FROM courseware_studentmodule WHERE user_id=" +user_id + " AND course_id ='" + course_id +"' AND question_id = '" + question_id +"';";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             rs.next();
@@ -1356,12 +1398,40 @@ public class DataBase_Handler
             }   
     }    
     
+    public int max_points_for_criteria(String course_id, String question_id, String criterion_id)
+    {
+        int max = 0;
+        
+        try{
+                String sql=" SELECT MAX(option_points) AS max_points FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id +"' AND criterion_id = '"+ criterion_id + "'";
+		Statement stmt=conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                if(rs.next())
+                    max=rs.getInt("max_points");
+            
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+         System.out.println(max);
+      return max;  
+    }
+    
+    public void insert_self_grade(int user_id, String course_id, String question_id , int grade)
+    {
+                try {
+                    String insertString="UPDATE courseware_studentmodule SET self_assessed_grade = " + grade + " WHERE user_id = "+user_id + " AND course_id = '" + course_id + "' AND question_id = '" + question_id +"'";
+                    Statement stmt = conn.createStatement();
+                    stmt.execute(insertString);
+                    } catch (SQLException e) {
+                            System.out.println("ERROR: Could not insert record in pa_grade" + e);
+                    }
+    }
+            
     public static void  main(String args[])
     {
         DataBase_Handler db =new DataBase_Handler(); 
-        String str[] = db.get_answer(1,"hello","?");
-        System.out.println( str[0]+ " " + str[1] );
-        
+        String x = db.response_for_id(6,"hello","?");
+        System.out.println(x);
     } 
 }
     

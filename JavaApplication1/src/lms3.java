@@ -259,6 +259,13 @@ public class lms3 extends javax.swing.JFrame {
         if(db.check_PA(student_temp.user_id, student_temp.course_id, student_temp.question_id))
         {
             data = db.get_answer(student_temp.user_id, student_temp.course_id, student_temp.question_id);
+
+            if(data[1] == null )
+            {
+                p.setText("None");
+                JOptionPane.showMessageDialog(null,"There are no Peers left too assess, come back later!");
+                System.exit(0);
+            }
             p.setText("Peer " + (db.assessments_done(student_temp.user_id, student_temp.course_id, student_temp.question_id)+1));
             ta.setText(data[0]);
             ArrayList<String> criterias = db.r_lms3_f(student_temp.user_id,student_temp.course_id,student_temp.question_id);
@@ -414,7 +421,6 @@ public class lms3 extends javax.swing.JFrame {
 
         if(check_if_submitted)
             Initialize();
-       
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
