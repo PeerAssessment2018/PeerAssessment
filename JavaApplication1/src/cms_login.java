@@ -137,8 +137,8 @@ public class cms_login extends javax.swing.JFrame {
         {
             System.out.println("Login Successfull !");
             JOptionPane.showMessageDialog(null,"Login Successfull !");
-            cms1 f=new cms1();
-            f.setVisible(true);
+            
+            author_temp.cms1.setVisible(true);
             this.setVisible(false);
         }
         else

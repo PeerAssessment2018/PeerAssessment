@@ -17,6 +17,7 @@ public class cms1 extends javax.swing.JFrame {
 
     public static int n1, n2;
     public static String p;
+  
 
     /**
      * Creates new form cms1
@@ -177,8 +178,10 @@ public class cms1 extends javax.swing.JFrame {
         String course=(String)cb.getSelectedItem();
         n1 = (int) nos.getValue();
         n2 = (int) noa.getValue();
-       // DataBase_Handler app = new DataBase_Handler();
-        //app.insert_question_details_1(course, p, n1, n2);
+       DataBase_Handler app = new DataBase_Handler();
+       
+        app.insert_question_details_1(course, p, n1, n2);
+       
         author_temp.course_id=course;
         author_temp.question_id=p;
         author_temp.no_assessor=n1;
@@ -188,8 +191,7 @@ public class cms1 extends javax.swing.JFrame {
         switch (res) {
             case JOptionPane.YES_OPTION:
             JOptionPane.showMessageDialog(null, "Submitted Successfully!");
-            cms2 frame = new cms2();
-            frame.setVisible(true);
+            author_temp.cms2.setVisible(true);
             this.setVisible(false);
             break;
             case JOptionPane.NO_OPTION:
@@ -243,7 +245,7 @@ public class cms1 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new cms1().setVisible(true);
+                author_temp.cms1.setVisible(true);
             }
         });
     }

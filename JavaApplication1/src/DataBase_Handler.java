@@ -230,7 +230,7 @@ public class DataBase_Handler
                 stmt.execute(insertString);
                 
                 } catch (Exception e) {
-			System.out.println("ERROR: Could not insert record");
+			System.out.println("ERROR: Could not insert record" + e);
 			return;
 		}
     }
@@ -1427,11 +1427,31 @@ public class DataBase_Handler
                     }
     }
             
+    public void prev_called_from_cms2(String course_id, String question_id)
+    {
+        try {
+                    String insertString="DELETE FROM question_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id +"'";
+                    Statement stmt = conn.createStatement();
+                    stmt.execute(insertString);
+                    } catch (SQLException e) {
+                            System.out.println("ERROR: Could not insert record in pa_grade" + e);
+                    }
+    }
+    
     public static void  main(String args[])
     {
+        Connection_to_DB.conn = null;
+         try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection_to_DB.conn=DriverManager.getConnection("jdbc:mysql://db4free.net:3306/pa_tool?autoReconnect=true&useSSL=false","adminpa","adminadmin");
+            System.out.println("Connection established !!");
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex.getMessage());
+        }
         DataBase_Handler db =new DataBase_Handler(); 
-        String x = db.response_for_id(6,"hello","?");
-        System.out.println(x);
+        db.insert_self_grade(1, "C", "Q", 0);
     } 
 }
     

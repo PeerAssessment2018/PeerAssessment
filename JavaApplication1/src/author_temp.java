@@ -16,4 +16,7 @@ public class author_temp {
     public static int no_assessor;
     public static int no_assessments;
     public static int fb=0;
+    public static cms1 cms1 = new cms1();
+    public static cms2 cms2 = new cms2();
+    public static cms3 cms3 = new cms3();
 }
