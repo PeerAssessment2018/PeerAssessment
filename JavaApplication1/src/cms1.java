@@ -187,12 +187,12 @@ public class cms1 extends javax.swing.JFrame {
         switch (res) {
             case JOptionPane.YES_OPTION:
             JOptionPane.showMessageDialog(null, "Submitted Successfully!");
-<<<<<<< HEAD
+
             author_temp.cms2.setVisible(true);
-=======
+
             cms2 frame=new cms2();
             frame.setVisible(true);
->>>>>>> 99cc5a26494fd8b0895afd754c5f9709dbe84726
+
             this.setVisible(false);
             break;
             case JOptionPane.NO_OPTION:

@@ -1440,16 +1440,7 @@ public class DataBase_Handler
     
     public static void  main(String args[])
     {
-        Connection_to_DB.conn = null;
-         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection_to_DB.conn=DriverManager.getConnection("jdbc:mysql://db4free.net:3306/pa_tool?autoReconnect=true&useSSL=false","adminpa","adminadmin");
-            System.out.println("Connection established !!");
-        }
-        catch(Exception ex)
-        {
-            System.out.println(ex.getMessage());
-        }
+        
         DataBase_Handler db =new DataBase_Handler(); 
         db.insert_self_grade(1, "C", "Q", 0);
     } 
