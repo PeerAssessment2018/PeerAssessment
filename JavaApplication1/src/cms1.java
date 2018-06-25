@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
  * @author Khushboo
  */
 public class cms1 extends javax.swing.JFrame {
-
     public static int n1, n2;
     public static String p;
   
@@ -49,6 +48,7 @@ public class cms1 extends javax.swing.JFrame {
         noa = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("STEP 1 OF 3");
         setMinimumSize(new java.awt.Dimension(425, 350));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -125,18 +125,14 @@ public class cms1 extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
                         .addComponent(jLabel4)
                         .addGap(33, 33, 33)
                         .addComponent(cb, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 58, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
@@ -191,11 +187,16 @@ public class cms1 extends javax.swing.JFrame {
         switch (res) {
             case JOptionPane.YES_OPTION:
             JOptionPane.showMessageDialog(null, "Submitted Successfully!");
+<<<<<<< HEAD
             author_temp.cms2.setVisible(true);
+=======
+            cms2 frame=new cms2();
+            frame.setVisible(true);
+>>>>>>> 99cc5a26494fd8b0895afd754c5f9709dbe84726
             this.setVisible(false);
             break;
             case JOptionPane.NO_OPTION:
-            JOptionPane.showMessageDialog(null, "Submission is Canceled");
+            JOptionPane.showMessageDialog(null, "Submission is Canceled!");
             break;
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -253,13 +254,13 @@ public class cms1 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JComboBox<String> cb;
     public static javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
+    public static javax.swing.JLabel jLabel1;
+    public static javax.swing.JLabel jLabel2;
+    public static javax.swing.JLabel jLabel3;
+    public static javax.swing.JLabel jLabel4;
+    public static javax.swing.JPanel jPanel1;
+    public static javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JSeparator jSeparator1;
     public static javax.swing.JSpinner noa;
     public static javax.swing.JSpinner nos;
     public static javax.swing.JTextArea prompt;

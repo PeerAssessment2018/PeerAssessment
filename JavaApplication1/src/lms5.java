@@ -43,6 +43,7 @@ public class lms5 extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("STEP 5 OF 5");
 
         jLabel1.setText("Result");
 

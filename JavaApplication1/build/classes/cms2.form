@@ -10,6 +10,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="STEP 2 OF 3"/>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[775, 600]"/>
     </Property>
@@ -84,16 +85,25 @@
                   <Component id="cb1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+<<<<<<< HEAD
               <Component id="panel1" pref="344" max="32767" attributes="0"/>
+=======
+              <Component id="panel1" pref="336" max="32767" attributes="0"/>
+>>>>>>> 99cc5a26494fd8b0895afd754c5f9709dbe84726
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+<<<<<<< HEAD
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="save" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+=======
+              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+              <Component id="save" min="-2" max="-2" attributes="0"/>
+>>>>>>> 99cc5a26494fd8b0895afd754c5f9709dbe84726
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -152,7 +162,11 @@
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
+<<<<<<< HEAD
                           <EmptySpace max="-2" attributes="0"/>
+=======
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+>>>>>>> 99cc5a26494fd8b0895afd754c5f9709dbe84726
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
@@ -184,11 +198,17 @@
                               </Group>
                               <Component id="crit" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
+<<<<<<< HEAD
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                       </Group>
+=======
+                      </Group>
+                      <Component id="crit" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPanel3" alignment="0" min="-2" max="-2" attributes="0"/>
+>>>>>>> 99cc5a26494fd8b0895afd754c5f9709dbe84726
                   </Group>
                   <EmptySpace pref="16" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -228,6 +248,7 @@
                           </Group>
                       </Group>
                   </Group>
+<<<<<<< HEAD
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
@@ -239,6 +260,11 @@
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
+=======
+                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+>>>>>>> 99cc5a26494fd8b0895afd754c5f9709dbe84726
               </Group>
           </Group>
         </DimensionLayout>
