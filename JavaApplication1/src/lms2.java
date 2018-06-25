@@ -45,6 +45,7 @@ public class lms2 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("STEP 2 OF 5");
 
         jLabel1.setText("Learning to assess Response");
 

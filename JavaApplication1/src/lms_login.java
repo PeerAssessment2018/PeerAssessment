@@ -35,6 +35,7 @@ public class lms_login extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("LMS LOGIN");
 
         jLabel1.setText("User ID :");
 

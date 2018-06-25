@@ -44,6 +44,7 @@ public class cms_login extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("CMS Login");
 
         jLabel1.setText("CMS LOGIN");
 

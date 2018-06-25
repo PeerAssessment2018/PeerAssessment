@@ -45,6 +45,7 @@ public class cms_register extends javax.swing.JFrame {
         ta = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("CMS Register");
 
         jLabel5.setText("password");
 
