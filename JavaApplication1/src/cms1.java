@@ -190,8 +190,8 @@ public class cms1 extends javax.swing.JFrame {
 
             author_temp.cms2.setVisible(true);
 
-            cms2 frame=new cms2();
-            frame.setVisible(true);
+            //cms2 frame=new cms2();
+            //frame.setVisible(true);
 
             this.setVisible(false);
             break;

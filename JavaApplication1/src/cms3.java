@@ -314,7 +314,12 @@ public class cms3 extends javax.swing.JFrame {
 
     private void cb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb2ActionPerformed
         // TODO add your handling code here:
-       // DataBase_Handler db=new DataBase_Handler();
+       // DataBase_Handler db=new DataBase_Handler();\
+        rd1.setVisible(false);
+        rd2.setVisible(false);
+        rd3.setVisible(false);
+        rd4.setVisible(false);
+        rd5.setVisible(false);
         String cri_id=(String)cb2.getSelectedItem();
         String course_id=(String) cms1.cb.getSelectedItem();
         String question_id=cms1.prompt.getText();
@@ -391,7 +396,12 @@ public class cms3 extends javax.swing.JFrame {
         int nosa=(int)no_of_ans.getValue();
         String q_id=author_temp.question_id;
         String course_id = author_temp.course_id;
-        StringTokenizer option=new StringTokenizer("");
+        StringTokenizer option=new StringTokenizer(""); 
+        rd1.setVisible(false);
+        rd2.setVisible(false);
+        rd3.setVisible(false);
+        rd4.setVisible(false);
+        rd5.setVisible(false);
         if(rd1.isSelected()==true)
             option=new StringTokenizer(rd1.getText()+" " + options_description.get(0)+" " + options_points.get(0));
         else if(rd2.isSelected()==true)
@@ -420,7 +430,7 @@ public class cms3 extends javax.swing.JFrame {
         {
             String cri=(String)cb2.getSelectedItem();
             db.set_sample_answer_details(assessor_id, course_id, q_id, sample_ans, cri,s1);
-            JOptionPane.showMessageDialog(null,"Details for the sample answer have been submitted!");
+            JOptionPane.showMessageDialog(null,"Your sample answer has been submitted successfully.");
             ta.setText("");
             cb2.removeItemAt(cb2.getSelectedIndex());
             rd1.setVisible(false);
@@ -471,6 +481,20 @@ public class cms3 extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO ahdd your handling code;
+        DataBase_Handler db=new DataBase_Handler();
+        int res = JOptionPane.showConfirmDialog(null, "Are you want to reset all your rubrics data? ", "", JOptionPane.YES_NO_OPTION);
+        switch (res) {
+            case JOptionPane.YES_OPTION:
+            db.prev_called_from_cms3(author_temp.course_id,author_temp.question_id);
+            JOptionPane.showMessageDialog(null,"Data reset! Now you can re-enter your data.");
+            author_temp.flag=1;
+            author_temp.cms2.setVisible(true);
+            author_temp.cms3.setVisible(false);
+            break;
+            case JOptionPane.NO_OPTION:
+            JOptionPane.showMessageDialog(null, "Data reset canceled!");
+            break;
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

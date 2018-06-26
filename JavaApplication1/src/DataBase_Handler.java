@@ -1437,7 +1437,24 @@ public class DataBase_Handler
                             System.out.println("ERROR: Could not insert record in pa_grade" + e);
                     }
     }
-    
+    public void prev_called_from_cms3(String course_id, String question_id)
+    {
+        try {
+                    String insertString="DELETE FROM question_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id +"'";
+                    Statement stmt = conn.createStatement();
+                    stmt.execute(insertString);
+                    } catch (SQLException e) {
+                            System.out.println("ERROR: Could not delete record in question_details" + e);
+                    }
+        
+        try {
+                    String insertString="DELETE FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id +"'";
+                    Statement stmt = conn.createStatement();
+                    stmt.execute(insertString);
+                    } catch (SQLException e) {
+                            System.out.println("ERROR: Could not delete record in option_details" + e);
+                    }
+    }
     public static void  main(String args[])
     {
         
