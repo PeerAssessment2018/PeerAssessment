@@ -1437,10 +1437,10 @@ public class DataBase_Handler
                             System.out.println("ERROR: Could not insert record in pa_grade" + e);
                     }
     }
-    public void prev_called_from_cms3(String course_id, String question_id)
+    public void prev_called_from_cms3(String cri_id, String question_id,String course_id)
     {
         try {
-                    String insertString="DELETE FROM question_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id +"'";
+                    String insertString="DELETE FROM question_details WHERE criterion_id = '" + cri_id + "' AND question_id = '" + question_id +"' AND course_id = '"+ course_id+"'";
                     Statement stmt = conn.createStatement();
                     stmt.execute(insertString);
                     } catch (SQLException e) {
@@ -1448,7 +1448,7 @@ public class DataBase_Handler
                     }
         
         try {
-                    String insertString="DELETE FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id +"'";
+                    String insertString="DELETE FROM option_details WHERE course_id = '" + cri_id + "' AND question_id = '" + question_id +"' AND course_id = '"+ course_id+"'";
                     Statement stmt = conn.createStatement();
                     stmt.execute(insertString);
                     } catch (SQLException e) {
