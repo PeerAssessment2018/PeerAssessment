@@ -456,13 +456,12 @@ public class cms3 extends javax.swing.JFrame {
         {
             String cri=(String)cb2.getSelectedItem();
             db.set_sample_answer_details(assessor_id, course_id, q_id, sample_ans, cri,s1);
-<<<<<<< HEAD
+
             JOptionPane.showMessageDialog(null,"Details for the sample answer have been submitted!");
             //ta.setText("");
-=======
+
             JOptionPane.showMessageDialog(null,"Your sample answer has been submitted successfully.");
             ta.setText("");
->>>>>>> 87ad8b12b952d5d3ddd9d3081da7d5c99d84812c
             cb2.removeItemAt(cb2.getSelectedIndex());
             rd1.setVisible(false);
             rd2.setVisible(false);

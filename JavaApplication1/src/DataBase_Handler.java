@@ -1452,8 +1452,7 @@ public class DataBase_Handler
                             System.out.println("ERROR: Could not insert record in pa_grade" + e);
                     }
     }
-<<<<<<< HEAD
-    
+
     ArrayList<String> get_sample_answers(String course_id, String question_id) {
        ArrayList<String> s = new ArrayList<String>();
         try{
@@ -1501,8 +1500,7 @@ public class DataBase_Handler
         return s;
     }
 
-      public static void  main(String args[])
-=======
+
     public void prev_called_from_cms3(String cri_id, String question_id,String course_id)
     {
         try {
@@ -1521,8 +1519,8 @@ public class DataBase_Handler
                             System.out.println("ERROR: Could not delete record in option_details" + e);
                     }
     }
+    
     public static void  main(String args[])
->>>>>>> 87ad8b12b952d5d3ddd9d3081da7d5c99d84812c
     {
         
         DataBase_Handler db =new DataBase_Handler(); 

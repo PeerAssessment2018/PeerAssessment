@@ -415,8 +415,7 @@ public class cms2 extends javax.swing.JFrame {
         DataBase_Handler app = new DataBase_Handler();
         System.out.println(author_temp.author_id+author_temp.question_id+author_temp.course_id+author_temp.no_assessor+author_temp.no_assessments);
         System.out.println(cb1.getItemCount());
-<<<<<<< HEAD
-=======
+
             if(cb1.getItemCount()==0)
             {
                 tf2.setText("");
@@ -437,7 +436,7 @@ public class cms2 extends javax.swing.JFrame {
             {
                 crit.setText("Criterion "+(nc-cb1.getItemCount()+1)+" of "+nc);
             }
->>>>>>> 87ad8b12b952d5d3ddd9d3081da7d5c99d84812c
+
             
           ifcompleted(nc); 
             if(cb2.getItemCount()==1)
@@ -453,12 +452,12 @@ public class cms2 extends javax.swing.JFrame {
                 points.setValue(0);
                 //ta1.setText("");
                 ta2.setText("");
-<<<<<<< HEAD
+
                 JOptionPane.showMessageDialog(null,"All your details for the option and criterion has been submitted! No further changes allowed!");
                 ifcompleted(nc);
-=======
+
                 JOptionPane.showMessageDialog(null,"You have submitted all the details for criterion and option successfully.");
->>>>>>> 87ad8b12b952d5d3ddd9d3081da7d5c99d84812c
+
             }
             else if(cb2.getItemCount()!=0)
             {
