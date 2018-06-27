@@ -236,6 +236,11 @@ public class cms3 extends javax.swing.JFrame {
         });
 
         jButton4.setText("Edit option for a particular criteria");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Edit criteria");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -459,6 +464,7 @@ public class cms3 extends javax.swing.JFrame {
         else if(cb2.getItemCount()!=1)
         {
             String cri=(String)cb2.getSelectedItem();
+<<<<<<< HEAD
             db.set_sample_answer_details(assessor_id, course_id, q_id, sample_ans, cri,s1);            
             JOptionPane.showMessageDialog(null,"Details for the sample answer have been submitted!");
 
@@ -467,6 +473,10 @@ public class cms3 extends javax.swing.JFrame {
 
             //ta.setText("");
 
+=======
+            db.set_sample_answer_details(assessor_id, course_id, q_id, sample_ans, cri,s1);
+            JOptionPane.showMessageDialog(null,"Details for the sample answer have been submitted!");
+>>>>>>> 676eebd50360a28123eaf9347642272f520a3886
             cb2.removeItemAt(cb2.getSelectedIndex());
             rd1.setVisible(false);
             rd2.setVisible(false);
@@ -563,6 +573,13 @@ public class cms3 extends javax.swing.JFrame {
         }
     
     }//GEN-LAST:event_formComponentShown
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        cms_edit_option f=new cms_edit_option();
+        f.setVisible(true);
+        author_temp.cms3.setVisible(false);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

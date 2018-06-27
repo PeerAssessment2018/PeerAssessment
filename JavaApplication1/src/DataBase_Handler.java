@@ -1522,18 +1522,29 @@ public class DataBase_Handler
                             System.out.println("ERROR: Could not delete record in option_details" + e);
                     }
     }
+<<<<<<< HEAD
 
     public void edit_option(String course,String question, String criteria, String option,String new_opt,String opt_desc,int points)
     {
         try {
                     String insertString="UPDATE option_details SET option_id = ' " + new_opt + "' , option_description = '"+opt_desc+"' , option_points= "+points+"WHERE course_id = '" + course + "' AND question_id = '" + question +"' AND criterion_id = '"+ criteria+"'"; 
                     Statement stmt = Connection_to_DB.conn.createStatement();
+=======
+    public void edit_option(String course,String question, String criteria, String option,String new_opt,String opt_desc,int points)
+    {
+        try {
+                    String insertString="UPDATE option_details SET option_id = '" + new_opt + "' , option_description = '"+opt_desc+"' , option_points= "+points+" WHERE course_id = '" + course + "' AND question_id = '" + question +"' AND criterion_id = '"+ criteria+"'"; 
+                    Statement stmt = conn.createStatement();
+>>>>>>> 676eebd50360a28123eaf9347642272f520a3886
                     stmt.execute(insertString);
                     } catch (SQLException e) {
-                            System.out.println("ERROR: Could not insert record in pa_grade" + e);
+                            System.out.println("ERROR: Could not insert record in option_details" + e);
                     }
     }
+<<<<<<< HEAD
     
+=======
+>>>>>>> 676eebd50360a28123eaf9347642272f520a3886
     public static void  main(String args[])
     {
         
