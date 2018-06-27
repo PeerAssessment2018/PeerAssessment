@@ -464,7 +464,7 @@ public class cms3 extends javax.swing.JFrame {
         else if(cb2.getItemCount()!=1)
         {
             String cri=(String)cb2.getSelectedItem();
-<<<<<<< HEAD
+
             db.set_sample_answer_details(assessor_id, course_id, q_id, sample_ans, cri,s1);            
             JOptionPane.showMessageDialog(null,"Details for the sample answer have been submitted!");
 
@@ -473,10 +473,10 @@ public class cms3 extends javax.swing.JFrame {
 
             //ta.setText("");
 
-=======
+
             db.set_sample_answer_details(assessor_id, course_id, q_id, sample_ans, cri,s1);
             JOptionPane.showMessageDialog(null,"Details for the sample answer have been submitted!");
->>>>>>> 676eebd50360a28123eaf9347642272f520a3886
+
             cb2.removeItemAt(cb2.getSelectedIndex());
             rd1.setVisible(false);
             rd2.setVisible(false);
