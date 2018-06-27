@@ -13,6 +13,5 @@ import java.sql.Connection;
  */
 public class Connection_to_DB {
     
-    public static Connection conn;
-    
+    public static Connection conn=null;
 }
