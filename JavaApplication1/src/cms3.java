@@ -510,7 +510,7 @@ public class cms3 extends javax.swing.JFrame {
         int res = JOptionPane.showConfirmDialog(null, "Are you want to reset all your rubrics data? ", "", JOptionPane.YES_NO_OPTION);
         switch (res) {
             case JOptionPane.YES_OPTION:
-            db.prev_called_from_cms3(author_temp.course_id,author_temp.question_id);
+          //  db.prev_called_from_cms3(author_temp.course_id,author_temp.question_id);
             JOptionPane.showMessageDialog(null,"Data reset! Now you can re-enter your data.");
             author_temp.flag=1;
             author_temp.cms2.setVisible(true);
