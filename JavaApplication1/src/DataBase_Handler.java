@@ -1519,24 +1519,16 @@ public class DataBase_Handler
                             System.out.println("ERROR: Could not delete record in option_details" + e);
                     }
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> cad495ad77e2f8f7a036cf96b55377d7074a73fa
     public void edit_option(String course,String question, String criteria, String option,String new_opt,String opt_desc,int points)
     {
         try {
-                    String insertString="UPDATE option_details SET option_id = ' " + new_opt + "' , option_description = '"+opt_desc+"' , option_points= "+points+"WHERE course_id = '" + course + "' AND question_id = '" + question +"' AND criterion_id = '"+ criteria+"'"; 
+                    String insertString="UPDATE option_details SET option_id = '" + new_opt + "' , option_description = '"+opt_desc+"' , option_points= "+points+" WHERE course_id = '" + course + "' AND question_id = '" + question +"' AND criterion_id = '"+ criteria+"'"; 
                     Statement stmt = conn.createStatement();
                     stmt.execute(insertString);
                     } catch (SQLException e) {
-                            System.out.println("ERROR: Could not insert record in pa_grade" + e);
+                            System.out.println("ERROR: Could not insert record in option_details" + e);
                     }
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> cad495ad77e2f8f7a036cf96b55377d7074a73fa
     public static void  main(String args[])
     {
         

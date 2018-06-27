@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /*
@@ -43,8 +44,19 @@ public class cms_edit_option extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Edit criterion");
+
+        cb1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb1ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Edit option");
 
@@ -141,6 +153,7 @@ public class cms_edit_option extends javax.swing.JFrame {
         switch (res) {
             case JOptionPane.YES_OPTION:
             db.edit_option(author_temp.course_id,author_temp.question_id, option, cri,new_option, option_desc, points);
+            System.out.println("hello");
             break;
             case JOptionPane.NO_OPTION:
             this.setVisible(false);
@@ -148,6 +161,25 @@ public class cms_edit_option extends javax.swing.JFrame {
             break;
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+         DataBase_Handler db=new DataBase_Handler();
+        ArrayList<String> criterias= db.r_lms3_f(author_temp.author_id, author_temp.course_id, author_temp.question_id);
+        for(int i=0;i<criterias.size();i++)
+            cb1.addItem(criterias.get(i));
+        cb1.setSelectedIndex(-1);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void cb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb1ActionPerformed
+        // TODO add your handling code here:
+        cb2.removeAllItems();
+        DataBase_Handler db=new DataBase_Handler();
+        ArrayList<String> criterias= db.r_lms3_f1(author_temp.author_id, author_temp.course_id, author_temp.question_id,(String)cb1.getSelectedItem());
+        for(int i=0;i<criterias.size();i++)
+            cb2.addItem(criterias.get(i));
+        cb2.setSelectedIndex(-1);
+    }//GEN-LAST:event_cb1ActionPerformed
 
     /**
      * @param args the command line arguments
