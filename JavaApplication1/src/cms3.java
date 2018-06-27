@@ -417,6 +417,7 @@ public class cms3 extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         int assessor_id=author_temp.author_id;
+        System.out.println(author_temp.author_id);
         String sample_ans=ta.getText();
         int nosa=(int)no_of_ans.getValue();
         String q_id=author_temp.question_id;
@@ -442,26 +443,12 @@ public class cms3 extends javax.swing.JFrame {
         int points=Integer.parseInt(option.nextToken());
         DataBase_Handler db=new DataBase_Handler();
         
-        if(cb1.getItemCount()==0)
+        
+        if(cb2.getItemCount()==2)
         {
-            JOptionPane.showMessageDialog(null,"Your responses have been submitted successfully! You won't be able to make any further changes.");
-            System.exit(0);
-        }
-        if(cb2.getItemCount()==1)
-        {
-            cb1.removeItemAt(cb1.getSelectedIndex());
+            db.set_sample_answer_details(assessor_id, course_id, q_id, sample_ans, (String)cb2.getSelectedItem(),s1);
             ans_of.setText("Sample Answer "+(nosa-cb1.getItemCount()+1)+" of "+nosa);
-        }
-        else
-        {
-            String cri=(String)cb2.getSelectedItem();
-            db.set_sample_answer_details(assessor_id, course_id, q_id, sample_ans, cri,s1);
-
-            JOptionPane.showMessageDialog(null,"Details for the sample answer have been submitted!");
-            //ta.setText("");
-
-            JOptionPane.showMessageDialog(null,"Your sample answer has been submitted successfully.");
-            ta.setText("");
+            cb1.removeItemAt(cb1.getSelectedIndex());
             cb2.removeItemAt(cb2.getSelectedIndex());
             rd1.setVisible(false);
             rd2.setVisible(false);
@@ -469,9 +456,29 @@ public class cms3 extends javax.swing.JFrame {
             rd4.setVisible(false);
             rd5.setVisible(false);
         }
+        else if(cb2.getItemCount()!=1)
+        {
+            String cri=(String)cb2.getSelectedItem();
+            db.set_sample_answer_details(assessor_id, course_id, q_id, sample_ans, cri,s1);
+
+          //  JOptionPane.showMessageDialog(null,"Details for the sample answer have been submitted!");
+            //ta.setText("");
+
+            cb2.removeItemAt(cb2.getSelectedIndex());
+            rd1.setVisible(false);
+            rd2.setVisible(false);
+            rd3.setVisible(false);
+            rd4.setVisible(false);
+            rd5.setVisible(false);
+        }
+        if(cb2.getItemCount()==1)
+        {
+            JOptionPane.showMessageDialog(null,"Details for the sample answer have been submitted!");
+        }
         if(cb1.getItemCount()==0)
         {
-            jButton3.setText("Submit");
+            JOptionPane.showMessageDialog(null,"Details of all your sample answers have been submitted successfully.");
+            System.exit(0);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -499,7 +506,7 @@ public class cms3 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ta.setText("");
+       // ta.setText("");
         rd1.setVisible(false);
         rd2.setVisible(false);
         rd3.setVisible(false);
