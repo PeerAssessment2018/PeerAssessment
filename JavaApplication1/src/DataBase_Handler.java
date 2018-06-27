@@ -1519,7 +1519,10 @@ public class DataBase_Handler
                             System.out.println("ERROR: Could not delete record in option_details" + e);
                     }
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> cad495ad77e2f8f7a036cf96b55377d7074a73fa
     public void edit_option(String course,String question, String criteria, String option,String new_opt,String opt_desc,int points)
     {
         try {
@@ -1530,7 +1533,10 @@ public class DataBase_Handler
                             System.out.println("ERROR: Could not insert record in pa_grade" + e);
                     }
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> cad495ad77e2f8f7a036cf96b55377d7074a73fa
     public static void  main(String args[])
     {
         
