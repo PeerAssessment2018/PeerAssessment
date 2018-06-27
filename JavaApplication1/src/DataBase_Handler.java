@@ -1452,6 +1452,7 @@ public class DataBase_Handler
                             System.out.println("ERROR: Could not insert record in pa_grade" + e);
                     }
     }
+<<<<<<< HEAD
     
     ArrayList<String> get_sample_answers(String course_id, String question_id) {
        ArrayList<String> s = new ArrayList<String>();
@@ -1501,6 +1502,27 @@ public class DataBase_Handler
     }
 
       public static void  main(String args[])
+=======
+    public void prev_called_from_cms3(String cri_id, String question_id,String course_id)
+    {
+        try {
+                    String insertString="DELETE FROM question_details WHERE criterion_id = '" + cri_id + "' AND question_id = '" + question_id +"' AND course_id = '"+ course_id+"'";
+                    Statement stmt = conn.createStatement();
+                    stmt.execute(insertString);
+                    } catch (SQLException e) {
+                            System.out.println("ERROR: Could not delete record in question_details" + e);
+                    }
+        
+        try {
+                    String insertString="DELETE FROM option_details WHERE course_id = '" + cri_id + "' AND question_id = '" + question_id +"' AND course_id = '"+ course_id+"'";
+                    Statement stmt = conn.createStatement();
+                    stmt.execute(insertString);
+                    } catch (SQLException e) {
+                            System.out.println("ERROR: Could not delete record in option_details" + e);
+                    }
+    }
+    public static void  main(String args[])
+>>>>>>> 87ad8b12b952d5d3ddd9d3081da7d5c99d84812c
     {
         
         DataBase_Handler db =new DataBase_Handler(); 
