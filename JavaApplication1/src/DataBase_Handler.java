@@ -1522,7 +1522,7 @@ public class DataBase_Handler
     public void edit_option(String course,String question, String criteria, String option,String new_opt,String opt_desc,int points)
     {
         try {
-                    String insertString="UPDATE option_details SET option_id = '" + new_opt + "' , option_description = '"+opt_desc+"' , option_points= "+points+" WHERE course_id = '" + course + "' AND question_id = '" + question +"' AND criterion_id = '"+ criteria+"'"; 
+                    String insertString ="UPDATE option_details SET option_id = '" + new_opt + "' , option_description = '"+opt_desc+"' , option_points= "+points+" WHERE course_id = '" + course + "' AND question_id = '" + question +"' AND criterion_id = '"+ criteria+"' AND option_id = '"+option+"'"; 
                     Statement stmt = conn.createStatement();
                     stmt.execute(insertString);
                     } catch (SQLException e) {
