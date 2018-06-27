@@ -406,12 +406,13 @@ public class cms3 extends javax.swing.JFrame {
         String s2=option.nextToken();
         int points=Integer.parseInt(option.nextToken());
         DataBase_Handler db=new DataBase_Handler();
+        
         if(cb1.getItemCount()==0)
         {
             JOptionPane.showMessageDialog(null,"Your responses have been submitted successfully! You won't be able to make any further changes.");
             System.exit(0);
         }
-        if(cb2.getItemCount()==0)
+        if(cb2.getItemCount()==1)
         {
             cb1.removeItemAt(cb1.getSelectedIndex());
             ans_of.setText("Sample Answer "+(nosa-cb1.getItemCount()+1)+" of "+nosa);
@@ -421,7 +422,7 @@ public class cms3 extends javax.swing.JFrame {
             String cri=(String)cb2.getSelectedItem();
             db.set_sample_answer_details(assessor_id, course_id, q_id, sample_ans, cri,s1);
             JOptionPane.showMessageDialog(null,"Details for the sample answer have been submitted!");
-            ta.setText("");
+            //ta.setText("");
             cb2.removeItemAt(cb2.getSelectedIndex());
             rd1.setVisible(false);
             rd2.setVisible(false);

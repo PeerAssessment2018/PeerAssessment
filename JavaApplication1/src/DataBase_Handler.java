@@ -1103,6 +1103,21 @@ public class DataBase_Handler
                 }
     }
     
+    public int get_no_of_sample_answers(String course_id , String question_id)
+    {
+        try{
+            String sql = "SELECT no_of_sample_answers FROM question_details WHERE course_id = '" + course_id +"' AND question_id = '"+question_id +"'";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            rs.next();
+            return rs.getInt("no_of_sample_answers");
+        }catch(SQLException e)
+                {
+                  System.out.println(e); 
+                }
+        return 0;
+    }
+    
     public void set_sample_answer_details(int author_id, String course_id, String question_id, String sample_answer, String criteria, String correct_option )
     {
         try{
@@ -1438,11 +1453,59 @@ public class DataBase_Handler
                     }
     }
     
-    public static void  main(String args[])
+    ArrayList<String> get_sample_answers(String course_id, String question_id) {
+       ArrayList<String> s = new ArrayList<String>();
+        try{
+            String sql = "SELECT DISTINCT sample_answer FROM sample_answer_details WHERE course_id = '" + course_id +"' AND question_id = '"+question_id +"'";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next())
+            s.add(rs.getString("sample_answer"));
+        }catch(SQLException e)
+                {
+                  System.out.println(e); 
+                }
+        return s;
+    }
+    
+  
+
+    ArrayList<String> get_correct_option(String course_id, String question_id,String answer) {
+        ArrayList<String> s = new ArrayList<String>();
+        try{
+            String sql = "SELECT DISTINCT correct_option FROM sample_answer_details WHERE course_id = '" + course_id +"' AND question_id = '"+question_id +"' AND sample_answer = '"+answer +"'";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next())
+            s.add(rs.getString("correct_option"));
+        }catch(SQLException e)
+                {
+                  System.out.println(e); 
+                }
+        return s;
+    }
+
+    ArrayList<String> get_sample_criteria(String course_id, String question_id, String answer) {
+        ArrayList<String> s = new ArrayList<String>();
+        try{
+            String sql = "SELECT DISTINCT criteria FROM sample_answer_details WHERE course_id = '" + course_id +"' AND question_id = '"+question_id +"' AND sample_answer = '"+answer +"'";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next())
+            s.add(rs.getString("criteria"));
+        }catch(SQLException e)
+                {
+                  System.out.println(e); 
+                }
+        return s;
+    }
+
+      public static void  main(String args[])
     {
         
         DataBase_Handler db =new DataBase_Handler(); 
-        db.insert_self_grade(1, "C", "Q", 0);
+       //ArrayList<String> s =  db.get_sample_criteria("hello","Question by X for hello","ok, I see");
+       //System.out.println(s); 
     } 
 }
     

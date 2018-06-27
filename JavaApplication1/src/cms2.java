@@ -414,27 +414,8 @@ public class cms2 extends javax.swing.JFrame {
         DataBase_Handler app = new DataBase_Handler();
         System.out.println(author_temp.author_id+author_temp.question_id+author_temp.course_id+author_temp.no_assessor+author_temp.no_assessments);
         System.out.println(cb1.getItemCount());
-            if(cb1.getItemCount()==0)
-            {
-                tf2.setText("");
-                no_of_option.setValue(0);
-                tf4.setText("");
-                points.setValue(0);
-                ta1.setText("");
-                ta2.setText("");
-               // app.insert_question_details_2(cname,cprompt,con);
-                JOptionPane.showMessageDialog(null,"All your details for the rubrics have been submitted! No further changes allowed!");
-                //cms3=new cms3();
-                author_temp.cms3.setVisible(true);
-                this.setVisible(false);
-                //cb1.removeItemAt(cb1.getSelectedIndex());
-                //tf1.setText("");
-            }
-            else
-            {
-                crit.setText("Criterion "+(nc-cb1.getItemCount()+1)+" of "+nc);
-            }
             
+          ifcompleted(nc); 
             if(cb2.getItemCount()==1)
         {
                 app.insert_question_details_2(cname,cprompt,con,fb);
@@ -449,6 +430,7 @@ public class cms2 extends javax.swing.JFrame {
                 //ta1.setText("");
                 ta2.setText("");
                 JOptionPane.showMessageDialog(null,"All your details for the option and criterion has been submitted! No further changes allowed!");
+                ifcompleted(nc);
             }
             else if(cb2.getItemCount()!=0)
             {
@@ -582,6 +564,29 @@ public class cms2 extends javax.swing.JFrame {
         });
     }
 
+    public void ifcompleted(int nc)
+    {
+        if(cb1.getItemCount()==0)
+            {
+                tf2.setText("");
+                no_of_option.setValue(0);
+                tf4.setText("");
+                points.setValue(0);
+                ta1.setText("");
+                ta2.setText("");
+               // app.insert_question_details_2(cname,cprompt,con);
+                JOptionPane.showMessageDialog(null,"All your details for the rubrics have been submitted! No further changes allowed!");
+                //cms3=new cms3();
+                author_temp.cms3.setVisible(true);
+                author_temp.cms2.setVisible(false);
+                //cb1.removeItemAt(cb1.getSelectedIndex());
+                //tf1.setText("");
+            }
+            else
+            {
+                crit.setText("Criterion "+(nc-cb1.getItemCount()+1)+" of "+nc);
+            }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.ButtonGroup buttonGroup1;
     public static javax.swing.JComboBox<String> cb1;
