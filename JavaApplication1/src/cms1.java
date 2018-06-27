@@ -205,6 +205,7 @@ public class cms1 extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+
         DataBase_Handler db= new DataBase_Handler();
         int a_id = db.username_to_aid(cms_login.name.getText());
         ArrayList<String> courses=new ArrayList<String>();

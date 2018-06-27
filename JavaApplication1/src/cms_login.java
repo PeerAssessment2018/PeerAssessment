@@ -136,6 +136,7 @@ public class cms_login extends javax.swing.JFrame {
         DataBase_Handler db=new DataBase_Handler();
         if(db.check_valid_login_cms(t1, t2))
         {
+            author_temp.author_id = db.username_to_aid(t1);
             System.out.println("Login Successfull !");
             JOptionPane.showMessageDialog(null,"Login Successfull !");
             

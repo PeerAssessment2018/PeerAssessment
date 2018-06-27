@@ -456,7 +456,7 @@ public class cms3 extends javax.swing.JFrame {
         {
             String cri=(String)cb2.getSelectedItem();
             db.set_sample_answer_details(assessor_id, course_id, q_id, sample_ans, cri,s1);
-
+            
             JOptionPane.showMessageDialog(null,"Details for the sample answer have been submitted!");
             //ta.setText("");
 
