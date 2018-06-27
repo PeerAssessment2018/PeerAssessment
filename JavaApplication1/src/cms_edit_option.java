@@ -140,7 +140,7 @@ public class cms_edit_option extends javax.swing.JFrame {
         int res = JOptionPane.showConfirmDialog(null, "Are you sure you want to edit the selected option?", "", JOptionPane.YES_NO_OPTION);
         switch (res) {
             case JOptionPane.YES_OPTION:
-            db.edit_option(author_temp.course_id,author_temp.question_id, option, cri,new_option, option_desc, points);
+                db.edit_option(author_temp.course_id,author_temp.question_id, option, cri,new_option, option_desc, points);
             break;
             case JOptionPane.NO_OPTION:
             this.setVisible(false);

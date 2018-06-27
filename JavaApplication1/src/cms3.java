@@ -459,14 +459,12 @@ public class cms3 extends javax.swing.JFrame {
         else if(cb2.getItemCount()!=1)
         {
             String cri=(String)cb2.getSelectedItem();
-            db.set_sample_answer_details(assessor_id, course_id, q_id, sample_ans, cri,s1);
-<<<<<<< HEAD
-            
+            db.set_sample_answer_details(assessor_id, course_id, q_id, sample_ans, cri,s1);            
             JOptionPane.showMessageDialog(null,"Details for the sample answer have been submitted!");
-=======
+
 
           //  JOptionPane.showMessageDialog(null,"Details for the sample answer have been submitted!");
->>>>>>> cad495ad77e2f8f7a036cf96b55377d7074a73fa
+
             //ta.setText("");
 
             cb2.removeItemAt(cb2.getSelectedIndex());

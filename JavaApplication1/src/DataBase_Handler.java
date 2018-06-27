@@ -12,31 +12,34 @@ import java.util.Random;
 
 public class DataBase_Handler 
 {
-    Connection conn;
     
     public DataBase_Handler()
     {   
-        conn = null;
-         try{
-            Properties conn_prop=new Properties();
-            conn_prop.put("user", "root");
-            conn_prop.put("password", "");
-            conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/peer_assessment",conn_prop);
-            System.out.println("Connection established !!");
-        }
-        catch(Exception ex)
+        /*if(Connection_to_DB.conn == null)
         {
-            System.out.println(ex.getMessage());
-        }
-          /*try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn=DriverManager.getConnection("jdbc:mysql://db4free.net:3306/pa_tool?autoReconnect=true&useSSL=false","adminpa","adminadmin");
-            System.out.println("Connection established !!");
-        }
-        catch(Exception ex)
-        {
-            System.out.println(ex.getMessage());
+                    try{
+                    Properties conn_prop=new Properties();
+                    conn_prop.put("user", "root");
+                    conn_prop.put("password", "");
+                    Connection_to_DB.conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/peer_assessment",conn_prop);
+                    System.out.println("Connection established !!");
+                }
+                catch(Exception ex)
+                {
+                    System.out.println(ex.getMessage());
+                }
         }*/
+        if(Connection_to_DB.conn == null)
+        {       try{
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    Connection_to_DB.conn=DriverManager.getConnection("jdbc:mysql://db4free.net:3306/pa_tool?autoReConnection_to_DB.connect=true&useSSL=false","adminpa","adminadmin");
+                    System.out.println("Connection established !!");
+                }
+                catch(Exception ex)
+                {
+                    System.out.println(ex.getMessage());
+                }
+        }
     }
     public boolean insert_student_data_handler(String username,String first_name,String last_name,String email,String password,String course_id)
     {
@@ -45,14 +48,14 @@ public class DataBase_Handler
         
         try{
             String sql ="SELECT id FROM student_data WHERE username="+"'"+username+"';";//+ " AND "+"'"+first_name+"'"+","+"'"+last_name+"'"+","+"'"+email+"'"+","+"'"+password+"'"+");";
-            Statement stmt = conn.createStatement();
+            Statement stmt = Connection_to_DB.conn.createStatement();
             ResultSet rs=stmt.executeQuery(sql);
             rs.next();
             
             int id=rs.getInt("id");
             
             sql ="INSERT INTO student_courseenrollment(user_id,course_id) VALUES ("+id+ ","+"'"+course_id+"');";//+","+"'"+last_name+"'"+","+"'"+email+"'"+","+"'"+password+"'"+");";
-            stmt = conn.createStatement();
+            stmt = Connection_to_DB.conn.createStatement();
             f=stmt.execute(sql);   
         
             int n = 0;
@@ -63,7 +66,7 @@ public class DataBase_Handler
                 n=rand.nextInt(999999)+100;
                 
                 sql="SELECT anonymous_user_id FROM student_anonymoususerid";
-                stmt = conn.createStatement();
+                stmt = Connection_to_DB.conn.createStatement();
                 rs=stmt.executeQuery(sql);
                 while(rs.next())
                 {
@@ -77,12 +80,12 @@ public class DataBase_Handler
             }
             
             sql ="SELECT id FROM student_data WHERE username="+"'"+username+"';";
-            stmt = conn.createStatement();
+            stmt = Connection_to_DB.conn.createStatement();
             rs=stmt.executeQuery(sql);
             rs.next();
             
             sql ="INSERT INTO student_anonymoususerid(user_id,anonymous_user_id,course_id) VALUES (" + id + "," + n + ",'"+course_id+"')";
-            stmt = conn.createStatement();
+            stmt = Connection_to_DB.conn.createStatement();
             f=stmt.execute(sql);
         }
         catch(Exception ex)
@@ -97,7 +100,7 @@ public class DataBase_Handler
         boolean f=false;
         try{
             String sql ="INSERT INTO student_data(username,first_name,last_name,email,password) VALUES ("+"'"+username+"'"+ ","+"'"+first_name+"'"+","+"'"+last_name+"'"+","+"'"+email+"'"+","+"'"+password+"'"+");";
-            Statement stmt = conn.createStatement();
+            Statement stmt = Connection_to_DB.conn.createStatement();
             f=stmt.execute(sql);
             
         }
@@ -114,14 +117,14 @@ public class DataBase_Handler
        // f=insert_faculty_data(username, first_name, last_name, email, password);
         try{
             String sql ="SELECT id FROM author_data WHERE username="+"'"+username+"';";//+ " AND "+"'"+first_name+"'"+","+"'"+last_name+"'"+","+"'"+email+"'"+","+"'"+password+"'"+");";
-            Statement stmt = conn.createStatement();
+            Statement stmt = Connection_to_DB.conn.createStatement();
             ResultSet rs=stmt.executeQuery(sql);
             rs.next();
             
             int id=rs.getInt("id");
             
             sql ="INSERT INTO author_coursecreated(author_id,course_id) VALUES ("+id+ ","+"'"+course_id+"');";//+","+"'"+last_name+"'"+","+"'"+email+"'"+","+"'"+password+"'"+");";
-            stmt = conn.createStatement();
+            stmt = Connection_to_DB.conn.createStatement();
             f=stmt.execute(sql);   
         }
         catch(Exception ex)
@@ -136,7 +139,7 @@ public class DataBase_Handler
         boolean f=false;
         try{
             String sql ="INSERT INTO author_data(username,first_name,last_name,email,password) VALUES ("+"'"+username+"'"+ ","+"'"+first_name+"'"+","+"'"+last_name+"'"+","+"'"+email+"'"+","+"'"+password+"'"+");";
-            Statement stmt = conn.createStatement();
+            Statement stmt = Connection_to_DB.conn.createStatement();
             f=stmt.execute(sql);   
         }
         catch(Exception ex)
@@ -152,7 +155,7 @@ public class DataBase_Handler
             String sql="SELECT (user_id,state) FROM courseware_studentmodule;";
             try 
             {
-            Statement statem=conn.createStatement();
+            Statement statem=Connection_to_DB.conn.createStatement();
             ResultSet rs=statem.executeQuery(sql);
             while(rs.next())
             {
@@ -175,7 +178,7 @@ public class DataBase_Handler
         try 
         {
             String sql = "INSERT INTO question_details(course_id,question_id,no_assessors,no_assessment) VALUES ("+"'"+course_id+"'"+ ","+"'"+question_id+"'"+","+x+","+y+ ");";
-            Statement stmt = conn.createStatement();
+            Statement stmt = Connection_to_DB.conn.createStatement();
             f=stmt.execute(sql);
         } 
         catch (Exception ex)
@@ -190,7 +193,7 @@ public class DataBase_Handler
         try 
         {
             String sql = " SELECT COUNT(*) FROM student_data ";
-            Statement stmt = conn.createStatement();
+            Statement stmt = Connection_to_DB.conn.createStatement();
             //stmt.execute(sql);
             ResultSet rs=stmt.executeQuery(sql);
             rs.next();
@@ -210,7 +213,7 @@ public class DataBase_Handler
         try 
         {
             String sql = "INSERT INTO courseware_studentmodule (user_id,course_id,question_id,prompt) VALUES ("+user_id+","+"'"+course_id+"'"+ ","+"'"+question_id+"'"+","+"'"+prompt+"'"+ ");";
-            Statement stmt = conn.createStatement();
+            Statement stmt = Connection_to_DB.conn.createStatement();
             stmt.execute(sql);
         } 
         catch (Exception ex)
@@ -226,7 +229,7 @@ public class DataBase_Handler
 			String insertString =" INSERT INTO question_details (course"
                        + "_id, question_id, no_assessors, no_assessment,criterion_id, criterion_prompt, no_of_options, feedback) VALUES ('"+author_temp.course_id+
                        "' , '"+author_temp.question_id+"' , "+author_temp.no_assessor+", "+author_temp.no_assessments+", '"+cri_name+"' , '"+cri_prompt+"' , "+nop+","+fb+");";
-                Statement stmt = conn.createStatement();
+                Statement stmt = Connection_to_DB.conn.createStatement();
                 stmt.execute(insertString);
                 
                 } catch (Exception e) {
@@ -240,7 +243,7 @@ public class DataBase_Handler
         try
             {
                String sql =  "SELECT user_id,submitted FROM courseware_studentmodule WHERE user_id = "+user_id + " AND course_id = '" + course+ "' AND question_id = '" + question_id +"'";
-               Statement stmt = conn.createStatement();
+               Statement stmt = Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 rs.next();
                 if(rs.getInt("submitted")==0)
@@ -263,7 +266,7 @@ public class DataBase_Handler
             {try {
 			String insertString = " INSERT INTO courseware_studentmodule ( user_id, course_id, question_id, state,date_of_submission, submitted )" +" VALUES ( " +
                                 +user_id+" , '"+course+"' , '"+ lms1.ta1.getText()+"' , '" +ans+"','"+ sqlDate  +"', " + submitted +" ) ";
-			Statement stmt = conn.createStatement();
+			Statement stmt = Connection_to_DB.conn.createStatement();
                 stmt.execute(insertString);
                } catch (Exception e) {
 			System.out.println("ERROR: Could not insert record");
@@ -275,7 +278,7 @@ public class DataBase_Handler
             {
                 try{
                 String sql = "UPDATE courseware_studentmodule SET state = '" + ans + "',submitted = "+submitted+" WHERE user_id = "+user_id + " AND state = '" + ans + "' AND course_id = '" + course+ "' AND question_id = '" + question_id +"'";
-                Statement stmt = conn.createStatement();
+                Statement stmt = Connection_to_DB.conn.createStatement();
                 stmt.execute(sql);
                 }catch(SQLException e)
                 {
@@ -290,7 +293,7 @@ public class DataBase_Handler
 			String insertString=" INSERT INTO option_details " + " ( " + " course_id, " + " question_id, " +
 					" criterion_id, " + " option_id, " + " option_description, " + " option_points " + " ) " + " VALUES "  + " (" + "'" +course_id + "'" + ","
 					+ "'" +ques_id + "'" + ","+ "'" +cri_id + "'" + ", '"+op_id + "' ," + "'" +op_desc + "'," +scale + ")";
-		Statement stmt = conn.createStatement();
+		Statement stmt = Connection_to_DB.conn.createStatement();
                 stmt.execute(insertString);
                 } catch (Exception e) {
 			System.out.println(e);
@@ -309,7 +312,7 @@ public class DataBase_Handler
                 //int x = 10;
                 //System.out.println(x);
                 String sql=" SELECT anonymous_user_id FROM student_anonymoususerid WHERE user_id = " + assesser_id ;
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 if(rs.next())
                     assesser_id = rs.getInt("anonymous_user_id");
@@ -328,7 +331,7 @@ public class DataBase_Handler
                 //int x = 10;
                 //System.out.println(x);
                 String sql=" SELECT criterion_id FROM question_details WHERE course_id= '" + course_id + "' AND question_id = '" + question_id +"'";
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
                     criterias.add(rs.getString("criterion_id"));
@@ -351,7 +354,7 @@ public class DataBase_Handler
                 try {
 			String sql=" INSERT INTO pa_grade ( user_id, anonymous_assesser_id, course_id, question_id, criteria_id, grade_points) VALUES "  + " (" + user_id + ","
 					+ assesser_id + ","+ "'" + course_id + "'" + ", '" + question_id + "' ," + "'" + criterias.get(j) + "'," + 0 +")";
-		Statement stmt = conn.createStatement();
+		Statement stmt = Connection_to_DB.conn.createStatement();
                 stmt.execute(sql);
                 } catch (SQLException e) {
 			System.out.println(e);
@@ -369,7 +372,7 @@ public class DataBase_Handler
                 //int x = 10;
                 //System.out.println(x);
                 String sql=" SELECT user_id FROM student_anonymoususerid WHERE anonymous_user_id = " + auid ;
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 if(rs.next())
                     uid = rs.getInt("user_id");
@@ -389,7 +392,7 @@ public class DataBase_Handler
                 //int x = 10;
                 //System.out.println(x);
                 String sql=" SELECT anonymous_user_id FROM student_anonymoususerid WHERE user_id = " + uid ;
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 if(rs.next())
                     auid = rs.getInt("anonymous_user_id");
@@ -411,7 +414,7 @@ public class DataBase_Handler
                 //System.out.println(x);
                 System.out.println("quest - " + question_id);
                 String sql=" SELECT criterion_id FROM question_details WHERE course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
                 {
@@ -447,7 +450,7 @@ public class DataBase_Handler
                 //System.out.println(x);
                 System.out.println("quest - " + question_id);
                 String sql=" SELECT criterion_id FROM question_details WHERE course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
                 {
@@ -471,7 +474,7 @@ public class DataBase_Handler
                 //int x = 10;
                 //System.out.println(x);
                 String sql=" SELECT criterion_id FROM question_details WHERE course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
                 {
@@ -493,7 +496,7 @@ public class DataBase_Handler
                 //int x = 10;
                 //System.out.println(x);
                 String sql=" SELECT option_id,option_description,option_points FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id + "' AND criterion_id = '" + selected_criteria +"'";
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
                 {
@@ -622,7 +625,7 @@ public class DataBase_Handler
                 //int x = 10;
                 //System.out.println(x);
                 String sql=" SELECT option_id,option_description,option_points FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id + "' AND criterion_id = '" + criteria +"'";
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
                 {
@@ -751,7 +754,7 @@ public class DataBase_Handler
                 //int x = 10;
                 //System.out.println(x);
                 String sql=" SELECT option_id,option_description,option_points FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id + "' AND criterion_id = '" + criteria +"'";
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
                 {
@@ -781,7 +784,7 @@ public class DataBase_Handler
                 //int x = 10;
                 //System.out.println(x);
                 String sql=" SELECT option_id,option_description,option_points FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id + "' AND criterion_id = '" + criteria +"'";
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
                 {
@@ -809,7 +812,7 @@ public class DataBase_Handler
                 //int x = 10;
                 //System.out.println(x);
                 String sql=" SELECT user_id FROM pa_grade WHERE anonymous_assesser_id = " + a_user_id ;
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
                 {
@@ -835,7 +838,7 @@ public class DataBase_Handler
                 //int x = 10;
                 //System.out.println(x);
                 String sql=" SELECT state FROM courseware_studentmodule WHERE user_id = '" + ids_to_assess.get(i)+ "' AND course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 if(rs.next())
                 {
@@ -868,7 +871,7 @@ public class DataBase_Handler
         
         try {
                 String sql=" SELECT no_assessors,no_assessment FROM question_details WHERE course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 if(rs.next())
                 {
@@ -884,7 +887,7 @@ public class DataBase_Handler
         
         try {
                 String sql=" SELECT self_assessed_grade FROM courseware_studentmodule WHERE user_id = " + user_id + " AND course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 if(rs.next())
                 {
@@ -898,7 +901,7 @@ public class DataBase_Handler
         
          try {
                 String sql=" SELECT AVG(grade_points) as avg_grade FROM pa_grade WHERE user_id = " + user_id + " AND course_id = '" + course_id + "'AND question_id = '" + question_id + "' GROUP BY anonymous_assessor_id HAVING count(*)>1";
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
                 {
@@ -921,7 +924,7 @@ public class DataBase_Handler
                     try {
                         String insertString="INSERT INTO pa_grade (user_id, anonymous_assessor_id, course_id, question_id, criteria_id,"
                                     + " grade_points) VALUES ("+user_id+","+assessor_id+", '"+course+"' , '"+q_id+"','"+cri_id.get(i)+"' ,"+points.get(i)+")";
-                    Statement stmt = conn.createStatement();
+                    Statement stmt = Connection_to_DB.conn.createStatement();
                     stmt.execute(insertString);
                     } catch (SQLException e) {
                             System.out.println("ERROR: Could not insert record in pa_grade" + e);
@@ -936,7 +939,7 @@ public class DataBase_Handler
         
         try {
                 String sql=" SELECT course_id FROM author_coursecreated" ;
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
                 {
@@ -954,7 +957,7 @@ public class DataBase_Handler
         
         try {
                 String sql=" SELECT course_id FROM author_coursecreated WHERE author_id = " + author_id ;
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
                 {
@@ -972,7 +975,7 @@ public class DataBase_Handler
         
         try {
                 String sql=" SELECT course_id FROM student_courseenrollment WHERE user_id = " + user_id;
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
                 {
@@ -990,7 +993,7 @@ public class DataBase_Handler
         
         try {
                 String sql=" SELECT id FROM student_data WHERE username = '" + username +"'";
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 if(rs.next())
                 {
@@ -1007,7 +1010,7 @@ public class DataBase_Handler
         try {
             System.out.println("Connection Established !");
             String sql="SELECT COUNT(username) as count1 FROM student_data WHERE username='"+username+"' AND password='"+password+"';";
-            Statement statement=conn.createStatement();
+            Statement statement=Connection_to_DB.conn.createStatement();
             ResultSet rs= statement.executeQuery(sql);
             rs.next();
             int f=rs.getInt("count1");
@@ -1025,7 +1028,7 @@ public class DataBase_Handler
         try {
             System.out.println("Connection Established !");
             String sql="SELECT COUNT(username) as count1 FROM author_data WHERE username='"+username+"' AND password='"+password+"';";
-            Statement statement=conn.createStatement();
+            Statement statement=Connection_to_DB.conn.createStatement();
             ResultSet rs= statement.executeQuery(sql);
             rs.next();
             int f=rs.getInt("count1");
@@ -1044,7 +1047,7 @@ public class DataBase_Handler
         
         try {
                 String sql=" SELECT id FROM author_data WHERE username = '" + username +"'";
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 if(rs.next())
                 {
@@ -1061,7 +1064,7 @@ public class DataBase_Handler
         String ques = null;
         try{
             String sql = "SELECT question_id FROM question_details WHERE course_id = '" + course_id +"'";
-            Statement stmt = conn.createStatement();
+            Statement stmt = Connection_to_DB.conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             if(rs.next())
             {
@@ -1079,7 +1082,7 @@ public class DataBase_Handler
         String response = null;
         try{
             String sql = "SELECT state FROM courseware_studentmodule WHERE user_id=" +user_id + " AND course_id ='" + course_id +"' AND question_id = '" + question_id +"';";
-            Statement stmt = conn.createStatement();
+            Statement stmt = Connection_to_DB.conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             rs.next();
             response = rs.getString("state");
@@ -1095,7 +1098,7 @@ public class DataBase_Handler
     {
         try{
             String sql = "UPDATE question_details SET no_of_sample_answers = "+ nosa + " WHERE course_id = '" + course_id +"' AND question_id = '"+question_id +"'";
-            Statement stmt = conn.createStatement();
+            Statement stmt = Connection_to_DB.conn.createStatement();
             stmt.execute(sql);
         }catch(SQLException e)
                 {
@@ -1107,7 +1110,7 @@ public class DataBase_Handler
     {
         try{
             String sql = "SELECT no_of_sample_answers FROM question_details WHERE course_id = '" + course_id +"' AND question_id = '"+question_id +"'";
-            Statement stmt = conn.createStatement();
+            Statement stmt = Connection_to_DB.conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             rs.next();
             return rs.getInt("no_of_sample_answers");
@@ -1122,7 +1125,7 @@ public class DataBase_Handler
     {
         try{
             String sql = "INSERT INTO sample_answer_details(author_id,course_id,question_id,sample_answer,criteria,correct_option) VALUES ("+author_id+",'"+course_id+"','"+question_id+"','"+sample_answer+"','"+criteria+"','"+correct_option+"')";
-            Statement stmt = conn.createStatement();
+            Statement stmt = Connection_to_DB.conn.createStatement();
             stmt.execute(sql);
         }catch(SQLException e)
                 {
@@ -1134,7 +1137,7 @@ public class DataBase_Handler
     {
         int no_assessed=0;
         try {
-            Statement statement=conn.createStatement();
+            Statement statement=Connection_to_DB.conn.createStatement();
             String sql="SELECT assessments_done FROM courseware_studentmodule WHERE user_id="+user_id+";";
             ResultSet rs=statement.executeQuery(sql);
             rs.next();
@@ -1151,7 +1154,7 @@ public class DataBase_Handler
     {
         int no_being_assessed=0;
         try {
-            Statement statement=conn.createStatement();
+            Statement statement=Connection_to_DB.conn.createStatement();
             String sql="SELECT times_assessed FROM courseware_studentmodule WHERE user_id="+user_id+";";
             ResultSet rs=statement.executeQuery(sql);
             rs.next();
@@ -1172,7 +1175,7 @@ public class DataBase_Handler
                
         int no_assessor=0;
         try {
-            Statement statement=conn.createStatement();
+            Statement statement=Connection_to_DB.conn.createStatement();
             ResultSet rs=statement.executeQuery("SELECT no_assessment FROM question_details WHERE course_id='"+course_id+"' AND question_id='"+question_id+"';");
             rs.next();
             no_assessor=rs.getInt("no_assessment");
@@ -1189,7 +1192,7 @@ public class DataBase_Handler
         
         int no_assessor=0;
         try {
-            Statement statement=conn.createStatement();
+            Statement statement=Connection_to_DB.conn.createStatement();
             ResultSet rs=statement.executeQuery("SELECT no_assessors FROM question_details WHERE course_id='"+course_id+"' AND question_id='"+question_id+"';");
             rs.next();
             no_assessor=rs.getInt("no_assessors");
@@ -1236,11 +1239,11 @@ public class DataBase_Handler
                 System.out.println("second SQL"); 
                 sql="SELECT * FROM courseware_studentmodule WHERE submitted = " + 1 + " AND user_id!="+user_id+" AND times_assessed < " + get_no_assessments(course_id,question_id) + " AND course_id = '" +course_id +"' AND question_id = '" + question_id +"' AND user_id NOT IN (SELECT user_id FROM pa_grade WHERE anonymous_assessor_id = " + user_to_anonymous(user_id) +") ORDER BY date_of_submission ASC LIMIT 1;";
             }
-            ResultSet rs=conn.createStatement().executeQuery(sql);
+            ResultSet rs=Connection_to_DB.conn.createStatement().executeQuery(sql);
             rs.next();
             str[0]=rs.getString("state");
             str[1] = String.valueOf(rs.getInt("user_id"));
-            /*ResultSet rs2 = conn.createStatement().executeQuery("SELECT COUNT(*) AS match FROM pa_grade WHERE user_id = " + Integer.parseInt(str[1]) + " AND anonymous_assesser_id= " + user_to_anonymous(user_id) + " ;");
+            /*ResultSet rs2 = Connection_to_DB.conn.createStatement().executeQuery("SELECT COUNT(*) AS match FROM pa_grade WHERE user_id = " + Integer.parseInt(str[1]) + " AND anonymous_assesser_id= " + user_to_anonymous(user_id) + " ;");
             rs2.next();
             int t = rs.getInt("match");
             if(t==0)
@@ -1264,7 +1267,7 @@ public class DataBase_Handler
                 //int x = 10;
                 //System.out.println(x);
                 String sql=" SELECT criterion_id FROM question_details WHERE course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
                 {
@@ -1288,7 +1291,7 @@ public class DataBase_Handler
                 //int x = 10;
                 //System.out.println(x);
                 String sql=" SELECT option_id,option_description,option_points FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id + "' AND criterion_id = '" + cri_id +"'";
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
                 {
@@ -1366,13 +1369,13 @@ public class DataBase_Handler
         int a_d = 0;
         try {
                 String sql=" SELECT assessments_done FROM courseware_studentmodule WHERE user_id = " + user_id + " AND course_id = '" + course_id + "' AND question_id = '" + question_id +"'";
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 if(rs.next())
                 a_d=rs.getInt("assessments_done") + 1;
                 
                 String sql2="UPDATE courseware_studentmodule SET assessments_done = " + a_d + " WHERE user_id = " + user_id + " AND course_id = '" + course_id + "' AND question_id = '" + question_id +"'";
-		stmt=conn.createStatement();
+		stmt=Connection_to_DB.conn.createStatement();
                 stmt.execute(sql2);
                 } catch (SQLException e) {
 		System.out.println(e);
@@ -1385,7 +1388,7 @@ public class DataBase_Handler
         
         try {
                 String sql=" SELECT assessments_done FROM courseware_studentmodule WHERE user_id = " + user_id + " AND course_id = '" + course_id + "' AND question_id = '" + question_id +"'";
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 if(rs.next())
                 a_d=rs.getInt("assessments_done");
@@ -1400,13 +1403,13 @@ public class DataBase_Handler
         int t_a = 0;
         try {
                 String sql=" SELECT times_assessed FROM courseware_studentmodule WHERE user_id = " + user_id + " AND course_id = '" + course_id + "' AND question_id = '" + question_id +"'";
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 if(rs.next())
                 t_a=rs.getInt("times_assessed") + 1;
                 
                 String sql2 = "UPDATE courseware_studentmodule SET times_assessed = " + t_a + " WHERE user_id = " + user_id + " AND course_id = '" + course_id + "' AND question_id = '" + question_id +"'";
-		stmt=conn.createStatement();
+		stmt=Connection_to_DB.conn.createStatement();
                 stmt.execute(sql2);
                 } catch (SQLException e) {
 		System.out.println(e);
@@ -1419,7 +1422,7 @@ public class DataBase_Handler
         
         try{
                 String sql=" SELECT MAX(option_points) AS max_points FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id +"' AND criterion_id = '"+ criterion_id + "'";
-		Statement stmt=conn.createStatement();
+		Statement stmt=Connection_to_DB.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 if(rs.next())
                     max=rs.getInt("max_points");
@@ -1435,7 +1438,7 @@ public class DataBase_Handler
     {
                 try {
                     String insertString="UPDATE courseware_studentmodule SET self_assessed_grade = " + grade + " WHERE user_id = "+user_id + " AND course_id = '" + course_id + "' AND question_id = '" + question_id +"'";
-                    Statement stmt = conn.createStatement();
+                    Statement stmt = Connection_to_DB.conn.createStatement();
                     stmt.execute(insertString);
                     } catch (SQLException e) {
                             System.out.println("ERROR: Could not insert record in pa_grade" + e);
@@ -1446,7 +1449,7 @@ public class DataBase_Handler
     {
         try {
                     String insertString="DELETE FROM question_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id +"'";
-                    Statement stmt = conn.createStatement();
+                    Statement stmt = Connection_to_DB.conn.createStatement();
                     stmt.execute(insertString);
                     } catch (SQLException e) {
                             System.out.println("ERROR: Could not insert record in pa_grade" + e);
@@ -1457,7 +1460,7 @@ public class DataBase_Handler
        ArrayList<String> s = new ArrayList<String>();
         try{
             String sql = "SELECT DISTINCT sample_answer FROM sample_answer_details WHERE course_id = '" + course_id +"' AND question_id = '"+question_id +"'";
-            Statement stmt = conn.createStatement();
+            Statement stmt = Connection_to_DB.conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while(rs.next())
             s.add(rs.getString("sample_answer"));
@@ -1474,7 +1477,7 @@ public class DataBase_Handler
         ArrayList<String> s = new ArrayList<String>();
         try{
             String sql = "SELECT DISTINCT correct_option FROM sample_answer_details WHERE course_id = '" + course_id +"' AND question_id = '"+question_id +"' AND sample_answer = '"+answer +"'";
-            Statement stmt = conn.createStatement();
+            Statement stmt = Connection_to_DB.conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while(rs.next())
             s.add(rs.getString("correct_option"));
@@ -1489,7 +1492,7 @@ public class DataBase_Handler
         ArrayList<String> s = new ArrayList<String>();
         try{
             String sql = "SELECT DISTINCT criteria FROM sample_answer_details WHERE course_id = '" + course_id +"' AND question_id = '"+question_id +"' AND sample_answer = '"+answer +"'";
-            Statement stmt = conn.createStatement();
+            Statement stmt = Connection_to_DB.conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while(rs.next())
             s.add(rs.getString("criteria"));
@@ -1505,7 +1508,7 @@ public class DataBase_Handler
     {
         try {
                     String insertString="DELETE FROM question_details WHERE criterion_id = '" + cri_id + "' AND question_id = '" + question_id +"' AND course_id = '"+ course_id+"'";
-                    Statement stmt = conn.createStatement();
+                    Statement stmt = Connection_to_DB.conn.createStatement();
                     stmt.execute(insertString);
                     } catch (SQLException e) {
                             System.out.println("ERROR: Could not delete record in question_details" + e);
@@ -1513,30 +1516,24 @@ public class DataBase_Handler
         
         try {
                     String insertString="DELETE FROM option_details WHERE course_id = '" + course_id + "' AND question_id = '" + question_id +"' AND criterion_id = '"+ cri_id+"'";
-                    Statement stmt = conn.createStatement();
+                    Statement stmt = Connection_to_DB.conn.createStatement();
                     stmt.execute(insertString);
                     } catch (SQLException e) {
                             System.out.println("ERROR: Could not delete record in option_details" + e);
                     }
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> cad495ad77e2f8f7a036cf96b55377d7074a73fa
     public void edit_option(String course,String question, String criteria, String option,String new_opt,String opt_desc,int points)
     {
         try {
                     String insertString="UPDATE option_details SET option_id = ' " + new_opt + "' , option_description = '"+opt_desc+"' , option_points= "+points+"WHERE course_id = '" + course + "' AND question_id = '" + question +"' AND criterion_id = '"+ criteria+"'"; 
-                    Statement stmt = conn.createStatement();
+                    Statement stmt = Connection_to_DB.conn.createStatement();
                     stmt.execute(insertString);
                     } catch (SQLException e) {
                             System.out.println("ERROR: Could not insert record in pa_grade" + e);
                     }
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> cad495ad77e2f8f7a036cf96b55377d7074a73fa
+    
     public static void  main(String args[])
     {
         
