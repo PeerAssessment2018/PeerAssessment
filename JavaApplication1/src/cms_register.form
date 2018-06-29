@@ -37,13 +37,13 @@
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="tf5" alignment="0" min="-2" pref="338" max="-2" attributes="0"/>
-                              <Component id="tf4" alignment="0" min="-2" pref="338" max="-2" attributes="0"/>
+                              <Component id="tf4" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Component id="jScrollPane1" min="-2" pref="273" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="tf5" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <Component id="tf3" alignment="1" min="-2" pref="340" max="-2" attributes="0"/>
                       </Group>
@@ -113,14 +113,6 @@
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
         <Property name="text" type="java.lang.String" value="password"/>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JTextField" name="tf5">
-      <Properties>
-        <Property name="toolTipText" type="java.lang.String" value="Enter your password(Be careful as it is case sensitive)"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -229,5 +221,7 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JPasswordField" name="tf5">
+    </Component>
   </SubComponents>
 </Form>

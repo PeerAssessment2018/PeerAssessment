@@ -1528,15 +1528,10 @@ public class DataBase_Handler
     public void edit_option(String course,String question, String criteria, String option,String new_opt,String opt_desc,int points)
     {
         try {
-<<<<<<< HEAD
                     String insertString ="UPDATE option_details SET option_id = '" + new_opt + "' , option_description = '"+opt_desc+"' , option_points= "+points+" WHERE course_id = '" + course + "' AND question_id = '" + question +"' AND criterion_id = '"+ criteria+"' AND option_id = '"+option+"'"; 
                     Statement stmt = conn.createStatement();
->>>>>>> 676eebd50360a28123eaf9347642272f520a3886
-=======
-                    String insertString="UPDATE option_details SET option_id = '" + new_opt + "' , option_description = '"+opt_desc+"' , option_points= "+points+" WHERE course_id = '" + course + "' AND question_id = '" + question +"' AND criterion_id = '"+ criteria+"'"; 
-                    Statement stmt = DataBase_Handler.conn.createStatement();
 
->>>>>>> bb784cc0df5947bce87e7f50692c6c09af409156
+                   
                     stmt.execute(insertString);
                     } catch (SQLException e) {
                             System.out.println("ERROR: Could not insert record in option_details" + e);
