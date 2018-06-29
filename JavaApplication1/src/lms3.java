@@ -292,6 +292,9 @@ public class lms3 extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
        
+        DataBase_Handler db = new DataBase_Handler();
+        db.learnt_to_assess_true(student_temp.user_id, student_temp.question_id, student_temp.course_id);
+        System.err.println("DOEN DONE DONE");
         //n34.setEnabled(false);
         rd1.setVisible(false);
         rd2.setVisible(false);

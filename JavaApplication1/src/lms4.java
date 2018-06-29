@@ -224,6 +224,13 @@ public class lms4 extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         DataBase_Handler db=new DataBase_Handler();
+        
+        if(db.is_self_assessed(student_temp.user_id, student_temp.course_id, student_temp.question_id))
+        {
+                    lms5 frame=new lms5();
+                    frame.setVisible(true);
+                    this.setVisible(false);
+        }
         //System.out.println("**************?*************");
         
         //check_if_submitted = false;        

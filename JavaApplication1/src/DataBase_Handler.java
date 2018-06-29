@@ -885,7 +885,7 @@ public class DataBase_Handler
     
      public void peer_assessment_grade(int user_id, String course_id, String question_id)
     {
-        int pag=0,max=0;
+        float max=0,pag=0;
         float pgrade=0;
         
    
@@ -922,11 +922,14 @@ public class DataBase_Handler
             } 
             
            Collections.sort(marks);
-           pag += marks.get(marks.size()/2);
+           if(marks.size()%2!=0)
+                pag += marks.get(marks.size()/2);
+           else
+               pag+=(marks.get(marks.size()/2-1)+marks.get(marks.size()/2)/2);
            System.out.println(pag); 
         }
         
-        pgrade = ((float)pag)/((float)max);
+        pgrade = pag/max;
         int pgrade2 = Math.round(pgrade*10);
         
         System.out.println(pag);
@@ -1619,16 +1622,12 @@ public class DataBase_Handler
     public void edit_option(String course,String question, String criteria, String option,String new_opt,String opt_desc,int points)
     {
         try {
-<<<<<<< HEAD
 
                     String insertString ="UPDATE option_details SET option_id = '" + new_opt + "' , option_description = '"+opt_desc+"' , option_points= "+points+" WHERE course_id = '" + course + "' AND question_id = '" + question +"' AND criterion_id = '"+ criteria+"' AND option_id = '"+option+"'"; 
                     Statement stmt = conn.createStatement();
-=======
-                    String insertString ="UPDATE option_details SET option_id = '" + new_opt + "' , option_description = '"+opt_desc+"' , option_points= "+points+" WHERE course_id = '" + course + "' AND question_id = '" + question +"' AND criterion_id = '"+ criteria+"' AND option_id = '"+option+"'"; 
-                    Statement stmt = conn.createStatement();
 
-                   
->>>>>>> e20e4553197d5fc00e4ea3e4df48f35ad594b907
+
+
                     stmt.execute(insertString);
                     } catch (SQLException e) {
                             System.out.println("ERROR: Could not insert record in option_details" + e);
@@ -1670,6 +1669,33 @@ public class DataBase_Handler
         return d;
     }
     
+      void learnt_to_assess_true(int user_id, String question_id, String course_id) {
+        try{
+            String sql = "UPDATE courseware_studentmodule SET learnt_to_assess = " + 1 + " WHERE user_id = " + user_id + " AND course_id = '" + course_id +"' AND question_id = '"+question_id +"'";
+            Statement stmt = DataBase_Handler.conn.createStatement();
+            stmt.execute(sql);
+         }catch(SQLException e)
+                {
+                  System.out.println(e); 
+                }
+    }
+
+     boolean is_self_assessed(int user_id, String course_id, String question_id) {
+         try{
+            String sql = "SELECT self_assessed_grade FROM courseware_studentmodule WHERE user_id = " + user_id + " AND course_id = '" + course_id +"' AND question_id = '"+question_id +"'";
+            Statement stmt = DataBase_Handler.conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            if(rs==null)
+                return false;
+            else if(rs.getInt("self_assessed_grade")>=0)
+                return true;
+         }catch(SQLException e)
+                {
+                  System.out.println(e); 
+                }
+        return false;
+    }
+      
     public static void  main(String args[])
     {
         
@@ -1679,6 +1705,7 @@ public class DataBase_Handler
        //System.out.println(s); 
     } 
 
+  
     
 
     
