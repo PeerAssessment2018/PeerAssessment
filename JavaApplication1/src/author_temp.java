@@ -15,6 +15,7 @@ public class author_temp {
     public static String question_id;
     public static int no_assessor;
     public static int no_assessments;
+    public static java.sql.Date final_date;
     public static int fb=0;
     public static cms1 cms1 = new cms1();
     public static cms2 cms2 = new cms2();

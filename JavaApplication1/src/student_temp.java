@@ -10,8 +10,8 @@
  */
 public class student_temp {
     
-    public static int user_id;
-    public static String course_id;
-    public static String question_id;
+    public static int user_id=1;
+    public static String course_id="hello";
+    public static String question_id="Question by X for hello";
 
 }

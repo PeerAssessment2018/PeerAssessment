@@ -356,7 +356,7 @@ public class cms_edit_criteria extends javax.swing.JFrame {
         }
         if(cb2.getItemCount()==1)
         {
-            db.insert_question_details_2(new_cri, cri_desc, noc, fb);
+            db.insert_question_details_2(new_cri, cri_desc, noc, fb,author_temp.final_date);
             db.insert_options_details_1(author_temp.question_id,author_temp.course_id,new_cri,option,option_desc,score);
             tf1.setText("");
             ta1.setText("");

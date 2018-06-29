@@ -441,7 +441,7 @@ public class cms2 extends javax.swing.JFrame {
           ifcompleted(nc); 
             if(cb2.getItemCount()==1)
         {
-                app.insert_question_details_2(cname,cprompt,con,fb);
+                app.insert_question_details_2(cname,cprompt,con,fb,author_temp.final_date);
                 app.insert_options_details_1(q,course,cname,oname,od,oscale);
                 cb2.removeItemAt(cb2.getSelectedIndex());
                // cb1.removeItemAt(cb1.getSelectedIndex());

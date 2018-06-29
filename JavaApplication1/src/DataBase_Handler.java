@@ -1,4 +1,6 @@
+import com.sun.org.apache.bcel.internal.generic.DLOAD;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,8 +31,8 @@ public class DataBase_Handler
                 {
                     System.out.println(ex.getMessage());
                 }
-        }
-        /*if(DataBase_Handler.conn == null)
+        }/*
+        if(DataBase_Handler.conn == null)
         {       try{
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     DataBase_Handler.conn=DriverManager.getConnection("jdbc:mysql://db4free.net:3306/pa_tool?autoReDataBase_Handler.connect=true&useSSL=false","adminpa","adminadmin");
@@ -223,13 +225,12 @@ public class DataBase_Handler
 	}     
     }
     
-    public void insert_question_details_2(String cri_name, String cri_prompt,int nop,int fb)
+    public void insert_question_details_2(String cri_name, String cri_prompt,int nop,int fb,java.sql.Date sqlDate)
     {		
-        
+        System.out.println("Called " + cri_name + "]]]]]]");
                 try {
-			String insertString =" INSERT INTO question_details (course"
-                       + "_id, question_id, no_assessors, no_assessment,criterion_id, criterion_prompt, no_of_options, feedback) VALUES ('"+author_temp.course_id+
-                       "' , '"+author_temp.question_id+"' , "+author_temp.no_assessor+", "+author_temp.no_assessments+", '"+cri_name+"' , '"+cri_prompt+"' , "+nop+","+fb+");";
+			String insertString =" INSERT INTO question_details (course_id, question_id, no_assessors, no_assessment,final_date,criterion_id, criterion_prompt, no_of_options, feedback) VALUES ('"+author_temp.course_id+
+                       "' , '"+author_temp.question_id+"' , "+author_temp.no_assessor+", "+author_temp.no_assessments+",'"+sqlDate+"','"+cri_name+"' , '"+cri_prompt+"' , "+nop+","+fb+");";
                 Statement stmt = DataBase_Handler.conn.createStatement();
                 stmt.execute(insertString);
                 
@@ -255,6 +256,22 @@ public class DataBase_Handler
                 System.out.println(e);
             } 
         return 2;
+    }
+    
+    public boolean learnt_to_assess(int user_id,String question_id, String course)
+    {
+        try
+            {
+               String sql =  "SELECT learnt_to_assess FROM courseware_studentmodule WHERE user_id = "+user_id + " AND course_id = '" + course+ "' AND question_id = '" + question_id +"'";
+               Statement stmt = DataBase_Handler.conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                rs.next();
+                if(rs.getInt("learnt_to_assess")==1)
+                    return true;
+            }catch(SQLException e){
+                System.out.println(e);
+            } 
+        return false;
     }
     
        
@@ -866,57 +883,131 @@ public class DataBase_Handler
             lms4.ta.setText(responses.get(j));*/
     }
     
-     public void results(int user_id, String course_id, String question_id)
+     public void peer_assessment_grade(int user_id, String course_id, String question_id)
     {
-        int a=0,b=0,sas=0,pas=0;
+        int pag=0,max=0;
+        float pgrade=0;
         
-        try {
-                String sql=" SELECT no_assessors,no_assessment FROM question_details WHERE course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
-		Statement stmt=DataBase_Handler.conn.createStatement();
-                ResultSet rs=stmt.executeQuery(sql);
-                if(rs.next())
-                {
-                    a=rs.getInt("no_assessors");
-                    b=rs.getInt("no_assessment");
-                }
-                } catch (Exception e) {
-		System.out.println(e);
-            }   
-        
-        /*System.out.println(a);
-        System.out.println(b);*/
-        
-        try {
-                String sql=" SELECT self_assessed_grade FROM courseware_studentmodule WHERE user_id = " + user_id + " AND course_id = '" + course_id + "'AND question_id = '" + question_id + "'";
-		Statement stmt=DataBase_Handler.conn.createStatement();
-                ResultSet rs=stmt.executeQuery(sql);
-                if(rs.next())
-                {
-                    sas=rs.getInt("self_assessed_grade");
-                }
-                } catch (Exception e) {
-		System.out.println(e);
-            } 
-        
-        ArrayList<Integer> marks = new ArrayList<>();
+   
+        ArrayList<String> criteria = new ArrayList<>();
         
          try {
-                String sql=" SELECT AVG(grade_points) as avg_grade FROM pa_grade WHERE user_id = " + user_id + " AND course_id = '" + course_id + "'AND question_id = '" + question_id + "' GROUP BY anonymous_assessor_id HAVING count(*)>1";
+                String sql=" SELECT criteria_id FROM pa_grade WHERE user_id = " + user_id + " AND course_id = '" + course_id + "'AND question_id = '" + question_id +"' GROUP BY criteria_id ";
 		Statement stmt=DataBase_Handler.conn.createStatement();
                 ResultSet rs=stmt.executeQuery(sql);
                 while(rs.next())
                 {
-                    marks.add(rs.getInt("avg_grade"));
+                    criteria.add(rs.getString("criteria_id"));
                 }
                 } catch (Exception e) {
 		System.out.println(e);
             } 
+  
+        System.out.println(criteria);
+        for(int i=0; i<criteria.size();i++)
+        {
+            max += max_points_for_criteria(course_id, question_id, criteria.get(i));
+            
+            ArrayList<Integer> marks = new ArrayList<>();
+            try {
+                String sql=" SELECT grade_points FROM pa_grade WHERE user_id = " + user_id + " AND course_id = '" + course_id + "'AND question_id = '" + question_id + "' AND criteria_id = '" + criteria.get(i)+"'";
+		Statement stmt=DataBase_Handler.conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    marks.add(rs.getInt("grade_points"));
+                }
+                } catch (SQLException e) {
+		System.out.println(e);
+            } 
+            
+           Collections.sort(marks);
+           pag += marks.get(marks.size()/2);
+           System.out.println(pag); 
+        }
         
-        Collections.sort(marks);
+        pgrade = ((float)pag)/((float)max);
+        int pgrade2 = Math.round(pgrade*10);
+        
+        System.out.println(pag);
+        System.out.println(max);
+        
+        insert_pa_grade(user_id, course_id, question_id, pgrade2);
+        /*
         pas = (marks.get(marks.size()/2-1)+marks.get(marks.size()/2))/2;
-        System.out.println(pas);
+        System.out.println(pas);*/
     }
      
+     public void auto_assessment_grade(int user_id, String course_id, String question_id)
+    {
+        //ML has to be applied if the student has not been assessed 
+        /*the solution without applying ML is when atleast the student has been assessed more than 2 or 3 times, so the assessments missings can be automatically
+        completed from the given assessments.*/
+        /*
+        To be clear, the correct approach is to add points for each criteria which is the current median, which would ultimately lead to the same median for the criteria
+        So, this function is still the same as peer_assessment_grade criteria, but ML would have to be applied to get better results.
+        */
+        
+        int pag=0,max=0;
+        float pgrade=0;
+        
+        ArrayList<String> criteria = new ArrayList<>();
+        
+         try {
+                String sql=" SELECT criteria_id FROM pa_grade WHERE user_id = " + user_id + " AND course_id = '" + course_id + "'AND question_id = '" + question_id +"' GROUP BY criteria_id ";
+		Statement stmt=DataBase_Handler.conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    criteria.add(rs.getString("criteria_id"));
+                }
+                } catch (Exception e) {
+		System.out.println(e);
+            } 
+  
+        System.out.println(criteria);
+        for(int i=0; i<criteria.size();i++)
+        {
+            max += max_points_for_criteria(course_id, question_id, criteria.get(i));
+            
+            ArrayList<Integer> marks = new ArrayList<>();
+            try {
+                String sql=" SELECT grade_points FROM pa_grade WHERE user_id = " + user_id + " AND course_id = '" + course_id + "'AND question_id = '" + question_id + "' AND criteria_id = '" + criteria.get(i)+"'";
+		Statement stmt=DataBase_Handler.conn.createStatement();
+                ResultSet rs=stmt.executeQuery(sql);
+                while(rs.next())
+                {
+                    marks.add(rs.getInt("grade_points"));
+                }
+                } catch (SQLException e) {
+		System.out.println(e);
+            } 
+            
+           Collections.sort(marks);
+           pag += marks.get(marks.size()/2);
+           System.out.println(pag); 
+        }
+        
+        pgrade = ((float)pag)/((float)max);
+        int pgrade2 = Math.round(pgrade*10);
+        
+        System.out.println(pag);
+        System.out.println(max);
+        
+        insert_pa_grade(user_id, course_id, question_id, pgrade2);
+    }
+     
+     public void insert_pa_grade(int user_id, String course_id, String question_id , int grade)
+    {
+                try {
+                    String insertString="UPDATE courseware_studentmodule SET peer_assessed_grade = " + grade + " WHERE user_id = "+user_id + " AND course_id = '" + course_id + "' AND question_id = '" + question_id +"'";
+                    Statement stmt = DataBase_Handler.conn.createStatement();
+                    stmt.execute(insertString);
+                    } catch (SQLException e) {
+                            System.out.println("ERROR: Could not insert record in pa_grade" + e);
+                    }
+    }
+      
     public void insert_pa_grade(int user_id,int assessor_id,String course, String q_id, ArrayList<String> cri_id,ArrayList<Integer> points,ArrayList<String> feedback)
     {		
         for(int i =0 ; i<cri_id.size(); i++)
@@ -1528,27 +1619,63 @@ public class DataBase_Handler
     public void edit_option(String course,String question, String criteria, String option,String new_opt,String opt_desc,int points)
     {
         try {
-<<<<<<< HEAD
+
                     String insertString ="UPDATE option_details SET option_id = '" + new_opt + "' , option_description = '"+opt_desc+"' , option_points= "+points+" WHERE course_id = '" + course + "' AND question_id = '" + question +"' AND criterion_id = '"+ criteria+"' AND option_id = '"+option+"'"; 
                     Statement stmt = conn.createStatement();
->>>>>>> 676eebd50360a28123eaf9347642272f520a3886
-=======
-                    String insertString="UPDATE option_details SET option_id = '" + new_opt + "' , option_description = '"+opt_desc+"' , option_points= "+points+" WHERE course_id = '" + course + "' AND question_id = '" + question +"' AND criterion_id = '"+ criteria+"'"; 
-                    Statement stmt = DataBase_Handler.conn.createStatement();
-
->>>>>>> bb784cc0df5947bce87e7f50692c6c09af409156
                     stmt.execute(insertString);
                     } catch (SQLException e) {
                             System.out.println("ERROR: Could not insert record in option_details" + e);
                     }
     }
+    
+     boolean user_has_been_assessed(int user_id, String course_id, String question_id) {
+         try{
+            String sql = "SELECT no_assessment FROM question_details WHERE course_id = '" + course_id +"' AND question_id = '"+question_id +"'";
+            Statement stmt = DataBase_Handler.conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            String sql2 = "SELECT times_assessed FROM courseware_studentmodule WHERE course_id = '" + course_id +"' AND question_id = '"+question_id +"' AND user_id = " + user_id;
+            Statement stmt2 = DataBase_Handler.conn.createStatement();
+            ResultSet rs2 = stmt2.executeQuery(sql2);
+            rs.next();
+            rs2.next();
+            if(rs.getInt("no_assessment")<=rs2.getInt("times_assessed"))
+                return true;                
+         }catch(SQLException e)
+                {
+                  System.out.println(e); 
+                }
+        return false;
+    }
 
+    java.sql.Date get_final_date_of_submission(String course_id, String question_id)
+    {
+       java.sql.Date d = null;
+        try{
+            String sql = "SELECT final_date FROM question_details WHERE course_id = '" + course_id +"' AND question_id = '"+question_id +"'";
+            Statement stmt = DataBase_Handler.conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            rs.next();
+            d=rs.getDate("final_date");                
+         }catch(SQLException e)
+                {
+                  System.out.println(e); 
+                }
+        return d;
+    }
+    
     public static void  main(String args[])
     {
         
         DataBase_Handler db =new DataBase_Handler(); 
+//        db.results(3,"hello","Question by X for hello");
        //ArrayList<String> s =  db.get_sample_criteria("hello","Question by X for hello","ok, I see");
        //System.out.println(s); 
     } 
+
+    
+
+    
 }
+
+   
     

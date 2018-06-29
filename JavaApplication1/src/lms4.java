@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+import javax.swing.JOptionPane;
 
 
 /*
@@ -185,12 +186,27 @@ public class lms4 extends javax.swing.JFrame {
             gradef = (float)total_points/(float)max_points;
             int grade = Math.round(gradef*10);
             db.insert_self_grade(student_temp.user_id,student_temp.course_id, student_temp.question_id,grade);
+            if(db.user_has_been_assessed(student_temp.user_id,student_temp.course_id, student_temp.question_id))
+            {
+            db.peer_assessment_grade(student_temp.user_id,student_temp.course_id, student_temp.question_id);    
             lms5 frame=new lms5();
             frame.setVisible(true);
             this.setVisible(false);
-        }
-        
-        
+            }
+            else
+            {
+                java.sql.Date sqlDate = new java.sql.Date(System.currentTimeMillis());
+                if(sqlDate.before(db.get_final_date_of_submission(student_temp.course_id, student_temp.question_id)))        
+                    JOptionPane.showMessageDialog(null,"You have yet not been assessed. Come back later!");
+                else
+                {
+                    db.auto_assessment_grade(student_temp.user_id,student_temp.course_id, student_temp.question_id);
+                    lms5 frame=new lms5();
+                    frame.setVisible(true);
+                    this.setVisible(false);
+                }
+            }
+        }  
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void rd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rd1ActionPerformed

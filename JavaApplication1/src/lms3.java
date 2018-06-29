@@ -262,6 +262,13 @@ public class lms3 extends javax.swing.JFrame {
 
             if(data[1] == null )
             {
+                java.sql.Date sqlDate = new java.sql.Date(System.currentTimeMillis());
+                if(sqlDate.before(db.get_final_date_of_submission(student_temp.course_id, student_temp.question_id)))  
+                {
+                    lms4 frame=new lms4();
+                    frame.setVisible(true);
+                    this.setVisible(false);
+                }
                 p.setText("None");
                 JOptionPane.showMessageDialog(null,"There are no Peers left too assess, come back later!");
                 System.exit(0);
