@@ -49,8 +49,6 @@ public class lms5 extends javax.swing.JFrame {
 
         jLabel2.setText("Display Result for:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel3.setText("You assessed these many number of peers:");
 
         jLabel4.setText("You were assessed by these many number of peers:");

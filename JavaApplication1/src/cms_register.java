@@ -30,7 +30,6 @@ public class cms_register extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel5 = new javax.swing.JLabel();
-        tf5 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         tf1 = new javax.swing.JTextField();
@@ -43,13 +42,12 @@ public class cms_register extends javax.swing.JFrame {
         tf4 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         ta = new javax.swing.JTextArea();
+        tf5 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CMS Register");
 
         jLabel5.setText("password");
-
-        tf5.setToolTipText("Enter your password(Be careful as it is case sensitive)");
 
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -102,12 +100,12 @@ public class cms_register extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(tf5, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tf4, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tf4)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jButton1)))
+                                    .addComponent(jButton1))
+                                .addComponent(tf5))
                             .addComponent(tf3, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,6 +227,6 @@ public class cms_register extends javax.swing.JFrame {
     public static javax.swing.JTextField tf2;
     public static javax.swing.JTextField tf3;
     public static javax.swing.JTextField tf4;
-    public static javax.swing.JTextField tf5;
+    private javax.swing.JPasswordField tf5;
     // End of variables declaration//GEN-END:variables
 }

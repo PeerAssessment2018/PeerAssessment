@@ -52,6 +52,7 @@ public class cms_edit_option extends javax.swing.JFrame {
 
         jLabel1.setText("Edit criterion");
 
+        cb1.setToolTipText("");
         cb1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb1ActionPerformed(evt);

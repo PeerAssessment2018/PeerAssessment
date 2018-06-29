@@ -1619,9 +1619,16 @@ public class DataBase_Handler
     public void edit_option(String course,String question, String criteria, String option,String new_opt,String opt_desc,int points)
     {
         try {
+<<<<<<< HEAD
 
                     String insertString ="UPDATE option_details SET option_id = '" + new_opt + "' , option_description = '"+opt_desc+"' , option_points= "+points+" WHERE course_id = '" + course + "' AND question_id = '" + question +"' AND criterion_id = '"+ criteria+"' AND option_id = '"+option+"'"; 
                     Statement stmt = conn.createStatement();
+=======
+                    String insertString ="UPDATE option_details SET option_id = '" + new_opt + "' , option_description = '"+opt_desc+"' , option_points= "+points+" WHERE course_id = '" + course + "' AND question_id = '" + question +"' AND criterion_id = '"+ criteria+"' AND option_id = '"+option+"'"; 
+                    Statement stmt = conn.createStatement();
+
+                   
+>>>>>>> e20e4553197d5fc00e4ea3e4df48f35ad594b907
                     stmt.execute(insertString);
                     } catch (SQLException e) {
                             System.out.println("ERROR: Could not insert record in option_details" + e);

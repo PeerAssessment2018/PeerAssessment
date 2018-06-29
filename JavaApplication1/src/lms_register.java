@@ -31,12 +31,12 @@ public class lms_register extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ta = new javax.swing.JTextArea();
         cb = new javax.swing.JComboBox<>();
+        jTextField5 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LMS REGISTER");
@@ -68,8 +68,6 @@ public class lms_register extends javax.swing.JFrame {
         jTextField4.setToolTipText("Provide a valid email address through which you cam be contacted.");
 
         jLabel5.setText("password");
-
-        jTextField5.setToolTipText("Enter password.");
 
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -121,8 +119,8 @@ public class lms_register extends javax.swing.JFrame {
                                                 .addComponent(cb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jTextField5)
-                                            .addComponent(jTextField4)))))
+                                            .addComponent(jTextField4)
+                                            .addComponent(jTextField5)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -273,7 +271,7 @@ public class lms_register extends javax.swing.JFrame {
     public static javax.swing.JTextField jTextField2;
     public static javax.swing.JTextField jTextField3;
     public static javax.swing.JTextField jTextField4;
-    public static javax.swing.JTextField jTextField5;
+    private javax.swing.JPasswordField jTextField5;
     private javax.swing.JTextArea ta;
     // End of variables declaration//GEN-END:variables
 }

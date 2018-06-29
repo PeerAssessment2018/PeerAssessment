@@ -30,6 +30,7 @@ public class cms_edit_criteria extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         cb1 = new javax.swing.JComboBox<>();
@@ -172,11 +173,14 @@ public class cms_edit_criteria extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Feedback"));
 
+        buttonGroup1.add(rd1);
         rd1.setSelected(true);
         rd1.setText("None");
 
+        buttonGroup1.add(rd2);
         rd2.setText("Optional");
 
+        buttonGroup1.add(rd3);
         rd3.setText("Required");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -413,6 +417,7 @@ public class cms_edit_criteria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     public static javax.swing.JComboBox<String> cb1;
     public static javax.swing.JComboBox<String> cb2;
     private javax.swing.JButton jButton1;
